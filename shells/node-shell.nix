@@ -1,9 +1,13 @@
 with import <nixpkgs> {};
 
-mkShell {
-  name = "dotnet-env";
+let
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+in mkShell {
+  name = "node-env";
   packages = [
-    dotnet-sdk_6
-    jetbrains.rider
+    nodejs
+    nodePackages.npm
+    nodePackages.yarn
+    unstable.jetbrains.rider
   ];
 }

@@ -79,12 +79,12 @@ in {
       discord
       feh # used to apply desktop wallpaper in i3
       xorg.xkill # kill program at mouse pointer location
-      gamemode
       qbittorrent
       flameshot # screenshot tool
     ];
   };
   programs.steam.enable = true;
+  programs.gamemode.enable = true;
 
   # environment.sessionVariables = {
   #   DOTNET_ROOT = "${pkgs.dotnet-sdk}";
@@ -106,16 +106,22 @@ in {
     home.stateVersion = "22.11"; # DO NOT CHANGE
     nixpkgs.config.allowUnfree = true;
 
+    home.file.".bashrc".source = ./configs/.bashrc;
+    home.file.".vimrc".source = ./configs/.vimrc;
+    home.file.".local/share/rofi/themes/theme.rasi".source = ./configs/rofi/theme.rasi;
+    home.file.".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
+
     home.packages = [ 
       pkgs.neofetch 
-      pkgs.jetbrains.rider # by default has 2022.2 which is too old
-      pkgs.jetbrains.datagrip # see prev
+      # pkgs.jetbrains.rider # by default has 2022.2 which is too old
+      # pkgs.jetbrains.datagrip # see prev
       pkgs.microsoft-edge
       pkgs.slack
       pkgs.insomnia
       pkgs.zoom-us
       pkgs.libsForQt5.okular
       pkgs.obs-studio
+      pkgs.firefox
     ];
 
     programs.rofi.enable = true;
@@ -149,6 +155,7 @@ in {
       "vim.useSystemClipboard" = true;
       "workbench.editor.wrapTabs" = true; # tabs become multiline instead of scroll
       "emmet.showExpandedAbbreviation" = "never"; # emmet gets in the way
+
       # don't modal opening on goto, just go to
       "editor.gotoLocation.multipleTypeDefinitions" = "goto";
       "editor.gotoLocation.multipleImplementations" = "goto";
@@ -171,7 +178,6 @@ in {
       "[javascript]" =  {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
-
     };
   };
 
@@ -188,7 +194,6 @@ in {
 #       - https://www.reddit.com/r/unixporn/comments/wndrz1/oc_rofi_a_bunch_of_rofi_themes_for_you_all_choose/
 #   - configure okular theme
 #   - figure out why linux mint boot doesn't show up in the boot loader
-#   - set up web dev environment
 #   - set up mobile dev environment
 #   - confiz
 #   - sops-nix to manage ssh keys
@@ -196,3 +201,6 @@ in {
 #   -   only option is gtile, not worth hassle
 #   - figure out why gamemode always asks for password
 #   - terminal based file explorer
+#   - learn about flakes
+#   - customize terminal
+#   - make vim ignore caps lock
