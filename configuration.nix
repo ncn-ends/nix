@@ -4,15 +4,15 @@ let
   user = "one";
   unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in {
+  system.stateVersion = "21.11"; # DO NOT CHANGE
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       <home-manager/nixos>
     ];
-
   nixpkgs.config.allowUnfree = true;
 
-  # --- foundational system config
+  # --- FOUNDATION --- 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true; # detects other linux boot partitions
@@ -20,13 +20,15 @@ in {
   boot.initrd.kernelModules = ["amdgpu"]; # recommended, not sure
   boot.loader.grub.device = "/dev/sda";
   time.timeZone = "America/Los_Angeles";
-  # may need to set this: time.hardwareClockInLocalTime = true;
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
      font = "Lat2-Terminus16";
      useXkbConfig = true; # use xkbOptions in tty.
   };
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
+  # --- DESKTOP ENVIRONMENT ---
   # with cinnamon
   services.xserver = {
     enable = true;
@@ -35,6 +37,10 @@ in {
     displayManager.defaultSession = "cinnamon";
     desktopManager.cinnamon.enable = true;
   };
+  # manual settings
+  #   - shortcuts
+  #       - rofi
+  #       - flameshot
 
   # with i3
   # services.xserver.enable = true;
@@ -50,25 +56,19 @@ in {
   #   ];
   # };
 
-
-
   # with KDE
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
-  
-  # these didn't work too well
-  # services.xserver.displayManager.lightdm.enable = true; # check into other display managers, lightdm was recommended
-  # services.xserver.windowManager.bspwm.enable = true;
-  # services.xserver.displayManager.defaultSession = "none+bspwm";
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
 
   # --- PACKAGES ---
   environment.systemPackages = with pkgs; [
     vim
     wget
+    # dotnetCorePackages.sdk_6_0
+    # msbuild
+    # netcoredbg
+    # omnisharp-roslyn
+    # mono
   ];
 
   users.users.${user} = {
@@ -80,22 +80,16 @@ in {
       feh # used to apply desktop wallpaper in i3
       xorg.xkill # kill program at mouse pointer location
       gamemode
+      qbittorrent
+      flameshot # screenshot tool
     ];
   };
   programs.steam.enable = true;
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment? 
+  # environment.sessionVariables = {
+  #   DOTNET_ROOT = "${pkgs.dotnet-sdk}";
+  #   DOTNET_CLI_TELEMETRY_OPTOUT = "true";
+  # };
 
   nixpkgs.overlays = [
     (self: super: {
@@ -109,22 +103,19 @@ in {
 
   # home-manager
   home-manager.users.${user} = { pkgs, ... }: {
-    home.stateVersion = "22.11";
+    home.stateVersion = "22.11"; # DO NOT CHANGE
     nixpkgs.config.allowUnfree = true;
 
     home.packages = [ 
-      pkgs.vscode
       pkgs.neofetch 
-      unstable.jetbrains.rider # by default has 2022.2 which is too old
-      unstable.jetbrains.datagrip # see prev
+      pkgs.jetbrains.rider # by default has 2022.2 which is too old
+      pkgs.jetbrains.datagrip # see prev
       pkgs.microsoft-edge
       pkgs.slack
       pkgs.insomnia
       pkgs.zoom-us
-      pkgs.qbittorrent
       pkgs.libsForQt5.okular
-      pkgs.gamemode
-      pkgs.dotnet-sdk_7
+      pkgs.obs-studio
     ];
 
     programs.rofi.enable = true;
@@ -139,6 +130,49 @@ in {
         };
       };
     };
+
+    programs.vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions; [
+        vscodevim.vim
+        bbenoist.nix
+        jnoortheen.nix-ide
+        formulahendry.auto-rename-tag
+        formulahendry.auto-close-tag
+        dbaeumer.vscode-eslint
+        eamodio.gitlens
+        esbenp.prettier-vscode
+      ];
+    };
+
+    programs.vscode.userSettings = {
+      "vim.useSystemClipboard" = true;
+      "workbench.editor.wrapTabs" = true; # tabs become multiline instead of scroll
+      "emmet.showExpandedAbbreviation" = "never"; # emmet gets in the way
+      # don't modal opening on goto, just go to
+      "editor.gotoLocation.multipleTypeDefinitions" = "goto";
+      "editor.gotoLocation.multipleImplementations" = "goto";
+      "editor.gotoLocation.multipleDefinitions" = "goto";
+      "editor.gotoLocation.multipleDeclarations" = "goto";
+
+      "vim.normalModeKeyBindings" = [
+        {
+          "before" =  ["g" "r"];
+          "commands" = [ "editor.action.goToReferences" ];
+        }
+      ];
+
+      "[typescriptreact]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[typescript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[javascript]" =  {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+
+    };
   };
 
 }
@@ -148,18 +182,17 @@ in {
 #   - update action bar
 #   - import datagrip/rider settings
 #       - connect datagrip to database
-#   - setup git/ssh
 #   - setup insomnia syncing
 #   - rofi themes
 #       - https://github.com/adi1090x/rofi
 #       - https://www.reddit.com/r/unixporn/comments/wndrz1/oc_rofi_a_bunch_of_rofi_themes_for_you_all_choose/
 #   - configure okular theme
 #   - figure out why linux mint boot doesn't show up in the boot loader
-#   - install dotnet
-#   - try out web ui
+#   - set up web dev environment
 #   - set up mobile dev environment
-#   - test out gamemode/proton on game
-#   - screenshot software
-#   - file explorer software
 #   - confiz
 #   - sops-nix to manage ssh keys
+#   - make cinnamon tiling
+#   -   only option is gtile, not worth hassle
+#   - figure out why gamemode always asks for password
+#   - terminal based file explorer
