@@ -1,0 +1,7 @@
+"rofi -show run"
+    m:0x8 + c:68
+    Alt + F2
+
+"flameshot gui"
+    m:0x5 + c:107
+    Control+Shift + Print

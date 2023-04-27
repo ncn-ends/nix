@@ -35,7 +35,6 @@ in {
   #   windowManager.qtile.enable = true;
   # };
 
-
   # with cinnamon
   services.xserver = {
     enable = true;
@@ -75,7 +74,7 @@ in {
     initialPassword = "password";
     packages = with pkgs; [
       discord
-      feh # used to apply desktop wallpaper in i3
+      feh # used to apply desktop wallpaper
       xorg.xkill # kill program at mouse pointer location
       qbittorrent
       flameshot # screenshot tool
@@ -111,6 +110,8 @@ in {
     # home.file.".local/share/rofi/themes/theme.rasi".source = ./configs/rofi/theme.rasi;
     # home.file.".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
     home.file.".config/qtile/config.py".source = ./configs/qtile.py;
+    home.file.".xbindkeysrc".source = ./configs/.xbindkeysrc;
+    home.file.".xinitrc".source = ./configs/.xinitrc;
 
     home.packages = [ 
       pkgs.neofetch 
@@ -123,8 +124,8 @@ in {
       pkgs.libsForQt5.okular
       pkgs.obs-studio
       pkgs.firefox
+      pkgs.xbindkeys
     ];
-
     programs.rofi.enable = true;
 
     programs.git = {
@@ -157,7 +158,7 @@ in {
       "workbench.editor.wrapTabs" = true; # tabs become multiline instead of scroll
       "emmet.showExpandedAbbreviation" = "never"; # emmet gets in the way
 
-      # don't modal opening on goto, just go to
+      # don't open modal on goto, just go to
       "editor.gotoLocation.multipleTypeDefinitions" = "goto";
       "editor.gotoLocation.multipleImplementations" = "goto";
       "editor.gotoLocation.multipleDefinitions" = "goto";
@@ -187,6 +188,7 @@ in {
 # TODO:
 #   - music player app, connects to youtube music
 #   - update action bar
+#   - set up datagrip
 #   - import datagrip/rider settings
 #       - connect datagrip to database
 #   - setup insomnia syncing
@@ -234,3 +236,10 @@ in {
 
 # interesting things
 #   - https://github.com/hyprwm/Hyprland
+
+# bad programs
+#   - sxhkd
+#       - horrible name
+#       - no place in documentation to see keys, have to use a separate program (unlike xbindkeys)
+#       - using xev to find some keys (fn keys, print screen, etc) doesn't work sometimes due to other programs getting in the way, so you have to create a clean instance of xorg to test the keys you want to bind
+#       - doesn't support key codes, just key names
