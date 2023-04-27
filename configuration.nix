@@ -29,6 +29,13 @@ in {
   hardware.pulseaudio.enable = true;
 
   # --- DESKTOP ENVIRONMENT ---
+  # with qtile
+  # services.xserver = {
+  #   enable = true;
+  #   windowManager.qtile.enable = true;
+  # };
+
+
   # with cinnamon
   services.xserver = {
     enable = true;
@@ -73,6 +80,7 @@ in {
       qbittorrent
       flameshot # screenshot tool
       bpytop # system monitor
+      libsForQt5.konsole # terminal emulator
     ];
   };
   programs.steam.enable = true;
@@ -102,6 +110,7 @@ in {
     home.file.".vimrc".source = ./configs/.vimrc;
     # home.file.".local/share/rofi/themes/theme.rasi".source = ./configs/rofi/theme.rasi;
     # home.file.".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
+    home.file.".config/qtile/config.py".source = ./configs/qtile.py;
 
     home.packages = [ 
       pkgs.neofetch 
@@ -218,3 +227,10 @@ in {
 # Logout dialogue
 # Default applications
 # Topbar
+# question
+#   - change topbar
+
+
+
+# interesting things
+#   - https://github.com/hyprwm/Hyprland
