@@ -28,13 +28,6 @@ in {
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # --- DESKTOP ENVIRONMENT ---
-  # with qtile
-  # services.xserver = {
-  #   enable = true;
-  #   windowManager.qtile.enable = true;
-  # };
-
   # with cinnamon
   services.xserver = {
     enable = true;
@@ -43,24 +36,7 @@ in {
     displayManager.defaultSession = "cinnamon";
     desktopManager.cinnamon.enable = true;
   };
-  # manual settings
-  #   - shortcuts
-  #       - rofi
-  #       - flameshot
 
-  # with i3
-  # services.xserver.enable = true;
-  # services.xserver.desktopManager.xterm.enable = false;
-  # services.xserver.displayManager.defaultSession = "none+i3";
-  # services.xserver.windowManager.i3 = {
-  #   enable = true;
-  #   extraPackages = with pkgs; [
-  #     dmenu # application launcher most people use
-  #     i3status # gives you the default i3 status bar
-  #     i3lock # default i3 screen locker
-  #     i3blocks # if you are planning on using i3blocks over i3status
-  #   ];
-  # };
 
   # --- PACKAGES ---
   environment.systemPackages = with pkgs; [
@@ -85,11 +61,6 @@ in {
   programs.steam.enable = true;
   programs.gamemode.enable = true;
 
-  # environment.sessionVariables = {
-  #   DOTNET_ROOT = "${pkgs.dotnet-sdk}";
-  #   DOTNET_CLI_TELEMETRY_OPTOUT = "true";
-  # };
-
   nixpkgs.overlays = [
     (self: super: {
       discord = super.discord.overrideAttrs (
@@ -107,8 +78,6 @@ in {
 
     home.file.".bashrc".source = ./configs/.bashrc;
     home.file.".vimrc".source = ./configs/.vimrc;
-    # home.file.".local/share/rofi/themes/theme.rasi".source = ./configs/rofi/theme.rasi;
-    # home.file.".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
     home.file.".config/qtile/config.py".source = ./configs/qtile.py;
     home.file.".xbindkeysrc".source = ./configs/.xbindkeysrc;
     home.file.".config/autostart/.flameshot.desktop".source = ./configs/desktop-entries/flameshot.desktop;
@@ -116,8 +85,7 @@ in {
 
     home.packages = [ 
       pkgs.neofetch 
-      # pkgs.jetbrains.rider # by default has 2022.2 which is too old
-      # pkgs.jetbrains.datagrip # see prev
+      # unstable.jetbrains.datagrip # by default has 2022.2 which is too old
       pkgs.microsoft-edge
       pkgs.slack
       pkgs.insomnia
@@ -127,7 +95,10 @@ in {
       pkgs.firefox
       pkgs.xbindkeys
     ];
-    programs.rofi.enable = true;
+    programs.rofi = {
+      enable = true;
+      theme = ./configs/rofi/theme.rasi;
+    };
 
     programs.git = {
       enable = true;
@@ -150,7 +121,7 @@ in {
         formulahendry.auto-close-tag
         dbaeumer.vscode-eslint
         eamodio.gitlens
-        esbenp.prettier-vscode
+        esbenp.prettier-vscode 
       ];
     };
 
@@ -193,9 +164,6 @@ in {
 #   - import datagrip/rider settings
 #       - connect datagrip to database
 #   - setup insomnia syncing
-#   - rofi themes
-#       - https://github.com/adi1090x/rofi
-#       - https://www.reddit.com/r/unixporn/comments/wndrz1/oc_rofi_a_bunch_of_rofi_themes_for_you_all_choose/
 #   - configure okular theme
 #   - figure out why linux mint boot doesn't show up in the boot loader
 #   - set up mobile dev environment
@@ -209,6 +177,8 @@ in {
 #   - customize terminal
 #   - make vim ignore caps lock
 #   - virtManager / windows VM
+#   - customize firefox
+#   - custom rofi theme with transparency and a compositor
 
 # Desktop compositor (Xorg)
 #     - xserver
