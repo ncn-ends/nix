@@ -56,19 +56,10 @@ in {
   #   ];
   # };
 
-  # with KDE
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
-
   # --- PACKAGES ---
   environment.systemPackages = with pkgs; [
     vim
     wget
-    # dotnetCorePackages.sdk_6_0
-    # msbuild
-    # netcoredbg
-    # omnisharp-roslyn
-    # mono
   ];
 
   users.users.${user} = {
@@ -81,6 +72,7 @@ in {
       xorg.xkill # kill program at mouse pointer location
       qbittorrent
       flameshot # screenshot tool
+      bpytop # system monitor
     ];
   };
   programs.steam.enable = true;
@@ -108,8 +100,8 @@ in {
 
     home.file.".bashrc".source = ./configs/.bashrc;
     home.file.".vimrc".source = ./configs/.vimrc;
-    home.file.".local/share/rofi/themes/theme.rasi".source = ./configs/rofi/theme.rasi;
-    home.file.".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
+    # home.file.".local/share/rofi/themes/theme.rasi".source = ./configs/rofi/theme.rasi;
+    # home.file.".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
 
     home.packages = [ 
       pkgs.neofetch 
@@ -195,7 +187,7 @@ in {
 #   - configure okular theme
 #   - figure out why linux mint boot doesn't show up in the boot loader
 #   - set up mobile dev environment
-#   - confiz
+#   - compiz
 #   - sops-nix to manage ssh keys
 #   - make cinnamon tiling
 #   -   only option is gtile, not worth hassle
@@ -204,3 +196,25 @@ in {
 #   - learn about flakes
 #   - customize terminal
 #   - make vim ignore caps lock
+#   - virtManager / windows VM
+
+# Desktop compositor (Xorg)
+#     - xserver
+# Notification daemon
+# Display manager
+# Screen locker
+# Application launcher
+#     - rofi
+# Audio control
+# Backlight control
+# Media control
+# Polkit authentication agent
+# Power management
+# Screen capture
+#     - flameshot
+# Screen temperature
+# Wallpaper setter
+#     - feh
+# Logout dialogue
+# Default applications
+# Topbar
