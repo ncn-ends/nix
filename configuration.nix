@@ -111,7 +111,8 @@ in {
     # home.file.".config/rofi/config.rasi".source = ./configs/rofi/config.rasi;
     home.file.".config/qtile/config.py".source = ./configs/qtile.py;
     home.file.".xbindkeysrc".source = ./configs/.xbindkeysrc;
-    home.file.".xinitrc".source = ./configs/.xinitrc;
+    home.file.".config/autostart/.flameshot.desktop".source = ./configs/desktop-entries/flameshot.desktop;
+    home.file.".config/autostart/.xbindkeys.desktop".source = ./configs/desktop-entries/xbindkeys.desktop;
 
     home.packages = [ 
       pkgs.neofetch 
