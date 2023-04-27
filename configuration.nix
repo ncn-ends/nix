@@ -143,6 +143,11 @@ in {
         }
       ];
 
+      "vim.handleKeys" = {
+        "<C-f>" =  false;
+        "<C-x>" =  false;
+      };
+
       "[typescriptreact]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
@@ -178,7 +183,6 @@ in {
 #   - make vim ignore caps lock
 #   - virtManager / windows VM
 #   - customize firefox
-#   - custom rofi theme with transparency and a compositor
 
 # Desktop compositor (Xorg)
 #     - xserver
