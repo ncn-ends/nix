@@ -44,7 +44,7 @@ in {
     vim
     wget
     wayfire 
-    wcm
+    wlr-randr # get output of monitors on wayland
   ];
 
   users.users.${user} = {
