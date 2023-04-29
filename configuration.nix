@@ -28,20 +28,12 @@ in {
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # with cinnamon
-  services.xserver = {
-    enable = true;
-    libinput.enable = true;
-    displayManager.lightdm.enable = true;
-    displayManager.defaultSession = "cinnamon";
-    desktopManager.cinnamon.enable = true;
-  };
-
 
   # --- PACKAGES ---
   environment.systemPackages = with pkgs; [
     vim
     wget
+    wayfire 
   ];
 
   users.users.${user} = {
@@ -78,11 +70,10 @@ in {
 
     home.file.".bashrc".source = ./configs/.bashrc;
     home.file.".vimrc".source = ./configs/.vimrc;
-    home.file.".config/qtile/config.py".source = ./configs/qtile.py;
-    home.file.".xbindkeysrc".source = ./configs/.xbindkeysrc;
-    home.file.".config/autostart/.flameshot.desktop".source = ./configs/desktop-entries/flameshot.desktop;
-    home.file.".config/autostart/.xbindkeys.desktop".source = ./configs/desktop-entries/xbindkeys.desktop;
-    home.file.".config/mimeapps.list".source = ./configs/mimeapps.list;
+    # home.file.".xbindkeysrc".source = ./configs/.xbindkeysrc;
+    # home.file.".config/autostart/.flameshot.desktop".source = ./configs/desktop-entries/flameshot.desktop;
+    # home.file.".config/autostart/.xbindkeys.desktop".source = ./configs/desktop-entries/xbindkeys.desktop;
+    # home.file.".config/mimeapps.list".source = ./configs/mimeapps.list;
 
     home.packages = [ 
       pkgs.neofetch 
@@ -95,21 +86,11 @@ in {
       pkgs.obs-studio
       pkgs.firefox
       pkgs.xbindkeys
+      pkgs.vlc
     ];
     programs.rofi = {
       enable = true;
       theme = ./configs/rofi/theme.rasi;
-    };
-    programs.mpv = {
-      enable = true;
-      bindings = {
-        H = "seek 10";
-        L = "seek -10";
-      };
-    };
-    services.polybar = {
-      enable = true;
-      script = "polybar bar &";
     };
     
 
