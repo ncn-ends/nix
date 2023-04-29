@@ -6,7 +6,7 @@ let
 in {
   system.stateVersion = "21.11"; # DO NOT CHANGE
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       ./hardware-configuration.nix
       <home-manager/nixos>
     ];
@@ -15,15 +15,15 @@ in {
   # --- FOUNDATION --- 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.useOSProber = true; # detects other linux boot partitions
-  boot.kernelPackages = pkgs.linuxPackages_latest; # recommended, not sure
-  boot.initrd.kernelModules = ["amdgpu"]; # recommended, not sure
+  boot.loader.grub.useOSProber = true; 
+  boot.kernelPackages = pkgs.linuxPackages_latest; 
+  boot.initrd.kernelModules = ["amdgpu"]; 
   boot.loader.grub.device = "/dev/sda";
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
      font = "Lat2-Terminus16";
-     useXkbConfig = true; # use xkbOptions in tty.
+     useXkbConfig = true;
   };
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -82,6 +82,7 @@ in {
     home.file.".xbindkeysrc".source = ./configs/.xbindkeysrc;
     home.file.".config/autostart/.flameshot.desktop".source = ./configs/desktop-entries/flameshot.desktop;
     home.file.".config/autostart/.xbindkeys.desktop".source = ./configs/desktop-entries/xbindkeys.desktop;
+    home.file.".config/mimeapps.list".source = ./configs/mimeapps.list;
 
     home.packages = [ 
       pkgs.neofetch 
@@ -99,6 +100,18 @@ in {
       enable = true;
       theme = ./configs/rofi/theme.rasi;
     };
+    programs.mpv = {
+      enable = true;
+      bindings = {
+        H = "seek 10";
+        L = "seek -10";
+      };
+    };
+    services.polybar = {
+      enable = true;
+      script = "polybar bar &";
+    };
+    
 
     programs.git = {
       enable = true;
@@ -164,7 +177,6 @@ in {
 
 # TODO:
 #   - music player app, connects to youtube music
-#   - update action bar
 #   - set up datagrip
 #   - import datagrip/rider settings
 #       - connect datagrip to database
@@ -183,6 +195,7 @@ in {
 #   - make vim ignore caps lock
 #   - virtManager / windows VM
 #   - customize firefox
+#   - customize polybar
 
 # Desktop compositor (Xorg)
 #     - xserver
@@ -203,6 +216,7 @@ in {
 #     - feh
 # Logout dialogue
 # Default applications
+#   see: https://wiki.gentoo.org/wiki/Default_applications
 # Topbar
 # question
 #   - change topbar
