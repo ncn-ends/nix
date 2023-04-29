@@ -70,6 +70,7 @@ in {
 
     home.file.".bashrc".source = ./configs/.bashrc;
     home.file.".vimrc".source = ./configs/.vimrc;
+    home.file.".config/wayfire.ini".source = ./configs/wayfire.ini;
     # home.file.".xbindkeysrc".source = ./configs/.xbindkeysrc;
     # home.file.".config/autostart/.flameshot.desktop".source = ./configs/desktop-entries/flameshot.desktop;
     # home.file.".config/autostart/.xbindkeys.desktop".source = ./configs/desktop-entries/xbindkeys.desktop;
