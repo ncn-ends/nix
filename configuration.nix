@@ -28,12 +28,23 @@ in {
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+      ];
+      wlr = {
+        enable = true;
+      };
+    }; # required for wlroots based desktops
+
 
   # --- PACKAGES ---
   environment.systemPackages = with pkgs; [
     vim
     wget
     wayfire 
+    wcm
   ];
 
   users.users.${user} = {
@@ -70,11 +81,12 @@ in {
 
     home.file.".bashrc".source = ./configs/.bashrc;
     home.file.".vimrc".source = ./configs/.vimrc;
-    home.file.".config/wayfire.ini".source = ./configs/wayfire.ini;
+    # home.file.".config/wayfire.ini".source = ./configs/wayfire.ini;
     # home.file.".xbindkeysrc".source = ./configs/.xbindkeysrc;
     # home.file.".config/autostart/.flameshot.desktop".source = ./configs/desktop-entries/flameshot.desktop;
     # home.file.".config/autostart/.xbindkeys.desktop".source = ./configs/desktop-entries/xbindkeys.desktop;
     # home.file.".config/mimeapps.list".source = ./configs/mimeapps.list;
+
 
     home.packages = [ 
       pkgs.neofetch 
@@ -88,6 +100,7 @@ in {
       pkgs.firefox
       pkgs.xbindkeys
       pkgs.vlc
+      pkgs.alacritty
     ];
     programs.rofi = {
       enable = true;
