@@ -82,6 +82,7 @@ in {
     home.file.".xbindkeysrc".source = ./configs/.xbindkeysrc;
     home.file.".config/autostart/.flameshot.desktop".source = ./configs/desktop-entries/flameshot.desktop;
     home.file.".config/autostart/.xbindkeys.desktop".source = ./configs/desktop-entries/xbindkeys.desktop;
+    home.file.".config/autostart/.polybar.desktop".source = ./configs/desktop-entries/polybar.desktop;
     home.file.".config/mimeapps.list".source = ./configs/mimeapps.list;
 
     home.packages = [ 
@@ -95,17 +96,11 @@ in {
       pkgs.obs-studio
       pkgs.firefox
       pkgs.xbindkeys
+      pkgs.vlc
     ];
     programs.rofi = {
       enable = true;
       theme = ./configs/rofi/theme.rasi;
-    };
-    programs.mpv = {
-      enable = true;
-      bindings = {
-        H = "seek 10";
-        L = "seek -10";
-      };
     };
     services.polybar = {
       enable = true;
