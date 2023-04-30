@@ -97,6 +97,7 @@ in {
       pkgs.firefox
       pkgs.xbindkeys
       pkgs.vlc
+      pkgs.alacritty
     ];
     programs.rofi = {
       enable = true;
@@ -106,7 +107,6 @@ in {
       enable = true;
       script = "polybar bar &";
     };
-    
 
     programs.git = {
       enable = true;
@@ -167,6 +167,13 @@ in {
       };
     };
   };
+
+  # everytime we want to use a flake add a command so that won't need to include in cli argument
+  # nix = {
+  #   package = pkgs.nixFlakes;
+  #   extraOptions = "experimental-features = nix-command flakes";
+  # };
+
 
 }
 
