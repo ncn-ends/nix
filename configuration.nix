@@ -7,69 +7,14 @@ in {
   system.stateVersion = "21.11"; # DO NOT CHANGE
   imports =
     [ 
-      ./hardware-configuration.nix
+      ./modules/hardware-configuration.nix
       <home-manager/nixos>
+      ./modules/cinnamon.desktop.nix
+      ./modules/foundation.nix
+      ./modules/users.nix
+      ./modules/packages.nix
     ];
   nixpkgs.config.allowUnfree = true;
-
-  # --- FOUNDATION --- 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.useOSProber = true; 
-  boot.kernelPackages = pkgs.linuxPackages_latest; 
-  boot.initrd.kernelModules = ["amdgpu"]; 
-  boot.loader.grub.device = "/dev/sda";
-  time.timeZone = "America/Los_Angeles";
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-     font = "Lat2-Terminus16";
-     useXkbConfig = true;
-  };
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # with cinnamon
-  services.xserver = {
-    enable = true;
-    libinput.enable = true;
-    displayManager.lightdm.enable = true;
-    displayManager.defaultSession = "cinnamon";
-    desktopManager.cinnamon.enable = true;
-  };
-
-
-  # --- PACKAGES ---
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-  ];
-
-  users.users.${user} = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" ];
-    initialPassword = "password";
-    packages = with pkgs; [
-      discord
-      feh # used to apply desktop wallpaper
-      xorg.xkill # kill program at mouse pointer location
-      qbittorrent
-      flameshot # screenshot tool
-      bpytop # system monitor
-      libsForQt5.konsole # terminal emulator
-    ];
-  };
-  programs.steam.enable = true;
-  programs.gamemode.enable = true;
-
-  nixpkgs.overlays = [
-    (self: super: {
-      discord = super.discord.overrideAttrs (
-        _: { src = builtins.fetchTarball {
-          url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-        }; }
-      );
-    })
-  ];
 
   # home-manager
   home-manager.users.${user} = { pkgs, ... }: {
@@ -154,6 +99,7 @@ in {
       "vim.handleKeys" = {
         "<C-f>" =  false;
         "<C-x>" =  false;
+        "<C-v>" = false;
       };
 
       "[typescriptreact]" = {

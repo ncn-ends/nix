@@ -9,7 +9,13 @@ in mkShell {
     nodePackages.npm
     nodePackages.yarn
     unstable.jetbrains.rider
-    android-studio
+    unstable.android-studio
     watchman
   ];
+
+  shellHook = ''
+    
+
+    echo "Mobile shell starting..."
+  '';
 }
