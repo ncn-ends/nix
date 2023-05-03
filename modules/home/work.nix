@@ -5,6 +5,7 @@
   home.stateVersion = "22.11"; # DO NOT CHANGE
   nixpkgs.config.allowUnfree = true;
 
+  # missing packages are added in darwin file
   home.packages = [
     pkgs.slack
     # pkgs.microsoft-edge
@@ -16,6 +17,7 @@
     # pkgs.vlc
     # pkgs.alacritty
     pkgs.azure-cli
+    # pkgs.android-studio
   ];
   programs.git = {
     enable = true;
@@ -86,6 +88,7 @@
     shellAliases = {
       nixsw = "darwin-rebuild switch --flake ~/nix/darwin/.#";
       nixup = "pushd ~/nix/darwin; nix flake update; nixsw; popd";
+      nixrn = "NIXPKGS_ALLOW_UNFREE=1 nix-shell ~/nix/shells/rn-shell.nix";
     };
   };	
   programs.alacritty = {

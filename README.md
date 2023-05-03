@@ -7,6 +7,8 @@ Organization is WIP while I figure out how I want to do things and learn more ab
 ### Darwin
 - initial bootstrap  
     - `nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurations.ncn.system`
+- when setting up xcode
+    - run `sudo xcode-select -s /Applications/Xcode.app` -or- go to preferences/settings -> locations -> select xcode version (warning: if you do it through the GUI, it will show a default value in the dropdown even if it's not set yet. need to actually select it initially. )
 
 ## Missing From Here
 
