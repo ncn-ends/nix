@@ -18,8 +18,16 @@
       NSGlobalDomain.AppleShowAllExtensions = true;
       NSGlobalDomain.InitialKeyRepeat = 14;
       NSGlobalDomain.KeyRepeat = 1;
-      finder.AppleShowAllExtensions = true;
+      finder.AppleShowAllExtensions = true; # shows file extensions in file name
       finder._FXShowPosixPathInTitle = true;
+      finder.ShowPathbar = true;
+      finder.ShowStatusBar = true;
+      finder.FXPreferredViewStyle = "Nlsv"; #list view
+      finder.AppleShowAllFiles = true; #shows hidden files
+      dock.tilesize = 24;
+      dock.static-only = true; #shows only open apps
+      dock.mru-spaces = false; # don't automatically rearrange spaces based on most recent use. who thought this was a good idea? 
+      dock.autohide-time-modifier = 2.0; # default is 1.0
       dock.autohide = true;
     };
     
@@ -30,4 +38,7 @@
       masApps = {};
       casks = ["raycast" "amethyst"];
     };
+
+    # my changes:
+    # system.defaults.screencapture.location = ~/Desktop;
 }
