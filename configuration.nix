@@ -12,7 +12,7 @@ in {
     ./modules/cinnamon.desktop.nix
     ./modules/users.nix
     ./modules/packages.nix
-    ./modules/home.nix
+    ./modules/home/main.nix
   ];
   nixpkgs.config.allowUnfree = true;
 }
