@@ -15,6 +15,7 @@ in {
     pkgs.firefox
     pkgs.vlc
     pkgs.alacritty
+    pkgs.azure-cli
   ];
 
   home.file.".bashrc".source = ../../configs/.bashrc;
