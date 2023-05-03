@@ -4,6 +4,10 @@ This is my nix set up for home-manager, nix-darwin (macos), and my nixos main co
 The goal is to have everything configured in this repo, and be able to share my config for other people to use. 
 Organization is WIP while I figure out how I want to do things and learn more about Nix.
 
+### Darwin
+- initial bootstrap  
+    - `nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurations.ncn.system`
+
 ## Missing From Here
 
 - Jetbrains IDEs (datagrip and Rider) configs are not stored here, and instead use the Jetbrains sync feature built into the IDE
