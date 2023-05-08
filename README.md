@@ -22,3 +22,4 @@ Organization is WIP while I figure out how I want to do things and learn more ab
 [home-manager config options](https://rycee.gitlab.io/home-manager/options.html)  
 [(Video) Set up guide from Matthis Benaets](https://www.youtube.com/watch?v=AGVXJ-TIv3Y)  
 [Nix ecosystem guide on nix.dev](https://nix.dev/tutorials)
+[Nix Shell tutorial from Mattia Gheda](https://ghedam.at/15978/an-introduction-to-nix-shell)

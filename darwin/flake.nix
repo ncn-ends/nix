@@ -11,7 +11,7 @@
 	}; 
 	outputs = inputs@{nixpkgs, nixpkgs-unstable, home-manager, darwin, ...}: 
 	{
-		darwinConfigurations.ncn-2 = darwin.lib.darwinSystem {
+		darwinConfigurations.ncns-MacBook-Pro = darwin.lib.darwinSystem {
 			system = "aarch64-darwin";
 			modules = [
 				{ nixpkgs.config.allowUnfree = true; }

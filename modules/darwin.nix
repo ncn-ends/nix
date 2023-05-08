@@ -7,12 +7,12 @@
     environment.shells = [ pkgs.bash pkgs.zsh ];
     environment.loginShell = pkgs.zsh;
     environment.systemPackages = with pkgs; [ 
-      coreutils 
+      # coreutils 
       git 
-      nodejs
-      nodePackages.npm
-      nodePackages.yarn
-      watchman
+      # nodejs
+      # nodePackages.npm
+      # nodePackages.yarn
+      # watchman
       # ruby
       # rubyPackages.ffi
       # cocoapods
