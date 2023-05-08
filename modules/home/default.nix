@@ -13,7 +13,7 @@ in {
     pkgs.zoom-us
     pkgs.obs-studio
     pkgs.firefox
-    pkgs.vlc
+    unstable.vlc
     pkgs.alacritty
     pkgs.azure-cli
   ];

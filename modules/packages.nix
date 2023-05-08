@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
+    playerctl # may help with vlc issues
   ];
 
   users.users.${config.lib.user.name}.packages =  with pkgs; [
