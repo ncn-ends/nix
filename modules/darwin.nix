@@ -13,8 +13,10 @@
       nodePackages.npm
       nodePackages.yarn
       watchman
-      cocoapods
-      xcbuild
+      # ruby
+      # rubyPackages.ffi
+      # cocoapods
+      # xcbuild
       # xcodebuild6
     ]; 
     environment.systemPath = [ "/opt/homebrew/bin" ];
