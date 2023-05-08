@@ -9,6 +9,10 @@ mkShell {
     nodePackages.npm
     nodePackages.yarn
     cocoapods
+    (runCommandLocal "sed" {} ''
+      mkdir -p $out/bin
+      ln -vs /usr/bin/sed $out/bin/sed
+    '')
   ];
 
   # sudo xcode-select --switch /Applications/Xcode.app
