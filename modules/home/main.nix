@@ -11,6 +11,7 @@ in {
       pkgs.neofetch 
       pkgs.libsForQt5.okular
       pkgs.xbindkeys
+      pkgs.libreoffice
     ];
 
     programs.rofi = {

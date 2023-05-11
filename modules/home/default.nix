@@ -16,6 +16,7 @@ in {
     unstable.vlc
     pkgs.alacritty
     pkgs.azure-cli
+    pkgs.figma-linux
   ];
 
   home.file.".bashrc".source = ../../configs/.bashrc;
