@@ -10,7 +10,5 @@ in mkShell {
     jetbrains.rider
   ];
 
-  shellHook = ''
-    alias startrr='cd ~/code/2_rr/HCMServer; rider . &>/dev/null &'
-  '';
+  shellHook = import ./shellHook.nix;
 }

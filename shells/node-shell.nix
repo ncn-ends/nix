@@ -11,7 +11,5 @@ in mkShell {
     unstable.jetbrains.rider
   ];
 
-  # shellHook = ''
-  #   alias rider-open='rider '
-  # '';
+  shellHook = import ./shellHook.nix
 }
