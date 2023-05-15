@@ -19,6 +19,11 @@ in {
     pkgs.figma-linux
   ];
 
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
   home.file.".bashrc".source = ../../configs/.bashrc;
   home.file.".vimrc".source  = ../../configs/.vimrc;
 

@@ -59,4 +59,5 @@ Organization is WIP while I figure out how I want to do things and learn more ab
 [NixOS Option Search](https://search.nixos.org/options?)  
 [home-manager config options](https://rycee.gitlab.io/home-manager/options.html)  
 [(Video) Set up guide from Matthis Benaets](https://www.youtube.com/watch?v=AGVXJ-TIv3Y)  
-[Nix ecosystem guide on nix.dev](https://nix.dev/tutorials)
+[Nix ecosystem guide on nix.dev](https://nix.dev/tutorials)  
+[Nix pills](https://nixos.org/guides/nix-pills/functions-and-imports.html)  

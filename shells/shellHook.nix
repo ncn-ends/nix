@@ -1,8 +1,8 @@
 ''
-  rrservdir(){
+  cdrrserv(){
     cd ~/code/2_rr/HCMServer
   }
-  rrwebdir(){
+  cdrrwebui(){
     cd ~/code/2_rr/EdluminUI
   }
   open-rider() {
@@ -30,8 +30,8 @@
          ▟███▛  ▜███▙       ▜███▙     
          ▝▀▀▀    ▀▀▀▀▘       ▀▀▀▘        
 
-rrservdir = opens RR server directory
-rrwebdir = opens RR web client directory
+cdrrserv = opens RR server directory
+cdrrwebui = opens RR web client directory
 open-rider = opens rider at specified directory
   "
 ''
