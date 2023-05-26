@@ -44,7 +44,6 @@ let
     # platforms-android-31
     # emulator
   ]);
-
 in
 mkShell {
   buildInputs = [
@@ -52,5 +51,6 @@ mkShell {
     android-studio
     nodejs
     yarn
+    jetbrains.rider
   ];
 }

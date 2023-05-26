@@ -12,6 +12,7 @@ in {
       pkgs.libsForQt5.okular
       pkgs.xbindkeys
       pkgs.libreoffice
+      pkgs.peek
     ];
 
     programs.rofi = {
@@ -29,5 +30,6 @@ in {
     home.file.".config/autostart/.xbindkeys.desktop".source = ../../configs/desktop-entries/xbindkeys.desktop;
     home.file.".config/autostart/.polybar.desktop".source   = ../../configs/desktop-entries/polybar.desktop;
     home.file.".config/mimeapps.list".source                = ../../configs/mimeapps.list;
+    home.file.".ideavimrc".source                           = ../../configs/.ideavimrc;
   };
 }

@@ -21,6 +21,11 @@
   programs.steam.enable = true;
   programs.gamemode.enable = true;
 
+  xdg.portal.enable = true; # required for flatpak
+  services.flatpak.enable = true;
+  # flatpak packages: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  #   - vlc
+
   nixpkgs.overlays = [
     (self: super: {
       discord = super.discord.overrideAttrs (

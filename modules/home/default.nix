@@ -13,10 +13,11 @@ in {
     pkgs.zoom-us
     pkgs.obs-studio
     pkgs.firefox
-    unstable.vlc
+    # unstable.vlc
     pkgs.alacritty
     pkgs.azure-cli
     pkgs.figma-linux
+    pkgs.drawio
   ];
 
   programs.vim = {
@@ -49,6 +50,7 @@ in {
       dbaeumer.vscode-eslint
       eamodio.gitlens
       esbenp.prettier-vscode 
+      # yoavbls.pretty-ts-errors
     ];
   };
 

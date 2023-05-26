@@ -1,0 +1,13 @@
+let mapleader=" "
+
+map <leader>r <Action>(RenameElement)
+
+map gr <Action>(FindUsages)
+map gs <Action>(FileStructurePopup)
+map gne <Action>(ReSharperGotoNextErrorInSolution)
+
+map sb <Action>(ToggleLineBreakpoint)
+map sr <Action>(Resume)
+map se <Action>(StepOver)
+map st <Action>(StepInto)
+map s <Nop>

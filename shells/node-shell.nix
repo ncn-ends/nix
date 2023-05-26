@@ -1,15 +1,14 @@
-with import <nixpkgs> {};
-
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in mkShell {
+with (import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) {});
+mkShell {
   name = "node-env";
   packages = [
-    nodejs-16_x
+    nodejs
     nodePackages.npm
     nodePackages.yarn
-    unstable.jetbrains.rider
+    nodePackages.javascript-typescript-langserver
+    nodePackages.typescript
+    jetbrains.rider
+    jetbrains.webstorm
   ];
-
-  shellHook = import ./shellHook.nix
+  shellHook = import ./shellHook.nix;
 }
