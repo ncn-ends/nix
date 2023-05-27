@@ -13,6 +13,7 @@ in {
       pkgs.xbindkeys
       pkgs.libreoffice
       pkgs.peek
+      pkgs.psensor
     ];
 
     programs.rofi = {

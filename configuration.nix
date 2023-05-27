@@ -13,6 +13,7 @@ in {
     ./modules/users.nix
     ./modules/packages.nix
     ./modules/home/main.nix
+    # ./modules/services/plex.nix
   ];
   nixpkgs.config.allowUnfree = true;
 }

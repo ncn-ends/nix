@@ -10,6 +10,7 @@ ssh-add -l > /dev/null || ssh-add
 alias nix-dotnet="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/dotnet-shell.nix";
 alias nix-node="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/node-shell.nix --pure";
 alias nix-android="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/android-shell.nix --pure";
+alias nix-py="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/python-shell.nix --pure";
 
 # programs
 alias vlc="flatpak run org.videolan.VLC"
