@@ -6,18 +6,22 @@
   nixpkgs.config.allowUnfree = true;
 
   # missing packages are added in darwin file
-  home.packages = [
-    pkgs.slack
+  home.packages = with pkgs; [
+    slack
     # pkgs.microsoft-edge
-    pkgs.slack
+    slack
     # pkgs.insomnia
-    pkgs.zoom-us
+    zoom-us
     # pkgs.obs-studio
     # pkgs.firefox
     # pkgs.vlc
     # pkgs.alacritty
-    pkgs.azure-cli
+    azure-cli
     # pkgs.android-studio
+    nodejs
+    nodePackages.npm
+    nodePackages.yarn
+    cocoapods
   ];
   programs.git = {
     enable = true;

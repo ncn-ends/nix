@@ -9,7 +9,7 @@
     environment.systemPackages = with pkgs; [ 
       # coreutils 
       git 
-      # nodejs
+      nodejs
       # nodePackages.npm
       # nodePackages.yarn
       # watchman

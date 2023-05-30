@@ -5,7 +5,6 @@ with (import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unst
 mkShell {
   name = "ios-env";
   buildInputs = [
-    nodejs
     nodePackages.npm
     nodePackages.yarn
     cocoapods
@@ -14,6 +13,10 @@ mkShell {
       ln -vs /usr/bin/sed $out/bin/sed
     '')
   ];
+
+  # shellHook = ''
+  #   export PATH="${}
+  # '';
 
   # sudo xcode-select --switch /Applications/Xcode.app
   # sudo xcodebuild -license
