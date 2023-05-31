@@ -11,3 +11,5 @@ map sr <Action>(Resume)
 map se <Action>(StepOver)
 map st <Action>(StepInto)
 map s <Nop>
+
+map <A-v> <C-v>

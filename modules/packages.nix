@@ -20,6 +20,7 @@
 
   programs.steam.enable = true;
   programs.gamemode.enable = true;
+  virtualisation.docker.enable = true;
 
   xdg.portal.enable = true; # required for flatpak
   services.flatpak.enable = true;

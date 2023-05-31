@@ -1,4 +1,4 @@
-with (import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) {});
+with (import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) {allowUnfree = true;});
 let 
   pythonEnv = python310.withPackages (ps: [
     ps.fastapi
@@ -14,6 +14,6 @@ in mkShell {
     pythonEnv
   ];
   shellHook = (import ./shellHook.nix) + ''
-  alias py:dev="uvicorn main:app --reload"
+    alias py:dev="uvicorn main:app --reload"
   '';
 }
