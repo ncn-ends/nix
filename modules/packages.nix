@@ -6,7 +6,16 @@
   environment.systemPackages = with pkgs; [
     wget
     playerctl # may help with vlc issues
+    lutris
   ];
+
+  systemd.extraConfig = ''
+    DefaultLimitNOFILE=1048576
+  '';
+
+  systemd.user.extraConfig = ''
+    DefaultLimitNOFILE=1048576
+  '';
 
   users.users.${config.lib.user.name}.packages =  with pkgs; [
     discord

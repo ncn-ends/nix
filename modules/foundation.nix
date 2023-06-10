@@ -14,11 +14,4 @@
   };
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-  };
 }

@@ -11,9 +11,11 @@ alias nix-dotnet="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/dotnet-shel
 alias nix-node="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/node-shell.nix --pure";
 alias nix-android="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/android-shell.nix --pure";
 alias nix-py="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/python-shell.nix --pure";
+alias nix-zig="nix-shell /etc/nixos/shells/zig-shell.nix";
 
 # programs
 alias vlc="flatpak run org.videolan.VLC"
+alias bottles="flatpak run com.usebottles.bottles"
 
 # ssh
 alias ssh:cap="ssh -i ~/.ssh/cap_key.pem cap@20.253.238.231"

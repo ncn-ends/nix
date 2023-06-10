@@ -61,3 +61,4 @@ Organization is WIP while I figure out how I want to do things and learn more ab
 [(Video) Set up guide from Matthis Benaets](https://www.youtube.com/watch?v=AGVXJ-TIv3Y)  
 [Nix ecosystem guide on nix.dev](https://nix.dev/tutorials)  
 [Nix pills](https://nixos.org/guides/nix-pills/functions-and-imports.html)  
+[General Nix guide "zero to nix", beginner friendly](https://zero-to-nix.com/)

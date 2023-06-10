@@ -14,6 +14,7 @@ in {
       pkgs.libreoffice
       pkgs.peek
       pkgs.psensor
+      pkgs.imagemagick
     ];
 
     programs.rofi = {
