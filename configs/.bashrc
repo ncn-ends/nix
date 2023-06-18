@@ -13,6 +13,9 @@ alias nix-android="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/android-sh
 alias nix-py="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/python-shell.nix --pure";
 alias nix-zig="nix-shell /etc/nixos/shells/zig-shell.nix";
 
+# convenience scripts
+alias scd="source /etc/nixos/configs/scripts/scd.sh"
+
 # programs
 alias vlc="flatpak run org.videolan.VLC"
 alias bottles="flatpak run com.usebottles.bottles"
