@@ -3,6 +3,7 @@
 # NOTE: This script file must be run with `source scd.sh` to work correctly
 # See: https://unix.stackexchange.com/questions/27139/script-to-change-current-directory-cd-pwd
 
+# make sure target directory is passed and use start_dir as 2nd argument or default to cwd
 TARGET_DIR=$1
 START_DIR=$2
 
@@ -17,11 +18,13 @@ then
     START_DIR=$(pwd)
 fi
 
+# search for first instance of directory name
 echo "Searching in $START_DIR for directory $TARGET_DIR..."
 
 PATHTODIR=`(find $START_DIR -type d -name "$TARGET_DIR" -print -quit) | head -n 1`
 
 
+# handle no directory found or use cd
 if [[ -z "$PATHTODIR" ]]
 then
     echo "Nothing found! Exiting..."
