@@ -15,6 +15,7 @@ in {
       pkgs.peek
       pkgs.psensor
       pkgs.imagemagick
+      pkgs.tokei
     ];
 
     programs.rofi = {
