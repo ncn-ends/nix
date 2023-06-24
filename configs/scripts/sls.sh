@@ -27,7 +27,6 @@ echo "Searching in $START_DIR for directory $TARGET_DIR..."
 
 PATHTODIR=`(find $START_DIR -type d -name "$TARGET_DIR" -print -quit) | head -n 1`
 
-
 # handle no directory found or use cd
 if [[ -z "$PATHTODIR" ]]
 then

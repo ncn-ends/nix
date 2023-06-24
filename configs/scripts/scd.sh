@@ -37,4 +37,6 @@ echo $PATHTODIR
 echo "Switching directories..."
 cd $PATHTODIR
 
+addcdlog
+
 echo "Complete!"

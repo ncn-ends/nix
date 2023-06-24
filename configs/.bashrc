@@ -15,7 +15,9 @@ alias nix-zig="nix-shell /etc/nixos/shells/zig-shell.nix";
 
 # convenience scripts
 alias scd="source /etc/nixos/configs/scripts/scd.sh"
+alias ucd="source /etc/nixos/configs/scripts/ucd.sh"
 alias sls="source /etc/nixos/configs/scripts/sls.sh"
+alias addcdlog="source /etc/nixos/configs/scripts/addcdlog.sh"
 
 # programs
 alias vlc="flatpak run org.videolan.VLC"
