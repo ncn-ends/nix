@@ -27,6 +27,7 @@ mkShell {
     # python-dotenv
     # aiohttp
     # python-multipart
+    requests
 
     jetbrains.pycharm-professional
   ];

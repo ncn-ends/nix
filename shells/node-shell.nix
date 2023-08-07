@@ -13,6 +13,7 @@ in mkShell {
     nodePackages.typescript
     jetbrains.rider
     jetbrains.webstorm
+    ngrok
   ];
   NPM_CONFIG_PREFIX = toString ./npm_config_prefix;
   # shellHook = import ./shellHook.nix;

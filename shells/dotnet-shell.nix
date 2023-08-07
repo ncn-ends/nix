@@ -1,9 +1,5 @@
-with import <nixpkgs> {};
-
-
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in mkShell {
+with (import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) { config = { allowUnfree = true;}; });
+mkShell {
   name = "dotnet-env";
   packages = [
     dotnet-sdk_6
