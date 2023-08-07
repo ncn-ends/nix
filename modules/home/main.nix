@@ -16,6 +16,10 @@ in {
       pkgs.psensor
       pkgs.imagemagick
       pkgs.tokei
+      pkgs.speedtest-cli
+      pkgs.shotcut
+      pkgs.libsForQt5.dolphin
+      pkgs.gimp
     ];
 
     programs.rofi = {
