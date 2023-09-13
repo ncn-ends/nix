@@ -9,6 +9,7 @@ in mkShell {
     nodejs
     nodePackages.npm
     nodePackages.yarn
+    nodePackages.pnpm
     nodePackages.javascript-typescript-langserver
     nodePackages.typescript
     jetbrains.rider

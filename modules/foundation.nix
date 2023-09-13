@@ -12,6 +12,5 @@
      font = "Lat2-Terminus16";
      useXkbConfig = true;
   };
-  sound.enable = true;
   hardware.pulseaudio.enable = true;
 }

@@ -1,7 +1,7 @@
 
 { pkgs, services, config, ... }:
 let 
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+  unstable = import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) { config = { allowUnfree = true; }; };
 in {
   home-manager.users.${config.lib.user.name} = { pkgs, ... }: {
     imports = [
@@ -18,8 +18,11 @@ in {
       pkgs.tokei
       pkgs.speedtest-cli
       pkgs.shotcut
+      pkgs.krusader
       pkgs.libsForQt5.dolphin
+      pkgs.bottom
       pkgs.gimp
+      pkgs.gitkraken
     ];
 
     programs.rofi = {

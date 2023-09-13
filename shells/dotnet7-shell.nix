@@ -1,8 +1,8 @@
 with (import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) { config = { allowUnfree = true;}; });
 mkShell {
-  name = "dotnet6-env";
+  name = "dotnet7-env";
   packages = [
-    dotnet-sdk_6
+    dotnet-sdk_7
     (jetbrains.rider.overrideAttrs (old: {
       postPatch = old.postPatch + ''
         interp="$(cat $NIX_CC/nix-support/dynamic-linker)"

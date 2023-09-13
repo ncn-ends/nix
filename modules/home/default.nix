@@ -1,6 +1,6 @@
 { pkgs, config, services, ... }:
 let 
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+  unstable = import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) { config = { allowUnfree = true; }; };
 in {
   home.stateVersion = "22.11"; # DO NOT CHANGE
   nixpkgs.config.allowUnfree = true;
