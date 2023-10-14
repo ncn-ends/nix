@@ -9,7 +9,9 @@ ssh-add -l > /dev/null || ssh-add
 # alias' for nix shells
 alias nix-dotnet="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/dotnet-shell.nix";
 alias nix-dotnet7="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/dotnet7-shell.nix";
-alias nix-node="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/node-shell.nix --pure";
+alias nix-dotnet8="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/dotnet8-shell.nix";
+alias nix-node="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/node-shell.nix";
+alias nix-bun="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/bun-shell.nix";
 alias nix-droid="nix-shell /etc/nixos/shells/android-shell.nix";
 alias nix-py="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/python-shell.nix --pure";
 alias nix-zig="nix-shell /etc/nixos/shells/zig-shell.nix";
