@@ -23,6 +23,7 @@ in {
       pkgs.bottom
       pkgs.gimp
       pkgs.gitkraken
+      pkgs.libsForQt5.kdeconnect-kde
     ];
 
     programs.rofi = {
@@ -46,5 +47,6 @@ in {
     home.file.".config/mimeapps.list".source                = ../../configs/mimeapps.list;
     home.file.".ideavimrc".source                           = ../../configs/.ideavimrc;
     home.file.".config/emacs".source                        = ../../configs/emacs;
+    home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg".source                        = ../../configs/csgo/autoexec.cfg;
   };
 }
