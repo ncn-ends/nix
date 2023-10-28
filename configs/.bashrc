@@ -13,11 +13,10 @@ alias nix-dotnet8="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/dotnet8-sh
 alias nix-node="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/node-shell.nix";
 alias nix-bun="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/bun-shell.nix";
 alias nix-droid="nix-shell /etc/nixos/shells/android-shell.nix";
-alias nix-py="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/python-shell.nix --pure";
+alias nix-py="NIXPKGS_ALLOW_UNFREE=1 nix-shell /etc/nixos/shells/python-shell.nix";
 alias nix-zig="nix-shell /etc/nixos/shells/zig-shell.nix";
 
 # convenience alias'
-
 alias nix-sw="sudo nixos-rebuild switch"
 
 # convenience scripts
@@ -34,3 +33,6 @@ alias bottles="flatpak run com.usebottles.bottles"
 alias ssh:cap="ssh -i ~/.ssh/cap_key.pem cap@20.253.238.231"
 alias ssh:ubuntu="ssh -i ~/.ssh/ubuntuvps ncn@45.77.184.179"
 alias ssh:hs="ssh -i ~/.ssh/ubuntuhs ncn@10.0.0.134"
+
+# direnv
+eval "$(direnv hook bash)"

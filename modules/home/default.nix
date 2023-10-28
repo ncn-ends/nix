@@ -7,7 +7,7 @@ in {
 
   home.packages = [ 
     unstable.jetbrains.datagrip # by default has 2022.2 which is too old
-    pkgs.microsoft-edge
+    unstable.microsoft-edge
     pkgs.slack
     pkgs.insomnia
     pkgs.zoom-us
@@ -25,7 +25,21 @@ in {
     defaultEditor = true;
   };
 
-  home.file.".bashrc".source = ../../configs/.bashrc;
+
+  programs.bash = {
+    enable = true;
+    bashrcExtra = ''
+      . /etc/nixos/configs/.bashrc
+    '';
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+  };
+
+  # home.file.".bashrc".source = ../../configs/.bashrc;
   home.file.".vimrc".source  = ../../configs/.vimrc;
 
   programs.git = {
