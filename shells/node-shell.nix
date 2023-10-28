@@ -16,8 +16,8 @@ in mkShell {
     jetbrains.webstorm
     ngrok
   ];
-  NPM_CONFIG_PREFIX = toString ./npm_config_prefix;
-  # shellHook = import ./shellHook.nix;
+  # NPM_CONFIG_PREFIX = toString ./npm_config_prefix;
+  inherit NPM_CONFIG_PREFIX;
   shellHook = (import ./shellHook.nix) + ''
     export PATH="${NPM_CONFIG_PREFIX}/bin:$PATH"
   '';

@@ -9,14 +9,15 @@
   outputs = {self, stable, unstable, devShellFlake, flake-utils}:
     let 
       eachDefaultSystem = flake-utils.lib.eachDefaultSystem;
+      devShellsLib = import ./dev-shells.nix;
 
       defineShells = { stablePkgs, unstablePkgs }: 
         let 
           mkShell = stablePkgs.mkShell;
           passShellInputs = { inherit mkShell stablePkgs unstablePkgs; };
         in {
-          devShells.node = devShellFlake.lib.nodeShell passShellInputs;
-          devShells.dotnet = devShellFlake.lib.dotnetShell passShellInputs;
+          devShells.node = devShellsLib.nodeShell passShellInputs;
+          # devShells.dotnet = devShellFlake.lib.dotnetShell passShellInputs;
         };
 
     in eachDefaultSystem (system: defineShells {

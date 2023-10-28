@@ -10,6 +10,4 @@ mkShell {
       '';
     }))
   ];
-
-  shellHook = import ./shellHook.nix;
 }
