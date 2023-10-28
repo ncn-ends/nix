@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "devShellFlake": {
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-b/5GCBTm0wle85gRxVeJOv1xaj9VZKI81CZhovhveGU=",
+        "path": "/nix/store/x2i3klzf5iv7lx2c3vvqp0nh8bvf29y3-source/dev-shells",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/x2i3klzf5iv7lx2c3vvqp0nh8bvf29y3-source/dev-shells",
+        "type": "path"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -20,6 +32,7 @@
     },
     "root": {
       "inputs": {
+        "devShellFlake": "devShellFlake",
         "flake-utils": "flake-utils",
         "stable": "stable",
         "unstable": "unstable"

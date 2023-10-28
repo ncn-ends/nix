@@ -13,9 +13,10 @@
       defineShells = { stablePkgs, unstablePkgs }: 
         let 
           mkShell = stablePkgs.mkShell;
+          passShellInputs = { inherit mkShell stablePkgs unstablePkgs; };
         in {
-          # devShells.node = devShellFlake.lib.nodeShell { inherit mkShell stablePkgs unstablePkgs; };
-          devShells.node = {};
+          devShells.node = devShellFlake.lib.nodeShell passShellInputs;
+          devShells.dotnet = devShellFlake.lib.dotnetShell passShellInputs;
         };
 
     in eachDefaultSystem (system: defineShells {
