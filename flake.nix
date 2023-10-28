@@ -17,7 +17,7 @@
           passShellInputs = { inherit mkShell stablePkgs unstablePkgs; };
         in {
           devShells.node = devShellsLib.nodeShell passShellInputs;
-          # devShells.dotnet = devShellFlake.lib.dotnetShell passShellInputs;
+          devShells.dotnet = devShellsLib.dotnetShell passShellInputs;
         };
 
     in eachDefaultSystem (system: defineShells {
