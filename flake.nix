@@ -3,7 +3,7 @@
     stable.url = "github:NixOS/nixpkgs/master";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    devShellFlake.url = "path:./flakes/dev-shell.nix";
+    devShellFlake.url = "./dev-shells";
   };
 
   outputs = {self, stable, unstable, devShellFlake, flake-utils}:
@@ -14,7 +14,8 @@
         let 
           mkShell = stablePkgs.mkShell;
         in {
-          devShells.node = devShellFlake.lib.nodeShell { inherit mkShell stablePkgs unstablePkgs; };
+          # devShells.node = devShellFlake.lib.nodeShell { inherit mkShell stablePkgs unstablePkgs; };
+          devShells.node = {};
         };
 
     in eachDefaultSystem (system: defineShells {
