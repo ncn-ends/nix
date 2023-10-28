@@ -34,25 +34,30 @@
             packages = stablePackages ++ unstablePackages;
           };
 
-          devShells.dotnet6 = mkShell rec {
-            name = "dotnet6-env";
+          devShells.dotnet = mkShell rec {
+            name = "dotnet-master-env";
 
             stablePackages = with stablePkgs; [
-              dotnet-sdk_6
+              (with dotnetCorePackages;combinePackages [
+                sdk_6_0
+                sdk_7_0
+              ])
             ];
 
             unstablePackages = with unstablePkgs; [
-              (jetbrains.rider.overrideAttrs (old: {
-                postPatch = old.postPatch + ''
-                  interp="$(cat $NIX_CC/nix-support/dynamic-linker)"
-                  patchelf --set-interpreter $interp plugins/dotCommon/DotFiles/linux-x64/JetBrains.Profiler.PdbServer
-                '';
-              }))
+              rider
+              # (jetbrains.rider.overrideAttrs (old: {
+              #   postPatch = old.postPatch + ''
+              #     interp="$(cat $NIX_CC/nix-support/dynamic-linker)"
+              #     patchelf --set-interpreter $interp plugins/dotCommon/DotFiles/linux-x64/JetBrains.Profiler.PdbServer
+              #   '';
+              # }))
             ];
 
             packages = stablePackages ++ unstablePackages;
           };
         };
+
     in eachDefaultSystem (system: defineShells {
       stablePkgs = import stable { inherit system; config.allowUnfree = true; };
       unstablePkgs = import unstable { inherit system; config.allowUnfree = true; };
