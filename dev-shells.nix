@@ -31,13 +31,13 @@
     ];
 
     unstablePackages = with unstablePkgs; [
-      jetbrains.rider
-      # (jetbrains.rider.overrideAttrs (old: {
-      #   postPatch = old.postPatch + ''
-      #     interp="$(cat $NIX_CC/nix-support/dynamic-linker)"
-      #     patchelf --set-interpreter $interp plugins/dotCommon/DotFiles/linux-x64/JetBrains.Profiler.PdbServer
-      #   '';
-      # }))
+      # jetbrains.rider
+      (jetbrains.rider.overrideAttrs (old: {
+        postPatch = old.postPatch + ''
+          interp="$(cat $NIX_CC/nix-support/dynamic-linker)"
+          patchelf --set-interpreter $interp plugins/dotCommon/DotFiles/linux-x64/JetBrains.Profiler.PdbServer
+        '';
+      }))
     ];
 
     packages = stablePackages ++ unstablePackages;
