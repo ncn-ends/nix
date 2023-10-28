@@ -3,7 +3,6 @@
     stable.url = "github:NixOS/nixpkgs/master";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    devShellFlake.url = "./dev-shells";
   };
 
   outputs = {self, stable, unstable, devShellFlake, flake-utils}:
