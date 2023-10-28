@@ -31,7 +31,6 @@
     ];
 
     unstablePackages = with unstablePkgs; [
-      # jetbrains.rider
       (jetbrains.rider.overrideAttrs (old: {
         postPatch = old.postPatch + ''
           interp="$(cat $NIX_CC/nix-support/dynamic-linker)"

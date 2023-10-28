@@ -36,13 +36,6 @@
   # flatpak packages: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   #   - vlc
 
-  # services.plex = {
-  #   enable = true;
-  #   openFirewall = true;
-  # };
-
-  # services.jellyfin.enable = true;
-
   nixpkgs.overlays = [
     (self: super: {
       discord = super.discord.overrideAttrs (

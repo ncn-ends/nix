@@ -51,6 +51,9 @@ in {
         };
       };
     };
+    ignores = [
+      ".direnv/*"
+    ];
   };
 
   programs.vscode = {
