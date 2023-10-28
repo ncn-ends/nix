@@ -5,7 +5,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {self, stable, unstable, devShellFlake, flake-utils}:
+  outputs = {self, stable, unstable, flake-utils}:
     let 
       eachDefaultSystem = flake-utils.lib.eachDefaultSystem;
       devShellsLib = import ./dev-shells.nix;
