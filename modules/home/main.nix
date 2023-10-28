@@ -34,10 +34,6 @@ in {
       enable = true;
       script = "polybar bar &";
     };
-    programs.emacs = {
-      enable = true;
-      package = pkgs.emacs;
-    };
 
     home.file.".config/qtile/config.py".source              = ../../configs/qtile.py;
     home.file.".xbindkeysrc".source                         = ../../configs/.xbindkeysrc;
@@ -46,7 +42,6 @@ in {
     home.file.".config/autostart/.polybar.desktop".source   = ../../configs/desktop-entries/polybar.desktop;
     home.file.".config/mimeapps.list".source                = ../../configs/mimeapps.list;
     home.file.".ideavimrc".source                           = ../../configs/.ideavimrc;
-    home.file.".config/emacs".source                        = ../../configs/emacs;
     home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg".source                        = ../../configs/csgo/autoexec.cfg;
   };
 }
