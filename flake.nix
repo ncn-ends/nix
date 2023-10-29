@@ -2,7 +2,6 @@
   inputs = {
     stable.url = "github:NixOS/nixpkgs/master";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {self, stable, unstable, flake-utils}:
