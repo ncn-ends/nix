@@ -1,7 +1,7 @@
 
-{ pkgs, services, config, ... }:
+{ pkgs, services, config, unstablePkgs, ... }:
 let 
-  unstable = import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) { config = { allowUnfree = true; }; };
+  # unstable = import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) { config = { allowUnfree = true; }; };
 in {
   home-manager.users.${config.lib.user.name} = { pkgs, ... }: {
     imports = [

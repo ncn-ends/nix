@@ -23,7 +23,7 @@
     xorg.xkill # kill program at mouse pointer location
     qbittorrent
     flameshot # screenshot tool
-    bpytop # system monitor
+    # bpytop # system monitor
     libsForQt5.konsole # terminal emulator
   ];
 
@@ -36,20 +36,13 @@
   # flatpak packages: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   #   - vlc
 
-  # services.plex = {
-  #   enable = true;
-  #   openFirewall = true;
-  # };
-
-  # services.jellyfin.enable = true;
-
-  nixpkgs.overlays = [
-    (self: super: {
-      discord = super.discord.overrideAttrs (
-        _: { src = builtins.fetchTarball {
-          url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-        }; }
-      );
-    })
-  ];
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     discord = super.discord.overrideAttrs (
+  #       _: { src = builtins.fetchTarball {
+  #         url = "https://discord.com/api/download?platform=linux&format=tar.gz";
+  #       }; }
+  #     );
+  #   })
+  # ];
 }

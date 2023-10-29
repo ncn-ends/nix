@@ -1,5 +1,5 @@
 {
-  nodeShell = {mkShell, stablePkgs, unstablePkgs}: mkShell rec { 
+  mkNodeShell = {mkShell, stablePkgs, unstablePkgs}: mkShell rec { 
     name = "node-env";
 
     stablePackages = with stablePkgs; [
@@ -20,7 +20,7 @@
     packages = stablePackages ++ unstablePackages;
   };
 
-  dotnetShell = {mkShell, stablePkgs, unstablePkgs} : mkShell rec {
+  mkDotnetShell = {mkShell, stablePkgs, unstablePkgs} : mkShell rec {
     name = "dotnet-master-env";
 
     stablePackages = with stablePkgs; [
@@ -31,7 +31,6 @@
     ];
 
     unstablePackages = with unstablePkgs; [
-      # jetbrains.rider
       (jetbrains.rider.overrideAttrs (old: {
         postPatch = old.postPatch + ''
           interp="$(cat $NIX_CC/nix-support/dynamic-linker)"
