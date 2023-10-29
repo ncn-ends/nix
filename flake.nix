@@ -7,20 +7,23 @@
 
   outputs = {self, stable, unstable, flake-utils}:
     let 
-      eachDefaultSystem = flake-utils.lib.eachDefaultSystem;
-      devShellsLib = import ./dev-shells.nix;
+      # reuse
+      defaultSystem = "x86_64-linux";
+      stablePkgs = import stable { system = defaultSystem; config.allowUnfree = true; };
+      unstablePkgs = import unstable { system = defaultSystem; config.allowUnfree = true; };
 
-      defineShells = { stablePkgs, unstablePkgs }: 
-        let 
-          mkShell = stablePkgs.mkShell;
-          passShellInputs = { inherit mkShell stablePkgs unstablePkgs; };
-        in {
-          devShells.node = devShellsLib.nodeShell passShellInputs;
-          devShells.dotnet = devShellsLib.dotnetShell passShellInputs;
+      # shells
+      mkDevShell = import ./dev-shells.nix;
+      mkShell = stablePkgs.mkShell;
+      passShellInputs = { inherit mkShell stablePkgs unstablePkgs; };
+
+      final = {
+        eval = 2 + 2;
+        devShells.${defaultSystem} = {
+          node = mkDevShell.nodeShell passShellInputs;
+          dotnet = mkDevShell.dotnetShell passShellInputs;
         };
+      };
 
-    in eachDefaultSystem (system: defineShells {
-      stablePkgs = import stable { inherit system; config.allowUnfree = true; };
-      unstablePkgs = import unstable { inherit system; config.allowUnfree = true; };
-    });
+    in final;
 }

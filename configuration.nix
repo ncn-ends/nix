@@ -4,6 +4,10 @@ let
   # user = "one";
 in {
   system.stateVersion = "21.11"; # DO NOT CHANGE
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   imports = [ 
     ./modules/hardware-configuration.nix
     <home-manager/nixos>
