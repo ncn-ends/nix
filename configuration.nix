@@ -13,17 +13,12 @@ in {
     ./modules/users.nix
     ./modules/packages.nix
     ./modules/home/main.nix
-    # ./modules/services/plex.nix
   ];
   nixpkgs.config.allowUnfree = true;
 }
 
 # TODO:
 #   - music player app, connects to youtube music
-#   - set up datagrip
-#   - import datagrip/rider settings
-#       - connect datagrip to database
-#   - setup insomnia syncing
 #   - configure okular theme
 #   - figure out why linux mint boot doesn't show up in the boot loader
 #   - set up mobile dev environment
@@ -37,7 +32,6 @@ in {
 #   - customize terminal
 #   - make vim ignore caps lock
 #   - virtManager / windows VM
-#   - customize firefox
 #   - customize polybar
 
 # Desktop compositor (Xorg)
