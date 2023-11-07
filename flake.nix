@@ -25,41 +25,40 @@
         };
       };
 
+      defineNixOS = {
+        nixos = stable.lib.nixosSystem {
+          specialArgs = {
+            stable = stablePkgs // {
+              azure-cli = stablePkgs.azure-cli.override {
+                python3 = stablePkgs.python310;
+              };
+            };
+            unstable = unstablePkgs;
+          };
+          modules = [
+            {
+              system.stateVersion = "21.11"; # DO NOT CHANGE
+              nixpkgs.config.allowUnfree = true;
+              nix.settings.experimental-features = [
+                "nix-command"
+                "flakes"
+              ];
+            }
+            ./modules/hardware-configuration.nix
+            home-manager.nixosModules.home-manager
+            ./modules/foundation.nix
+            ./modules/cinnamon.desktop.nix
+            ./modules/users.nix
+            ./modules/packages.nix
+            ./modules/home.nix
+          ];
+        };
+      };
+
       final = {
         eval = 2 + 2;
         devShells = defineShells;
-        nixosConfigurations = {
-          nixos = stable.lib.nixosSystem {
-            specialArgs = {
-              stable = stablePkgs // {
-                azure-cli = stablePkgs.azure-cli.override {
-                  python3 = stablePkgs.python310;
-                };
-              };
-              unstable = unstablePkgs;
-            };
-            modules = [
-              {
-                system.stateVersion = "21.11"; # DO NOT CHANGE
-                nixpkgs.config.allowUnfree = true;
-                nix.settings.experimental-features = [
-                  "nix-command"
-                  "flakes"
-                ];
-              }
-              ./modules/hardware-configuration.nix
-              # "${home-manager}/nixos"
-              # <home-manager/nixos>
-              home-manager.nixosModules.home-manager
-              
-              ./modules/foundation.nix
-              ./modules/cinnamon.desktop.nix
-              ./modules/users.nix
-              ./modules/packages.nix
-              ./modules/home.nix
-            ];
-          };
-        };
+        nixosConfigurations = defineNixOS;
       };
 
     in final;
