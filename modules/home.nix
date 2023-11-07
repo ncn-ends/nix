@@ -1,44 +1,43 @@
 
-{ pkgs, services, config, ... }:
+{ services, config, ... }:
 let 
   unstable = import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) { config = { allowUnfree = true; }; };
+  stable = import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) { config = { allowUnfree = true; }; };
 in {
-  home-manager.users.${config.lib.user.name} = { pkgs, ... }: {
+  home-manager.users.${config.lib.user.name} = { ... }: {
     home.stateVersion = "22.11"; # DO NOT CHANGE
     nixpkgs.config.allowUnfree = true;
 
     home.packages = [ 
       # default
-      unstable.jetbrains.datagrip # by default has 2022.2 which is too old
+      unstable.jetbrains.datagrip
       unstable.microsoft-edge
-      pkgs.slack
-      pkgs.insomnia
-      pkgs.zoom-us
-      pkgs.obs-studio
-      pkgs.firefox
+      stable.slack
+      stable.insomnia
+      stable.zoom-us
+      stable.obs-studio
+      stable.firefox
       # unstable.vlc
-      pkgs.alacritty
-      pkgs.azure-cli
-      pkgs.figma-linux
-      pkgs.drawio
+      stable.alacritty
+      stable.azure-cli
+      # stable.figma-linux # marked as insecure
     
       # home only
-      pkgs.neofetch 
-      pkgs.libsForQt5.okular
-      pkgs.xbindkeys
-      pkgs.libreoffice
-      pkgs.peek
-      pkgs.psensor
-      pkgs.imagemagick
-      pkgs.tokei
-      pkgs.speedtest-cli
-      pkgs.shotcut
-      pkgs.krusader
-      pkgs.libsForQt5.dolphin
-      pkgs.bottom
-      pkgs.gimp
-      pkgs.gitkraken
-      pkgs.libsForQt5.kdeconnect-kde
+      stable.neofetch 
+      stable.libsForQt5.okular
+      stable.xbindkeys
+      stable.libreoffice
+      stable.peek
+      stable.psensor
+      stable.imagemagick
+      stable.tokei
+      stable.speedtest-cli
+      stable.shotcut
+      stable.krusader
+      stable.libsForQt5.dolphin
+      stable.bottom
+      stable.gimp
+      stable.libsForQt5.kdeconnect-kde
     ];
 
     programs.vim = {
@@ -79,7 +78,7 @@ in {
 
     programs.vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions; [
+      extensions = with stable.vscode-extensions; [
         vscodevim.vim
         bbenoist.nix
         jnoortheen.nix-ide
