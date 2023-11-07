@@ -8,8 +8,15 @@
     let 
       # reuse
       defaultSystem = "x86_64-linux";
-      stablePkgs = import stable { system = defaultSystem; config.allowUnfree = true; };
-      unstablePkgs = import unstable { system = defaultSystem; config.allowUnfree = true; };
+      passPkgsInputs = {
+        system = defaultSystem;
+        config = {
+          allowUnfree = true;
+          android_sdk.accept_license = true;
+        };
+      };
+      stablePkgs = import stable passPkgsInputs;
+      unstablePkgs = import unstable passPkgsInputs;
 
       # shells
       mkDevShell = import ./dev-shells.nix;
@@ -21,6 +28,7 @@
         devShells.${defaultSystem} = {
           node = mkDevShell.nodeShell passShellInputs;
           dotnet = mkDevShell.dotnetShell passShellInputs;
+          rn = mkDevShell.reactNativeShell passShellInputs;
         };
       };
 
