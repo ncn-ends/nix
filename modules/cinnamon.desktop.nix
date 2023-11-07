@@ -1,5 +1,7 @@
-{ pkgs, services, ... }:
-{
+{ stable, services, ... }:
+let 
+  # inherit (import ../helpers/fetch-packages.nix {}) stable;
+in {
   services.xserver = {
     enable = true;
     libinput.enable = true;
@@ -11,7 +13,7 @@
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    extraPackages = with pkgs; [
+    extraPackages = with stable; [
       amdvlk
       vaapiVdpau
       libvdpau-va-gl

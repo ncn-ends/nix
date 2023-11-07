@@ -1,5 +1,5 @@
 {
-  nodeShell = {mkShell, stablePkgs, unstablePkgs}: mkShell rec { 
+  nodeShell = {mkShell, stablePkgs, unstablePkgs, ...}: mkShell rec { 
     name = "node-env";
 
     stablePackages = with stablePkgs; [

@@ -1,9 +1,11 @@
-{ pkgs, ... }:
-{
+{ stable, ... }:
+let 
+  # inherit (import ../helpers/fetch-packages.nix {}) stable;
+in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true; 
-  boot.kernelPackages = pkgs.linuxPackages_latest; 
+  boot.kernelPackages = stable.linuxPackages_latest; 
   boot.initrd.kernelModules = ["amdgpu"]; 
   boot.loader.grub.device = "/dev/sda";
   time.timeZone = "America/Los_Angeles";
@@ -13,4 +15,12 @@
      useXkbConfig = true;
   };
   hardware.pulseaudio.enable = true;
+
+  systemd.extraConfig = ''
+    DefaultLimitNOFILE=1048576
+  '';
+
+  systemd.user.extraConfig = ''
+    DefaultLimitNOFILE=1048576
+  '';
 }
