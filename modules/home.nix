@@ -1,8 +1,7 @@
 
 { services, config, ... }:
 let 
-  unstable = import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz) { config = { allowUnfree = true; }; };
-  stable = import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) { config = { allowUnfree = true; }; };
+  inherit (import ../helpers/fetch-packages.nix {}) stable unstable;
 in {
   home-manager.users.${config.lib.user.name} = { ... }: {
     home.stateVersion = "22.11"; # DO NOT CHANGE

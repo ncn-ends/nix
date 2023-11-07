@@ -1,8 +1,5 @@
-{ config, pkgs, ... }:
-
-let 
-  # user = "one";
-in {
+{ config, ... }:
+{
   system.stateVersion = "21.11"; # DO NOT CHANGE
   nix.settings.experimental-features = [
     "nix-command"
