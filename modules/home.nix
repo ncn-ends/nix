@@ -38,6 +38,9 @@ in {
       stable.bottom
       stable.gimp
       stable.libsForQt5.kdeconnect-kde
+
+      # music player
+      stable.youtube-music
     ];
 
     programs.vim = {
