@@ -36,7 +36,6 @@ in {
 #   - customize terminal
 #   - make vim ignore caps lock
 #   - virtManager / windows VM
-#   - customize polybar
 
 # Desktop compositor (Xorg)
 #     - xserver

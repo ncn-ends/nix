@@ -15,7 +15,7 @@
 			system = "aarch64-darwin";
 			modules = [
 				{ nixpkgs.config.allowUnfree = true; }
-				../modules/darwin.nix
+				./darwin.nix
 				home-manager.darwinModules.home-manager {
 					home-manager = {
 						useGlobalPkgs = true;
