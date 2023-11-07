@@ -15,4 +15,12 @@ in {
      useXkbConfig = true;
   };
   hardware.pulseaudio.enable = true;
+
+  systemd.extraConfig = ''
+    DefaultLimitNOFILE=1048576
+  '';
+
+  systemd.user.extraConfig = ''
+    DefaultLimitNOFILE=1048576
+  '';
 }

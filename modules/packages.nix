@@ -1,30 +1,21 @@
-{ pkgs, config, services, ... }:
-{
+{ config, services, ... }:
+let
+  inherit (import ../helpers/fetch-packages.nix {}) stable unstable;
+in {
   # note: refer to home-manager set up file for more packages.
   # note: some packages are dependent on the desktop being used. they'll be included in the respective desktop files.
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with stable; [
     wget
-    playerctl # may help with vlc issues
     lutris
   ];
 
-  systemd.extraConfig = ''
-    DefaultLimitNOFILE=1048576
-  '';
-
-  systemd.user.extraConfig = ''
-    DefaultLimitNOFILE=1048576
-  '';
-
-  users.users.${config.lib.user.name}.packages =  with pkgs; [
+  users.users.${config.lib.user.name}.packages =  with stable; [
     discord
-    feh # used to apply desktop wallpaper
+    # feh # used to apply desktop wallpaper, useful for certain DEs
     xorg.xkill # kill program at mouse pointer location
     qbittorrent
     flameshot # screenshot tool
-    bpytop # system monitor
-    libsForQt5.konsole # terminal emulator
   ];
 
   programs.steam.enable = true;
@@ -36,6 +27,7 @@
   # flatpak packages: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   #   - vlc
 
+  # TODO: this is fine for now, but should move overlays into 1 file when there are too many
   nixpkgs.overlays = [
     (self: super: {
       discord = super.discord.overrideAttrs (
