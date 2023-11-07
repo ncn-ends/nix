@@ -1,6 +1,6 @@
-{ services, ... }:
+{ stable, services, ... }:
 let 
-  inherit (import ../helpers/fetch-packages.nix {}) stable;
+  # inherit (import ../helpers/fetch-packages.nix {}) stable;
 in {
   services.xserver = {
     enable = true;

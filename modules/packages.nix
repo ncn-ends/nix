@@ -1,6 +1,6 @@
-{ config, services, ... }:
+{ stable, unstable, config, services, ... }:
 let
-  inherit (import ../helpers/fetch-packages.nix {}) stable unstable;
+  # inherit (import ../helpers/fetch-packages.nix {}) stable unstable;
   name = "one";
 in {
   # note: refer to home-manager set up file for more packages.

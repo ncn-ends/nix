@@ -1,7 +1,7 @@
 
-{ services, config, ... }:
+{ services, stable, unstable, config, ... }:
 let 
-  inherit (import ../helpers/fetch-packages.nix {}) stable unstable;
+  # inherit (import ../helpers/fetch-packages.nix {}) stable unstable;
   name = "one";
 in {
   home-manager.users.${name} = { ... }: {
@@ -42,7 +42,7 @@ in {
 
     programs.vim = {
       enable = true;
-      defaultEditor = true;
+      # defaultEditor = true; # stopped working after switching home manager import
     };
 
     programs.bash = {
