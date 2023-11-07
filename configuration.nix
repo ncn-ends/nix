@@ -16,7 +16,7 @@ in {
     ./modules/cinnamon.desktop.nix
     ./modules/users.nix
     ./modules/packages.nix
-    ./modules/home/main.nix
+    ./modules/home.nix
   ];
   nixpkgs.config.allowUnfree = true;
 }
