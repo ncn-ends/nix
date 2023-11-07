@@ -1,6 +1,7 @@
 { config, services, ... }:
 let
   inherit (import ../helpers/fetch-packages.nix {}) stable unstable;
+  name = "one";
 in {
   # note: refer to home-manager set up file for more packages.
   # note: some packages are dependent on the desktop being used. they'll be included in the respective desktop files.
@@ -10,7 +11,7 @@ in {
     lutris
   ];
 
-  users.users.${config.lib.user.name}.packages =  with stable; [
+  users.users.${name}.packages =  with stable; [
     discord
     # feh # used to apply desktop wallpaper, useful for certain DEs
     xorg.xkill # kill program at mouse pointer location
