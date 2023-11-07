@@ -1,4 +1,4 @@
-{ pkgs, services, ... }:
+{ services, ... }:
 {
   users.users.one = {
     isNormalUser = true;
