@@ -1,8 +1,5 @@
 { stable, unstable, config, services, name, ... }:
 {
-  # note: refer to home-manager set up file for more packages.
-  # note: some packages are dependent on the desktop being used. they'll be included in the respective desktop files.
-
   environment.systemPackages = with stable; [
     wget
     lutris

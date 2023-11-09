@@ -61,7 +61,6 @@
     };
 
     # home.file.".bashrc".source = ../../configs/.bashrc;
-    home.file.".vimrc".source  = ../configs/.vimrc;
 
     programs.git = {
       enable = true;
@@ -138,13 +137,14 @@
       package = stable.polybar;
     };
 
-    home.file.".config/qtile/config.py".source              = ../configs/qtile.py;
-    home.file.".xbindkeysrc".source                         = ../configs/.xbindkeysrc;
-    home.file.".config/autostart/.flameshot.desktop".source = ../configs/desktop-entries/flameshot.desktop;
-    home.file.".config/autostart/.xbindkeys.desktop".source = ../configs/desktop-entries/xbindkeys.desktop;
-    home.file.".config/autostart/.polybar.desktop".source   = ../configs/desktop-entries/polybar.desktop;
-    home.file.".config/mimeapps.list".source                = ../configs/mimeapps.list;
-    home.file.".ideavimrc".source                           = ../configs/.ideavimrc;
-    home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg".source                        = ../configs/csgo/autoexec.cfg;
+    home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg".source = ../configs/csgo/autoexec.cfg;
+    home.file.".config/autostart/.flameshot.desktop".source   = ../configs/desktop-entries/flameshot.desktop;
+    home.file.".config/autostart/.xbindkeys.desktop".source   = ../configs/desktop-entries/xbindkeys.desktop;
+    home.file.".config/autostart/.polybar.desktop".source     = ../configs/desktop-entries/polybar.desktop;
+    home.file.".config/mimeapps.list".source                  = ../configs/mimeapps.list;
+    home.file.".xbindkeysrc".source                           = ../configs/.xbindkeysrc;
+    home.file.".config/qtile/config.py".source                = ../configs/qtile.py;
+    home.file.".ideavimrc".source                             = ../configs/.ideavimrc;
+    home.file.".vimrc".source                                 = ../configs/.vimrc;
   };
 }
