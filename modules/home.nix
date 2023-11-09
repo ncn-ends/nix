@@ -1,9 +1,6 @@
 
-{ services, stable, unstable, config, ... }:
-let 
-  # inherit (import ../helpers/fetch-packages.nix {}) stable unstable;
-  name = "one";
-in {
+{ services, stable, unstable, name, config, ... }:
+{
   home-manager.users.${name} = { ... }: {
     home.stateVersion = "22.11"; # DO NOT CHANGE
     nixpkgs.config.allowUnfree = true;
