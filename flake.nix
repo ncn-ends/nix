@@ -27,8 +27,9 @@
       };
 
       # nixos
+      hostName = "nixos";
       defineNixOS = {
-        nixos = lib.nixosSystem {
+        ${hostName} = lib.nixosSystem {
           specialArgs = {
             stable = (import ./helpers/apply-overrides.nix) stable;
             unstable = unstable;
