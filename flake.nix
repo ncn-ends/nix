@@ -8,15 +8,17 @@
 
   outputs = inputs@{self, home-manager, flake-utils, ...}:
     let 
-      # reuse
-      defaultSystem = "x86_64-linux";
-      name = "one";
-      hostName = "nixos";
-      stable = import inputs.stable { system = defaultSystem; config.allowUnfree = true; };
-      unstable = import inputs.unstable { system = defaultSystem; config.allowUnfree = true; };
-      lib = inputs.stable.lib;
+      importConfig = { system = defaultSystem; config.allowUnfree = true; };
 
-      # shells
+      # --- reuse ---
+      unstable = import inputs.unstable importConfig;
+      stable = import inputs.stable importConfig;
+      defaultSystem = "x86_64-linux";
+      lib = inputs.stable.lib;
+      hostName = "nixos";
+      name = "one";
+
+      # --- shells ---
       mkDevShell = import ./dev-shells.nix;
       mkShell = stable.mkShell;
       passShellInputs = { inherit mkShell stable unstable; };
@@ -28,7 +30,7 @@
         };
       };
 
-      # nixos
+      # --- nixos ---
       defineNixOS = {
         ${hostName} = lib.nixosSystem {
           specialArgs = {
@@ -37,7 +39,7 @@
           };
           modules = [
             {
-              system.stateVersion = "21.11"; # DO NOT CHANGE
+              system.stateVersion = "21.11";
               nixpkgs.config.allowUnfree = true;
               nix.settings.experimental-features = [
                 "nix-command"

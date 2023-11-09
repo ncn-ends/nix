@@ -2,7 +2,7 @@
 { services, stable, unstable, name, config, ... }:
 {
   home-manager.users.${name} = { ... }: {
-    home.stateVersion = "22.11"; # DO NOT CHANGE
+    home.stateVersion = "22.11";
     nixpkgs.config.allowUnfree = true;
 
     home.packages = [ 
