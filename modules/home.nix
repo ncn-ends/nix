@@ -38,6 +38,7 @@ in {
       stable.bottom
       stable.gimp
       stable.libsForQt5.kdeconnect-kde
+      stable.screenkey
 
       # music player
       stable.youtube-music
@@ -136,6 +137,8 @@ in {
     services.polybar = {
       enable = true;
       script = "polybar bar &";
+      config = ../configs/polybar/config.ini;
+      package = stable.polybar;
     };
 
     home.file.".config/qtile/config.py".source              = ../configs/qtile.py;

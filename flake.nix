@@ -28,11 +28,7 @@
       defineNixOS = {
         nixos = stable.lib.nixosSystem {
           specialArgs = {
-            stable = stablePkgs // {
-              azure-cli = stablePkgs.azure-cli.override {
-                python3 = stablePkgs.python310;
-              };
-            };
+            stable = (import ./helpers/apply-overrides.nix) stablePkgs;
             unstable = unstablePkgs;
           };
           modules = [

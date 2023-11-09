@@ -23,4 +23,10 @@ in {
   systemd.user.extraConfig = ''
     DefaultLimitNOFILE=1048576
   '';
+
+  fonts.packages = with stable; [
+    montserrat
+    roboto
+    roboto-mono
+  ];
 }
