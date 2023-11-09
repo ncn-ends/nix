@@ -6,17 +6,18 @@
     home-manager.inputs.nixpkgs.follows = "stable";
   };
 
-  outputs = {self, stable, unstable, home-manager, flake-utils}:
+  outputs = inputs@{self, home-manager, flake-utils, ...}:
     let 
       # reuse
       defaultSystem = "x86_64-linux";
-      stablePkgs = import stable { system = defaultSystem; config.allowUnfree = true; };
-      unstablePkgs = import unstable { system = defaultSystem; config.allowUnfree = true; };
+      stable = import inputs.stable { system = defaultSystem; config.allowUnfree = true; };
+      unstable = import inputs.unstable { system = defaultSystem; config.allowUnfree = true; };
+      lib = inputs.stable.lib;
 
       # shells
       mkDevShell = import ./dev-shells.nix;
-      mkShell = stablePkgs.mkShell;
-      passShellInputs = { inherit mkShell stablePkgs unstablePkgs; };
+      mkShell = stable.mkShell;
+      passShellInputs = { inherit mkShell stable unstable; };
 
       defineShells = {
         ${defaultSystem} = {
@@ -25,11 +26,12 @@
         };
       };
 
+      # nixos
       defineNixOS = {
-        nixos = stable.lib.nixosSystem {
+        nixos = lib.nixosSystem {
           specialArgs = {
-            stable = (import ./helpers/apply-overrides.nix) stablePkgs;
-            unstable = unstablePkgs;
+            stable = (import ./helpers/apply-overrides.nix) stable;
+            unstable = unstable;
           };
           modules = [
             {

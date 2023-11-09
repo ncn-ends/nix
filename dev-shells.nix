@@ -1,8 +1,8 @@
 {
-  nodeShell = {mkShell, stablePkgs, unstablePkgs, ...}: mkShell rec { 
+  nodeShell = {mkShell, stable, unstable, ...}: mkShell rec { 
     name = "node-env";
 
-    stablePackages = with stablePkgs; [
+    stablePackages = with stable; [
       nodejs
       nodePackages.npm
       nodePackages.yarn
@@ -12,7 +12,7 @@
       ngrok
     ];
 
-    unstablePackages = with unstablePkgs; [
+    unstablePackages = with unstable; [
       jetbrains.rider
       jetbrains.webstorm
     ];
@@ -20,17 +20,17 @@
     packages = stablePackages ++ unstablePackages;
   };
 
-  dotnetShell = {mkShell, stablePkgs, unstablePkgs} : mkShell rec {
+  dotnetShell = {mkShell, stable, unstable} : mkShell rec {
     name = "dotnet-master-env";
 
-    stablePackages = with stablePkgs; [
+    stablePackages = with stable; [
       (with dotnetCorePackages;combinePackages [
         sdk_6_0
         sdk_7_0
       ])
     ];
 
-    unstablePackages = with unstablePkgs; [
+    unstablePackages = with unstable; [
       (jetbrains.rider.overrideAttrs (old: {
         postPatch = old.postPatch + ''
           interp="$(cat $NIX_CC/nix-support/dynamic-linker)"
