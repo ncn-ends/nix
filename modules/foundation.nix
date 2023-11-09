@@ -1,7 +1,5 @@
 { stable, ... }:
-let 
-  # inherit (import ../helpers/fetch-packages.nix {}) stable;
-in {
+{
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true; 

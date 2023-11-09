@@ -1,7 +1,5 @@
 { stable, services, ... }:
-let 
-  # inherit (import ../helpers/fetch-packages.nix {}) stable;
-in {
+{
   services.xserver = {
     enable = true;
     libinput.enable = true;

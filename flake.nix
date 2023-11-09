@@ -11,6 +11,7 @@
       # reuse
       defaultSystem = "x86_64-linux";
       name = "one";
+      hostName = "nixos";
       stable = import inputs.stable { system = defaultSystem; config.allowUnfree = true; };
       unstable = import inputs.unstable { system = defaultSystem; config.allowUnfree = true; };
       lib = inputs.stable.lib;
@@ -28,7 +29,6 @@
       };
 
       # nixos
-      hostName = "nixos";
       defineNixOS = {
         ${hostName} = lib.nixosSystem {
           specialArgs = {
