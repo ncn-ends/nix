@@ -4,6 +4,7 @@
 - Avoid overlays
 - Avoid channels
 - Prefer taller code than nesting
+- Modules should be nested 1 layer deep. No importing within modules (unless it's in an import)
 
 ### Folder structure  
 `dep/` files no longer used, but don't feel like deleting them yet  

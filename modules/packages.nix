@@ -1,8 +1,9 @@
 { stable, unstable, config, services, name, ... }:
 {
-  environment.systemPackages = with stable; [
-    wget
-    lutris
+  environment.systemPackages = [
+    stable.wget
+    stable.lutris
+    unstable.ranger
   ];
 
   users.users.${name}.packages =  with stable; [
