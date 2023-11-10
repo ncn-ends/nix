@@ -20,7 +20,6 @@ alias sls="source /etc/nixos/configs/scripts/sls.sh"
 alias addcdlog="source /etc/nixos/configs/scripts/addcdlog.sh"
 
 # programs
-alias vlc="flatpak run org.videolan.VLC"
 alias bottles="flatpak run com.usebottles.bottles"
 
 # ssh

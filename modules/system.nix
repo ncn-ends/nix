@@ -15,6 +15,7 @@
   services.flatpak.enable = true;
   # flatpak packages: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   #   - vlc
+  #   - bottles
 
   home-manager.users.${name} = { ... }: {
     programs.vim = {

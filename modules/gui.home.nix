@@ -26,6 +26,7 @@
       stable.youtube-music
       stable.flameshot
       stable.qbittorrent
+      unstable.vlc
     ];
   };
 }
