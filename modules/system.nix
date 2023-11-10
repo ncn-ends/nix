@@ -8,13 +8,10 @@
     unstable.ranger
   ];
 
-  virtualisation.docker.enable = true; # TODO: move this
+  virtualisation.docker.enable = true;
 
-  # TODO: can remove these if get vlc working without flatpak
   xdg.portal.enable = true; # required for flatpak
   services.flatpak.enable = true;
-  # flatpak packages: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  #   - vlc
   #   - bottles
 
   home-manager.users.${name} = { ... }: {
