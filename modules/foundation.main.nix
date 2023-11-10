@@ -1,5 +1,12 @@
-{ stable, ... }:
+{ stable, name, ... }:
 {
+  system.stateVersion = "21.11";
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true; 
@@ -23,8 +30,17 @@
   '';
 
   fonts.packages = with stable; [
-    montserrat
-    roboto
     roboto-mono
   ];
+
+  users.users.one = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "docker" ];
+    initialPassword = "password";
+  };
+
+  home-manager.users.${name} = { ... }: {
+    home.stateVersion = "22.11";
+    nixpkgs.config.allowUnfree = true;
+  };
 }

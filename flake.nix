@@ -38,21 +38,14 @@
             stable = (import ./helpers/apply-overrides.nix) stable;
           };
           modules = [
-            {
-              system.stateVersion = "21.11";
-              nixpkgs.config.allowUnfree = true;
-              nix.settings.experimental-features = [
-                "nix-command"
-                "flakes"
-              ];
-            }
             ./modules/hardware-configuration.nix
             home-manager.nixosModules.home-manager
-            ./modules/foundation.nix
-            ./modules/cinnamon.desktop.nix
-            ./modules/users.nix
-            ./modules/packages.nix
-            ./modules/home.nix
+            ./modules/foundation.main.nix
+            ./modules/system.nix
+            ./modules/desktop.nix
+            ./modules/gui.common.nix
+            ./modules/gui.home.nix
+            ./modules/play.nix
           ];
         };
       };
