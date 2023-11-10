@@ -53,5 +53,9 @@
 
     home.file.".ideavimrc".source  = ../configs/.ideavimrc;
     home.file.".vimrc".source      = ../configs/.vimrc;
+    home.file.".config/ranger" = {
+      recursive = true;
+      source = ../configs/ranger;
+    };
   };
 }
