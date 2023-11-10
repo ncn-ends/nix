@@ -3,8 +3,9 @@ text/html=microsoft-edge.desktop
 application/xhtml+xml=microsoft-edge.desktop
 x-scheme-handler/http=microsoft-edge.desktop
 x-scheme-handler/https=microsoft-edge.desktop
-inode/directory=org.kde.dolphin.desktop
+inode/directory=krusader.desktop
+image/*=okular.desktop
 
 [Added Associations]
 x-scheme-handler/http=microsoft-edge.desktop;
-inode/directory=org.kde.dolphin.desktop;
+inode/directory=krusader.desktop;

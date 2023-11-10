@@ -10,7 +10,8 @@
       stable.libsForQt5.okular
       stable.libreoffice
       stable.imagemagick
-      stable.libsForQt5.dolphin
+      # stable.libsForQt5.dolphin
+      stable.krusader
       stable.gimp
       stable.libsForQt5.kdeconnect-kde
       stable.youtube-music

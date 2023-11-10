@@ -35,9 +35,10 @@
       stable.screenkey
     ];
 
-    home.file.".config/autostart/.flameshot.desktop".source   = ../configs/desktop-entries/flameshot.desktop;
-    home.file.".config/autostart/.xbindkeys.desktop".source   = ../configs/desktop-entries/xbindkeys.desktop;
-    home.file.".config/autostart/.polybar.desktop".source     = ../configs/desktop-entries/polybar.desktop;
+    home.file.".config/autostart/.screenkey.desktop".source   = ../configs/startup/screenkey.desktop;
+    home.file.".config/autostart/.flameshot.desktop".source   = ../configs/startup/flameshot.desktop;
+    home.file.".config/autostart/.xbindkeys.desktop".source   = ../configs/startup/xbindkeys.desktop;
+    home.file.".config/autostart/.polybar.desktop".source     = ../configs/startup/polybar.desktop;
     home.file.".config/mimeapps.list".source                  = ../configs/mimeapps.list;
     home.file.".xbindkeysrc".source                           = ../configs/.xbindkeysrc;
   };
