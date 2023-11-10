@@ -14,6 +14,18 @@
       stable.peek
       stable.shotcut
     ];
+
+    programs.alacritty = {
+      enable = true;
+      settings.window = {
+        opacity = 0.95;
+        dimensions = {
+          lines = 40;
+          columns = 150;
+        };
+      };
+    };
+
     programs.vscode = {
       enable = true;
       extensions = with stable.vscode-extensions; [
