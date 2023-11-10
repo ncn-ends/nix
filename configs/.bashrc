@@ -30,3 +30,7 @@ alias ssh:hs="ssh -i ~/.ssh/ubuntuhs ncn@10.0.0.134"
 
 # direnv
 eval "$(direnv hook bash)"
+
+# set default editor to vim
+export SUDO_EDITOR="vim"
+export EDITOR="vim"

@@ -19,8 +19,13 @@
   home-manager.users.${name} = { ... }: {
     programs.vim = {
       enable = true;
-      # TODO: make vim default editor
-      # defaultEditor = true; # stopped working after switching home manager import
+      defaultEditor = true;
+    };
+
+    home.sessionVariables = {
+      # default editor set to vim
+      EDITOR = "vim";
+      SUDO_EDITOR = "vim";
     };
 
     programs.bash = {
