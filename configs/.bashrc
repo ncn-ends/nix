@@ -34,3 +34,5 @@ eval "$(direnv hook bash)"
 # set default editor to vim
 export SUDO_EDITOR="vim"
 export EDITOR="vim"
+export GIT_EDITOR="vim";
+export GIT_SEQUENCE_EDITOR="vim";

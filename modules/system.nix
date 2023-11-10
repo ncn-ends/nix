@@ -26,6 +26,8 @@
       # default editor set to vim
       EDITOR = "vim";
       SUDO_EDITOR = "vim";
+      GIT_EDITOR = "vim";
+      GIT_SEQUENCE_EDITOR = "vim";
     };
 
     programs.bash = {
@@ -49,6 +51,9 @@
           "git@github.com:" = {
             insteadOf = "https://github.com/";
           };
+        };
+        core = {
+          editor = "vim";
         };
       };
       ignores = [
