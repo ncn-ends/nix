@@ -28,6 +28,7 @@
 
     programs.vscode = {
       enable = true;
+      mutableExtensionsDir = false; # home-manager stopped installing extensions at some point and this fixed it
       extensions = with stable.vscode-extensions; [
         vscodevim.vim
         bbenoist.nix
@@ -37,11 +38,14 @@
         dbaeumer.vscode-eslint
         eamodio.gitlens
         esbenp.prettier-vscode 
+        # kamadorueda.alejandra
+        # dlasagno.rasi
+        tomoki1207.pdf
         # yoavbls.pretty-ts-errors
       ];
       userSettings = {
-        "vim.useSystemClipboard" = true;
-        "workbench.editor.wrapTabs" = true; # tabs become multiline instead of scroll
+        # "vim.useSystemClipboard" = true;
+        "workbench.editor.wrapTabs" = true; # have tabs become multiline instead of scroll
         "emmet.showExpandedAbbreviation" = "never"; # emmet gets in the way
 
         # don't open modal on goto, just go to
@@ -49,18 +53,28 @@
         "editor.gotoLocation.multipleImplementations" = "goto";
         "editor.gotoLocation.multipleDefinitions" = "goto";
         "editor.gotoLocation.multipleDeclarations" = "goto";
+        "editor.wordWrap" = "on";
+        "editor.cursorBlinking" = "smooth";
+        "editor.unicodeHighlight.invisibleCharacters" =  true;
+        "editor.menuBarVisibility" = "hidden";
+        "editor.formatOnPaste" = true;
+        "breadcrumbs.enabled" = false;
+        "customizeUI.activityBar" = "top";
 
         "vim.normalModeKeyBindings" = [
           {
-            "before" =  ["g" "r"];
-            "commands" = [ "editor.action.goToReferences" ];
+            "before" = ["g" "r"];
+            "commands" = ["editor.action.goToReferences"];
           }
         ];
+        "vim.showMarksInGutter" = true;
 
         "vim.handleKeys" = {
-          "<C-f>" =  false;
-          "<C-x>" =  false;
+          "<C-f>" = false;
+          "<C-x>" = false;
           "<C-v>" = false;
+          "<C-c>" = false;
+          "<C-p>" = false;
         };
 
         "[typescriptreact]" = {
@@ -69,7 +83,7 @@
         "[typescript]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
         };
-        "[javascript]" =  {
+        "[javascript]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
         };
       };
