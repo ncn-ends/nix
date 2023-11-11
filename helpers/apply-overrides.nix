@@ -1,7 +1,7 @@
 packages : (packages // {
-  azure-cli = packages.azure-cli.override {
-    python3 = packages.python310;
-  };
+  # azure-cli = packages.azure-cli.override {
+  #   python3 = packages.python310;
+  # };
   polybar = packages.polybar.overrideAttrs (old: {
     version = "3.7.0";
     src = packages.fetchFromGitHub {
