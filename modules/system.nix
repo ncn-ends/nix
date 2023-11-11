@@ -32,7 +32,7 @@
       enable = true;
       # TODO: fix this
       bashrcExtra = ''
-        . /etc/nixos/configs/.bashrc
+        . /etc/nixos/configs/shell/.bashrc
       '';
     };
 
@@ -59,8 +59,8 @@
       ];
     };
 
-    home.file.".ideavimrc".source  = ../configs/.ideavimrc;
-    home.file.".vimrc".source      = ../configs/.vimrc;
+    home.file.".ideavimrc".source  = ../configs/vim/.ideavimrc;
+    home.file.".vimrc".source      = ../configs/vim/.vimrc;
     home.file.".config/ranger" = {
       recursive = true;
       source = ../configs/ranger;

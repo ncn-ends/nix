@@ -39,7 +39,7 @@
     home.file.".config/autostart/.flameshot.desktop".source   = ../configs/startup/flameshot.desktop;
     home.file.".config/autostart/.xbindkeys.desktop".source   = ../configs/startup/xbindkeys.desktop;
     home.file.".config/autostart/.polybar.desktop".source     = ../configs/startup/polybar.desktop;
-    home.file.".config/mimeapps.list".source                  = ../configs/mimeapps.list;
-    home.file.".xbindkeysrc".source                           = ../configs/.xbindkeysrc;
+    home.file.".config/mimeapps.list".source                  = ../configs/xorg/mimeapps.list;
+    home.file.".xbindkeysrc".source                           = ../configs/xorg/.xbindkeysrc;
   };
 }
