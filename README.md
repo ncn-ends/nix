@@ -20,6 +20,7 @@
 `modules/desktop.nix` specific to the desktop environment. currently using xserver and cinnamon  
 `modules/gui.common.nix` DE and OS agnostic gui programs and related for all desktop computers  
 `modules/gui.home.nix` DE and OS agnostic gui programs and related for non-work computers
+`modules/vm.nix` VMs and related  
 `modules/play.nix` gaming  
 
 ## Programs to try
