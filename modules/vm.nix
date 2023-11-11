@@ -1,12 +1,5 @@
 { config, stable, name, ...}:
 {
-  # ---
-  # IMPORTANT NOTE
-  # initially when loading virt manager, you need to do file -> add connection. leave at defaults, then hit ok. you'll then see QEMU/KVM
-  # ---
-
-
-
   # key based configuration storage system, back end to GSettings
   programs.dconf.enable = true;
 
@@ -41,4 +34,14 @@
     spiceUSBRedirection.enable = true;
   };
   services.spice-vdagentd.enable = true;
+
+  home-manager.users.${name} = {...}: {
+    # auto connect to qemu instead of having to set it up through the GUI initially
+    dconf.settings = { 
+      "org/virt-manager/virt-manager/connections" = {
+        autoconnect = ["qemu:///system"];
+        uris = ["qemu:///system"];
+      };
+    };
+  };
 }

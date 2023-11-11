@@ -12,6 +12,7 @@ alias nix-node="nix develop /etc/nixos#node";
 
 # convenience alias'
 alias nix-sw="sudo nixos-rebuild switch"
+alias nix-up="cd /etc/nix; nix flake update; nix-sw"
 
 # convenience scripts
 alias scd="source /etc/nixos/configs/scripts/scd.sh"
