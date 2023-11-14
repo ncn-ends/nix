@@ -17,6 +17,7 @@
       stable.flameshot
       stable.qbittorrent
       unstable.vlc
+      stable.libsForQt5.filelight
     ];
   };
 }
