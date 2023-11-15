@@ -25,7 +25,7 @@
 
 ## Programs to try
 ### File Managers
-- Krusader
 - Nemo
 - nnn
 - yazi
+- thunar

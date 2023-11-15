@@ -22,6 +22,12 @@
     programs.rofi = {
       enable = true;
       theme = ../configs/rofi/theme.rasi;
+      plugins = [
+        stable.rofi-calc
+      ];
+      extraConfig =  {
+        modi = "window,drun,run,ssh,calc";
+      };
     };
     services.polybar = {
       enable = true;
