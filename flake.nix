@@ -27,6 +27,7 @@
         ${defaultSystem} = {
           node = mkDevShell.nodeShell passShellInputs;
           dotnet = mkDevShell.dotnetShell passShellInputs;
+          dn-eap = mkDevShell.dotnetEapShell passShellInputs;
         };
       };
 
