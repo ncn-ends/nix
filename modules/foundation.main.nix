@@ -33,7 +33,7 @@
     roboto-mono
   ];
 
-  users.users.one = {
+  users.users.${name} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "docker" ];
     initialPassword = "password";

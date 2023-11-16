@@ -28,7 +28,7 @@ alias ssh:cap="ssh -i ~/.ssh/cap_key.pem cap@20.253.238.231"
 alias ssh:ubuntu="ssh -i ~/.ssh/ubuntuvps ncn@45.77.184.179"
 alias ssh:hs="ssh -i ~/.ssh/ubuntuhs ncn@10.0.0.134"
 
-# direnv
+# required for direnv
 eval "$(direnv hook bash)"
 
 # set default editor to vim

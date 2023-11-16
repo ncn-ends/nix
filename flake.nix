@@ -8,11 +8,11 @@
 
   outputs = inputs@{self, home-manager, flake-utils, ...}:
     let 
-      importConfig = { system = defaultSystem; config.allowUnfree = true; };
+      passPksImportInput = { system = defaultSystem; config.allowUnfree = true; };
 
       # --- reuse ---
-      unstable = import inputs.unstable importConfig;
-      stable = import inputs.stable importConfig;
+      unstable = import inputs.unstable passPksImportInput;
+      stable = import inputs.stable passPksImportInput;
       defaultSystem = "x86_64-linux";
       lib = inputs.stable.lib;
       hostName = "nixos";
