@@ -47,6 +47,7 @@
             ./modules/gui.common.nix
             ./modules/gui.home.nix
             ./modules/vm.nix
+            ./modules/server.nix
             ./modules/play.nix
           ];
         };
