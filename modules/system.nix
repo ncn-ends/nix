@@ -8,6 +8,20 @@
     unstable.ranger
   ];
 
+  security.sudo = {
+    extraRules = [
+      {
+        users = [ name ];
+        commands = [
+          { 
+            command = "/etc/profiles/per-user/one/bin/ranger"; 
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
+  };
+
   virtualisation.docker.enable = true;
 
   xdg.portal.enable = true; # required for flatpak
