@@ -55,12 +55,12 @@
 
     unstablePackages = with unstable; [
       (jetbrains.rider.overrideAttrs (old: rec {
-        # https://download.jetbrains.com/rider/JetBrains.Rider-2023.3-EAP6-233.11555.23.Checked.tar.gz
-        version = "2023.3-EAP6-233.11555.23.Checked";
+        # https://download.jetbrains.com/rider/JetBrains.Rider-2023.3-EAP8-233.11799.49.Checked.tar.gz
+        version = "2023.3-EAP8-233.11799.49.Checked";
         name = "rider-${version}";
         src = unstable.fetchurl {
           url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
-          sha256 = "sha256-7dXtWXJlHnSOG7/BG2q3qzbuDJVFtICRTe8iUKCmQmQ=";
+          sha256 = "sha256-5pY1aa/EfTUdaJisqNiRg0ibf90YBM+yRv0d5gc0LjY=";
         };
         postPatch = old.postPatch + ''
           interp="$(cat $NIX_CC/nix-support/dynamic-linker)"
