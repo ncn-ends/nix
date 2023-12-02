@@ -44,6 +44,7 @@
           modules = [
             ./modules/hardware-configuration.nix
             home-manager.nixosModules.home-manager
+            ./modules/foundation.common.nix
             ./modules/foundation.main.nix
             ./modules/system.nix
             ./modules/desktop.nix
