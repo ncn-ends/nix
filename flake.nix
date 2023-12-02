@@ -20,6 +20,7 @@
       lib = inputs.stable.lib;
       hostName = "nixos";
       name = "one";
+      macName = "ncn";
 
       # --- shells ---
       mkDevShell = import ./dev-shells.nix;
@@ -64,21 +65,14 @@
           system = "aarch64-darwin";
           specialArgs = {
             inherit unstable self;
-            name = "ncn";
+            name = macName;
             stable = (import ./helpers/apply-overrides.nix) stable;
           };
           modules = [ 
             home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users."ncn" = { pkgs, ... }: {
-                home.username = "ncn";
-                home.stateVersion = "22.11";
-                programs.home-manager.enable = true;
-                nixpkgs.config.allowUnfree = true;
-              };
-            }
+            ./modules/system.nix
+            ./modules/foundation.common.nix
+            ./modules/foundation.mac.nix
             ./nix-darwin.nix
             ./modules/vscode.nix
           ];

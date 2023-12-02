@@ -8,26 +8,6 @@
     unstable.ranger
   ];
 
-  security.sudo = {
-    extraRules = [
-      {
-        users = [ name ];
-        commands = [
-          { 
-            command = "/etc/profiles/per-user/one/bin/ranger"; 
-            options = [ "NOPASSWD" ];
-          }
-        ];
-      }
-    ];
-  };
-
-  virtualisation.docker.enable = true;
-
-  xdg.portal.enable = true; # required for flatpak
-  services.flatpak.enable = true;
-  #   - bottles
-
   home-manager.users.${name} = { ... }: {
     programs.vim = {
       enable = true;
@@ -40,14 +20,6 @@
       SUDO_EDITOR = "vim";
       GIT_EDITOR = "vim";
       GIT_SEQUENCE_EDITOR = "vim";
-    };
-
-    programs.bash = {
-      enable = true;
-      # TODO: fix this
-      bashrcExtra = ''
-        . /etc/nixos/configs/shell/.bashrc
-      '';
     };
 
     programs.direnv = {

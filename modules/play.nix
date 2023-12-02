@@ -1,5 +1,9 @@
 { stable, unstable, config, services, name, ... }:
 {
+  xdg.portal.enable = true; # required for flatpak
+  services.flatpak.enable = true;
+  #   - bottles
+
   environment.systemPackages = [
     stable.lutris
   ];

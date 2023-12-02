@@ -21,7 +21,7 @@
         opacity = 0.95;
         dimensions = {
           lines = 40;
-          columns = 150;
+          columns = 120;
         };
       };
     };

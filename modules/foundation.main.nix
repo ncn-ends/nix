@@ -43,4 +43,28 @@
     home.stateVersion = "22.11";
     nixpkgs.config.allowUnfree = true;
   };
+
+  programs.bash = {
+    enable = true;
+    # TODO: fix this
+    bashrcExtra = ''
+      . /etc/nixos/configs/shell/.bashrc
+    '';
+  };
+
+  security.sudo = {
+    extraRules = [
+      {
+        users = [ name ];
+        commands = [
+          { 
+            command = "/etc/profiles/per-user/one/bin/ranger"; 
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
+  };
+
+  virtualisation.docker.enable = true;
 }
