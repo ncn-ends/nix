@@ -4,15 +4,18 @@
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "stable";
+    darwin.url = "github:LnL7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "stable";
   };
 
-  outputs = inputs@{self, home-manager, flake-utils, ...}:
+  outputs = inputs@{self, darwin, home-manager, flake-utils, ...}:
     let 
       passPksImportInput = { system = defaultSystem; config.allowUnfree = true; };
 
       # --- reuse ---
       unstable = import inputs.unstable passPksImportInput;
       stable = import inputs.stable passPksImportInput;
+      macHostName = "ncns-MacBook-Pro";
       defaultSystem = "x86_64-linux";
       lib = inputs.stable.lib;
       hostName = "nixos";
@@ -45,6 +48,7 @@
             ./modules/system.nix
             ./modules/desktop.nix
             ./modules/gui.common.nix
+            ./modules/vscode.nix
             ./modules/gui.home.nix
             ./modules/vm.nix
             ./modules/server.nix
@@ -53,10 +57,26 @@
         };
       };
 
+      # --- nix darwin ---
+      defineNixDarwin = {
+        ${macHostName} = darwin.lib.darwinSystem {
+          specialArgs = {
+            inherit name unstable;
+            stable = (import ./helpers/apply-overrides.nix) stable;
+          };
+          modules = [ 
+            home-manager.darwinModules.home-manager
+            ./nix-darwin.nix
+            ./modules/vscode.nix
+          ];
+        };
+      };
+
       final = {
         eval = 2 + 2;
         devShells = defineShells;
         nixosConfigurations = defineNixOS;
+        darwinConfigurations = defineNixDarwin;
       };
 
     in final;
