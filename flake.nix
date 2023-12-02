@@ -61,12 +61,24 @@
       # --- nix darwin ---
       defineNixDarwin = {
         ${macHostName} = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
           specialArgs = {
-            inherit name unstable;
+            inherit unstable self;
+            name = "ncn";
             stable = (import ./helpers/apply-overrides.nix) stable;
           };
           modules = [ 
             home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."ncn" = { pkgs, ... }: {
+                home.username = "ncn";
+                home.stateVersion = "22.11";
+                programs.home-manager.enable = true;
+                nixpkgs.config.allowUnfree = true;
+              };
+            }
             ./nix-darwin.nix
             ./modules/vscode.nix
           ];

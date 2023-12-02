@@ -2,7 +2,7 @@
 { stable, unstable, config, services, name, ... }:
 {
   home-manager.users.${name} = { ... }: {
-    programs.vscode = {
+        programs.vscode = {
       enable = true;
       mutableExtensionsDir = false; # home-manager stopped installing extensions at some point and this fixed it
       extensions = with stable.vscode-extensions; [
@@ -22,7 +22,7 @@
       userSettings = {
         # "vim.useSystemClipboard" = true;
         "workbench.editor.wrapTabs" = true; # have tabs become multiline instead of scroll
-        "workbench.editor.showTabs" = false;
+        # "workbench.editor.showTabs" = false;
         "workbench.tree.indent" = 20;
         "emmet.showExpandedAbbreviation" = "never"; # emmet gets in the way
 
