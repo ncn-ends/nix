@@ -9,7 +9,6 @@
       stable.zoom-us
       stable.obs-studio
       stable.firefox
-      stable.alacritty
       stable.azure-cli
       stable.peek
       stable.shotcut

@@ -1,33 +1,11 @@
 	{pkgs, config, ...}: 
-  
   {
-    system.stateVersion = 4;
-    # here are the darwin preferences and configs
-    programs.zsh.enable = true;
     environment.shells = [ pkgs.bash pkgs.zsh ];
     environment.loginShell = pkgs.zsh;
-    environment.systemPackages = with pkgs; [ 
-      # coreutils 
-      git 
-      nodejs
-      # nodePackages.npm
-      # nodePackages.yarn
-      # watchman
-      # ruby
-      # rubyPackages.ffi
-      # cocoapods
-      # xcbuild
-      # xcodebuild6
-    ]; 
     environment.systemPath = [ "/opt/homebrew/bin" ];
     environment.pathsToLink = [ "/Applications" ];
-    nix.extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
     system.keyboard.enableKeyMapping = true;
-    services.nix-daemon.enable = true;
     system.defaults = {
-      finder.AppleShowAllExtensions = true; # shows file extensions in file name
       finder._FXShowPosixPathInTitle = true;
       finder.ShowPathbar = true;
       finder.ShowStatusBar = true;

@@ -73,7 +73,6 @@
             ./modules/system.nix
             ./modules/foundation.common.nix
             ./modules/foundation.mac.nix
-            ./nix-darwin.nix
             ./modules/vscode.nix
           ];
         };
