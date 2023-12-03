@@ -1,7 +1,7 @@
-{ stable, self, name, ... }:
+{ stable, unstable, self, name, ... }:
 {
-  nixpkgs.hostPlatform = "aarch64-darwin";
   system.stateVersion = 4;
+  nixpkgs.hostPlatform = "aarch64-darwin";
   nix.settings.experimental-features = "nix-command flakes";
   system.configurationRevision = self.rev or self.dirtyRev or null;
   users.users."ncn".home = "/Users/ncn";
@@ -10,9 +10,9 @@
   services.nix-daemon.enable = true;
   nixpkgs.config.allowUnfree = true;
 
-  # these might be needed when adding zsh to nix, but they could also cause problems
-  # environment.shells = [ pkgs.bash pkgs.zsh ];
-  # environment.loginShell = pkgs.zsh;
+  # not too sure what these are for or if they're necessary
+  environment.shells = [ stable.bash stable.zsh ];
+  environment.loginShell = stable.zsh;
 
   # may be needed when adding homebrew to nix config
   # environment.systemPath = [ "/opt/homebrew/bin" ];
@@ -69,9 +69,8 @@
     NSGlobalDomain.InitialKeyRepeat = 14;
     # speed of character repeat when held down
     NSGlobalDomain.KeyRepeat = 1;
-
+    NSGlobalDomain."com.apple.keyboard.fnState" = true;
     # NSGlobalDomain.com.apple.trackpad.scaling = 1.2; # trackpad tracking speed, default is 1 
-    # NSGlobalDomain.com.apple.keyboard.fnState = false; # f1-f12 keys as function keys
   };
 
 
@@ -81,6 +80,10 @@
     home.username = name;
     programs.home-manager.enable = true;
     nixpkgs.config.allowUnfree = true;
+    home.packages = [
+      # stable.obs-studio
+      unstable.jetbrains.webstorm
+    ];  
     programs.zsh = {
       enable = true;
       enableCompletion = true;
@@ -96,6 +99,7 @@
       export ANDROID_HOME=$ANDROID_SDK_ROOT
       export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
       export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+      export PATH=$PATH:/run/current-system/sw/bin
       export NODE_BINARY=/Users/ncn/.nvm/versions/node/v16.20.0/bin/node
       '';
     };	

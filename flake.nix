@@ -35,7 +35,7 @@
         };
       };
 
-      # --- nixos ---
+      # # --- nixos ---
       defineNixOS = {
         ${hostName} = lib.nixosSystem {
           specialArgs = {
@@ -64,9 +64,10 @@
         ${macHostName} = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
-            inherit unstable self;
+            inherit self;
             name = macName;
-            stable = (import ./helpers/apply-overrides.nix) stable;
+            unstable = import inputs.unstable { system = "aarch64-darwin"; config.allowUnfree = true; };
+            stable = import inputs.stable { system = "aarch64-darwin"; config.allowUnfree = true; };
           };
           modules = [ 
             home-manager.darwinModules.home-manager

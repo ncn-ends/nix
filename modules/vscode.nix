@@ -32,6 +32,7 @@
         "editor.gotoLocation.multipleDefinitions" = "goto";
         "editor.gotoLocation.multipleDeclarations" = "goto";
         "editor.wordWrap" = "on";
+        "editor.wrappingColumn" = 0;
         "editor.cursorBlinking" = "smooth";
         "editor.unicodeHighlight.invisibleCharacters" =  true;
         "editor.menuBarVisibility" = "hidden";
