@@ -50,15 +50,6 @@
     # show hidden files in finder and in general
     finder.AppleShowAllFiles = true; 
     NSGlobalDomain.AppleShowAllFiles = true;
-    # size of icons in dock
-    dock.tilesize = 36;
-    # only shows open apps in the dock
-    dock.static-only = true; 
-    # don't automatically rearrange spaces based on most recent use. who thought this was a good idea? 
-    dock.mru-spaces = false; 
-    # time to hide dock, default is 1.0 
-    dock.autohide-time-modifier = 0.5;
-    dock.autohide = true;
     # don't save documents to iCloud by default
     NSGlobalDomain.NSDocumentSaveNewDocumentsToCloud = false;
     # no automatic spelling correction
@@ -71,6 +62,30 @@
     NSGlobalDomain.KeyRepeat = 1;
     NSGlobalDomain."com.apple.keyboard.fnState" = true;
     # NSGlobalDomain.com.apple.trackpad.scaling = 1.2; # trackpad tracking speed, default is 1 
+    # 24 hour time
+    NSGlobalDomain.AppleICUForce24HourTime = true;
+    # add feedback sound when volume is changed
+    NSGlobalDomain."com.apple.sound.beep.feedback" = 1;
+    # only shows open apps in the dock
+    dock.static-only = true; 
+    # don't automatically rearrange spaces based on most recent use. who thought this was a good idea? 
+    dock.mru-spaces = false; 
+    # autohide dock, animation speed. can also have autohide-delay
+    dock.autohide = true;
+    dock.autohide-time-modifier = 0.5;
+    # size of icons in dock
+    dock.tilesize = 36;
+    # make icon bigger on hover and icon size on hover
+    dock.magnification = true; # TODO: did not work as intended
+    dock.largesize = 128; # default
+    # hide icons on desktop
+    finder.CreateDesktop = false;
+    # allow quitting finder
+    finder.QuitMenuItem = true;
+    # no guest user allowed on log in
+    loginwindow.GuestEnabled = false;
+    # can normally type >console on user name to get console access at log in window. this prevents that
+    loginwindow.DisableConsoleAccess = true;
   };
 
 
