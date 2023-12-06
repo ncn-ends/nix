@@ -1,11 +1,16 @@
 { stable, unstable, self, name, ... }:
-{
+let 
+  username = "ncn";
+  homeDir = "/Users/${username}";
+in {
   system.stateVersion = 4;
   nixpkgs.hostPlatform = "aarch64-darwin";
   nix.settings.experimental-features = "nix-command flakes";
   system.configurationRevision = self.rev or self.dirtyRev or null;
-  users.users."ncn".home = "/Users/ncn";
-  users.users."ncn".name = "ncn";
+  users.users.${username} = {
+    name = username;
+    home = homeDir;
+  };
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -60,6 +65,7 @@
     NSGlobalDomain.InitialKeyRepeat = 14;
     # speed of character repeat when held down
     NSGlobalDomain.KeyRepeat = 1;
+    # require fn keys to hold fn to do their duty
     NSGlobalDomain."com.apple.keyboard.fnState" = true;
     # NSGlobalDomain.com.apple.trackpad.scaling = 1.2; # trackpad tracking speed, default is 1 
     # 24 hour time
@@ -68,7 +74,7 @@
     NSGlobalDomain."com.apple.sound.beep.feedback" = 1;
     # only shows open apps in the dock
     dock.static-only = true; 
-    # don't automatically rearrange spaces based on most recent use. who thought this was a good idea? 
+    # don't automatically rearrange spaces based on most recent use.
     dock.mru-spaces = false; 
     # autohide dock, animation speed. can also have autohide-delay
     dock.autohide = true;
@@ -76,8 +82,8 @@
     # size of icons in dock
     dock.tilesize = 36;
     # make icon bigger on hover and icon size on hover
-    dock.magnification = true; # TODO: did not work as intended
-    dock.largesize = 128; # default
+    dock.magnification = true; 
+    dock.largesize = 64; # default
     # hide icons on desktop
     finder.CreateDesktop = false;
     # allow quitting finder
@@ -86,6 +92,19 @@
     loginwindow.GuestEnabled = false;
     # can normally type >console on user name to get console access at log in window. this prevents that
     loginwindow.DisableConsoleAccess = true;
+    # minimize animation
+    dock.minimize-to-application = true;
+
+    # --- experimenting ---
+    # these did not work
+    screencapture.location = "${homeDir}/captures";
+    screencapture.type = "jpg";
+    # not sure
+    dock.enable-spring-load-actions-on-all-items = true;
+    # set size of cursor
+    # universalaccess.mouseDriverCursorSize = 3.99;
+    # font smoothing
+    NSGlobalDomain.AppleFontSmoothing = 2;
   };
 
 
