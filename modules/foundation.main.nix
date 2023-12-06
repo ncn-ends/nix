@@ -42,15 +42,15 @@
   home-manager.users.${name} = { ... }: {
     home.stateVersion = "22.11";
     nixpkgs.config.allowUnfree = true;
+
+    programs.bash = {
+      enable = true;
+      bashrcExtra = ''
+        . /etc/nixos/configs/shell/.bashrc
+      '';
+    };
   };
 
-  programs.bash = {
-    enable = true;
-    # TODO: fix this
-    bashrcExtra = ''
-      . /etc/nixos/configs/shell/.bashrc
-    '';
-  };
 
   security.sudo = {
     extraRules = [
