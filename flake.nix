@@ -30,6 +30,7 @@
       defineShells = {
         ${defaultSystem} = {
           node = mkDevShell.nodeShell passShellInputs;
+          py = mkDevShell.pythonShell passShellInputs;
           dotnet = mkDevShell.dotnetShell passShellInputs;
           dn-eap = mkDevShell.dotnetEapShell passShellInputs;
         };
