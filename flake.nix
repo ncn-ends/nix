@@ -23,16 +23,15 @@
       macName = "ncn";
 
       # --- shells ---
-      mkDevShell = import ./dev-shells.nix;
       mkShell = stable.mkShell;
       passShellInputs = { inherit mkShell stable unstable; };
 
       defineShells = {
         ${defaultSystem} = {
-          node = mkDevShell.nodeShell passShellInputs;
-          py = mkDevShell.pythonShell passShellInputs;
-          dotnet = mkDevShell.dotnetShell passShellInputs;
-          dn-eap = mkDevShell.dotnetEapShell passShellInputs;
+          node = import ./dev-shells/node.nix passShellInputs;
+          py = import ./dev-shells/py.nix passShellInputs;
+          dotnet = import ./dev-shells/dotnet.nix  passShellInputs;
+          dn-eap = import ./dev-shells/dn-eap.nix  passShellInputs;
         };
       };
 

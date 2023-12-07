@@ -12,7 +12,7 @@
 ## Folder structure  
 `dep/` files no longer used, but don't feel like deleting them yet  
 `helpers/` common helpers used across the entire project  
-`dev-shells.nix` may separate into files in the future  
+`dev-shells/` dev shells  
 `configs/` config files and personal shell scripts  
 `modules/` NixOS/Nix Darwin modules   
 `modules/foundation.main.nix` foundational OS settings for main computer  
