@@ -13,7 +13,7 @@
       stable.krusader
       stable.gimp
       stable.libsForQt5.kdeconnect-kde
-      unstable.youtube-music
+      stable.youtube-music
       stable.flameshot
       stable.qbittorrent
       unstable.vlc
