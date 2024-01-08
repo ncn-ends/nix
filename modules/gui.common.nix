@@ -2,7 +2,7 @@
 {
   home-manager.users.${name} = { ... }: {
     home.packages = [ 
-      unstable.jetbrains.datagrip
+      stable.jetbrains.datagrip
       stable.microsoft-edge
       stable.slack
       stable.insomnia

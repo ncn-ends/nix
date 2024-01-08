@@ -18,6 +18,8 @@
       stable.qbittorrent
       unstable.vlc
       stable.libsForQt5.filelight
+      stable.prismlauncher
+      stable.stacer
     ];
   };
 }
