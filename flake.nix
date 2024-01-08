@@ -2,13 +2,18 @@
   inputs = {
     stable.url = "github:NixOS/nixpkgs/master";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "stable";
+
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "stable";
+
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "stable";
   };
 
-  outputs = inputs@{self, darwin, home-manager, flake-utils, ...}:
+  outputs = inputs@{self, darwin, home-manager, flake-utils, sops-nix, ...}:
     let 
       passPksImportInput = { system = defaultSystem; config.allowUnfree = true; };
 
@@ -40,12 +45,13 @@
       defineNixOS = {
         ${hostName} = lib.nixosSystem {
           specialArgs = {
-            inherit name unstable;
+            inherit name unstable sops-nix;
             stable = (import ./helpers/apply-overrides.nix) stable;
           };
           modules = [
             ./modules/hardware-configuration.nix
             home-manager.nixosModules.home-manager
+            ./modules/secrets.nix
             ./modules/foundation.common.nix
             ./modules/foundation.main.nix
             ./modules/system.nix
@@ -55,6 +61,7 @@
             ./modules/gui.home.nix
             ./modules/vm.nix
             ./modules/server.nix
+            ./modules/minecraft.server.nix
             ./modules/play.nix
           ];
         };
