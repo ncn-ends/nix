@@ -2,6 +2,7 @@
 {
   environment.systemPackages = [
     stable.wget
+    stable.unzip
   ];
 
   users.users.${name}.packages = [

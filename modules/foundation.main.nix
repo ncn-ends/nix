@@ -35,7 +35,7 @@
 
   users.users.${name} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "docker" ];
+    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "docker" "plex" ];
     initialPassword = "password";
   };
 
