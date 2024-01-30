@@ -3,7 +3,7 @@
   home-manager.users.${name} = { ... }: {
     home.packages = [ 
       stable.jetbrains.datagrip
-      stable.microsoft-edge
+      unstable.microsoft-edge
       stable.slack
       stable.insomnia
       stable.zoom-us

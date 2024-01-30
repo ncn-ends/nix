@@ -19,8 +19,8 @@
       unstable.vlc
       stable.libsForQt5.filelight
       stable.prismlauncher
-      stable.stacer
-      stable.floorp
+      # stable.stacer
+      # stable.floorp
       stable.whatsapp-for-linux
     ];
   };

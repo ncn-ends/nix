@@ -2,15 +2,16 @@
 
 [Default Applications]
 text/html=microsoft-edge.desktop
+text/plain=code.desktop
 application/xhtml+xml=microsoft-edge.desktop
 x-scheme-handler/http=microsoft-edge.desktop
 x-scheme-handler/https=microsoft-edge.desktop
-inode/directory=krusader.desktop
+inode/directory=org.kde.krusader.desktop
 image/webp=microsoft-edge.desktop
 image/png=microsoft-edge.desktop
 image/jpeg=microsoft-edge.desktop
 image/gif=microsoft-edge.desktop
 
 [Added Associations]
-x-scheme-handler/http=microsoft-edge.desktop;
-inode/directory=krusader.desktop;
+x-scheme-handler/http=microsoft-edge.desktop
+inode/directory=org.kde.krusader.desktop

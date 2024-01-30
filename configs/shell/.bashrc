@@ -37,4 +37,7 @@ export SUDO_EDITOR="vim"
 export EDITOR="vim"
 export GIT_EDITOR="vim";
 export GIT_SEQUENCE_EDITOR="vim";
-export TERMINAL=$TERM
+
+# set default terminal emulator
+export TERMINAL="alacritty"
+alias x-terminal-emulator='alacritty'
