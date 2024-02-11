@@ -10,7 +10,6 @@
       stable.libsForQt5.okular
       stable.libreoffice
       stable.imagemagick
-      stable.krusader
       stable.gimp
       stable.libsForQt5.kdeconnect-kde
       stable.youtube-music
@@ -22,6 +21,7 @@
       # stable.stacer
       # stable.floorp
       stable.whatsapp-for-linux
+      stable.xfce.thunar
     ];
   };
 }
