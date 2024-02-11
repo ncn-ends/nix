@@ -38,6 +38,7 @@
           dotnet = import ./dev-shells/dotnet.nix  passShellInputs;
           dotnet8 = import ./dev-shells/dotnet8.nix  passShellInputs;
           dn-eap = import ./dev-shells/dn-eap.nix  passShellInputs;
+          rust = import ./dev-shells/rust.nix  passShellInputs;
         };
       };
 
