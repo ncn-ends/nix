@@ -6,12 +6,24 @@ text/plain=code.desktop
 application/xhtml+xml=microsoft-edge.desktop
 x-scheme-handler/http=microsoft-edge.desktop
 x-scheme-handler/https=microsoft-edge.desktop
-inode/directory=org.kde.krusader.desktop
+inode/directory=thunar.desktop
 image/webp=microsoft-edge.desktop
 image/png=microsoft-edge.desktop
 image/jpeg=microsoft-edge.desktop
 image/gif=microsoft-edge.desktop
+video/mp4=vlc.desktop
+video/mpeg=vlc.desktop
+video/quicktime=vlc.desktop
+video/x-msvideo=vlc.desktop
+video/x-matroska=vlc.desktop
+video/webm=vlc.desktop
 
 [Added Associations]
 x-scheme-handler/http=microsoft-edge.desktop
-inode/directory=org.kde.krusader.desktop
+inode/directory=thunar.desktop
+video/mp4=vlc.desktop;
+video/mpeg=vlc.desktop;
+video/quicktime=vlc.desktop;
+video/x-msvideo=vlc.desktop;
+video/x-matroska=vlc.desktop;
+video/webm=vlc.desktop;
