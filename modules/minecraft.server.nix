@@ -5,10 +5,12 @@
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
+  # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/games/minecraft-server.nix
   services.minecraft-server = {
     enable = true;
     eula = true;
     declarative = true;
+    # dataDir = TODO: set it properly here
 
     # see here for more info: https://minecraft.gamepedia.com/Server.properties#server.properties
     serverProperties = {

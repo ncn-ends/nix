@@ -62,7 +62,7 @@
             ./modules/gui.home.nix
             ./modules/vm.nix
             ./modules/server.nix
-            ./modules/minecraft.server.nix
+            # ./modules/minecraft.server.nix
             ./modules/play.nix
           ];
         };
