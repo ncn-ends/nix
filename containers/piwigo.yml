@@ -8,8 +8,8 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /run/media/one/shape/gallery/piwigo/config::/config
-      - /run/media/one/shape/gallery/piwigo/gallery:/gallery
+      - /run/media/one/shape1/gallery/piwigo/config:/config
+      - /run/media/one/shape1/gallery/piwigo/gallery:/gallery
     ports:
       - 8143:80
     restart: unless-stopped
@@ -27,7 +27,7 @@ services:
       - MYSQL_USER=piwigo_db_user
       - MYSQL_PASSWORD=password
     volumes:
-      - /run/media/one/shape/gallery/piwigo/mariadb_config:/config
+      - /run/media/one/shape1/gallery/piwigo/mariadb_config:/config
     ports:
       - 3306:3306
     restart: unless-stopped
