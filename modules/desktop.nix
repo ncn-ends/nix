@@ -11,10 +11,10 @@
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    extraPackages = with stable; [
-      amdvlk
-      vaapiVdpau
-      libvdpau-va-gl
+    extraPackages = [
+      stable.amdvlk
+      stable.vaapiVdpau
+      stable.libvdpau-va-gl
     ];
   };
 

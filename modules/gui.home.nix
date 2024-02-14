@@ -1,7 +1,7 @@
 { stable, unstable, config, services, name, ... }:
 {
-  users.users.${name}.packages = with stable; [
-    discord 
+  users.users.${name}.packages = [
+    stable.discord 
     stable.xorg.xkill
   ];
 

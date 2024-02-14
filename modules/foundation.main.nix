@@ -31,8 +31,8 @@
     DefaultLimitNOFILE=1048576
   '';
 
-  fonts.packages = with stable; [
-    roboto-mono
+  fonts.packages = [
+    stable.roboto-mono
   ];
 
   users.users.${name} = {
