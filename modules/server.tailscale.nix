@@ -1,35 +1,19 @@
 { stable, config, ...}: {
+
+  # things done manually:
+  #   tailscale up --advertise-exit-node
+
+  services.tailscale.enable = true;
+  environment.systemPackages = [ stable.tailscale ];
+  # https://github.com/tailscale/tailscale/issues/4432
+  services.tailscale.useRoutingFeatures = "server";
+  services.tailscale.permitCertUid = "caddy";
+
   networking.firewall = { 
     trustedInterfaces = [ "tailscale0" ];
     allowedTCPPorts = [ 22 ];
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
-
-  # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/games/minecraft-server.nix
-  services.minecraft-server = {
-    enable = true;
-    eula = true;
-    declarative = true;
-    # dataDir = TODO: set it properly here
-
-    # see here for more info: https://minecraft.gamepedia.com/Server.properties#server.properties
-    serverProperties = {
-      server-port = 25565;
-      gamemode = "survival";
-      motd = "NixOS Minecraft server on Tailscale!";
-      max-players = 5;
-
-      enable-rcon = true;
-      "rcon.password" = "pw";
-
-      level-seed = "10292992";
-      hardcore = false;
-      # enforce-whitelist = true; # TODO: this doesn't work
-    };
-  };
-
-  environment.systemPackages = [ stable.tailscale stable.mcrcon ];
-  services.tailscale.enable = true;
 
   systemd.services.tailscale-autoconnect = {
     description = "Automatic connection to Tailscale";
@@ -54,5 +38,4 @@
       ${tailscale}/bin/tailscale up -authkey $(cat ${config.sops.secrets."tailscale-minecraft".path})
     '';
   };
-
 }

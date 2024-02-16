@@ -42,7 +42,7 @@
         };
       };
 
-      # # --- nixos ---
+      # --- nixos ---
       defineNixOS = {
         ${hostName} = lib.nixosSystem {
           specialArgs = {
@@ -62,7 +62,11 @@
             ./modules/gui.home.nix
             ./modules/vm.nix
             ./modules/server.nix
-            # ./modules/minecraft.server.nix
+            ./modules/server.syncthing.nix
+            ./modules/server.tailscale.nix
+            ./modules/server.vaultwarden.nix
+            ./modules/server.caddy.nix
+            # ./modules/server.minecraft.nix
             ./modules/play.nix
           ];
         };
