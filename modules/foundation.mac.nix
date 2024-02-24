@@ -16,7 +16,7 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   # not too sure what these are for or if they're necessary
-  environment.shells = [ stable.bash stable.zsh ];
+  environment.shells = [ stable.zsh ];
   environment.loginShell = stable.zsh;
 
   # may be needed when adding homebrew to nix config
@@ -107,6 +107,19 @@ in {
     NSGlobalDomain.AppleFontSmoothing = 2;
   };
 
+  environment.systemPackages = [
+      # stable.zulu17 # jdk for react native
+      # stable.jdk17
+      stable.nodejs
+      stable.nodePackages.npm
+      stable.nodePackages.yarn
+  ];
+
+  system.activationScripts.postUserActivation.text = ''
+    # Following line should allow us to avoid a logout/login cycle
+    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  '';
+
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
@@ -117,6 +130,9 @@ in {
     home.packages = [
       # stable.obs-studio
       unstable.jetbrains.webstorm
+      # unstable.jetbrains.rider
+      stable.azure-cli
+      stable.insomnia
     ];  
     programs.zsh = {
       enable = true;
@@ -134,9 +150,10 @@ in {
       export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
       export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
       export PATH=$PATH:/run/current-system/sw/bin
-      export NODE_BINARY=/Users/ncn/.nvm/versions/node/v16.20.0/bin/node
       '';
     };	
+      # export JAVA_HOME=${stable.zulu17}/lib/openjdk
+      # export PATH=$JAVA_HOME:$PATH
     # TODO: this is repeated from gui.common.nix, consolidate
     programs.alacritty = {
       enable = true;
