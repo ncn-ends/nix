@@ -13,7 +13,7 @@
     sops-nix.inputs.nixpkgs.follows = "stable";
   };
 
-  outputs = inputs@{self, darwin, home-manager, flake-utils, sops-nix, ...}:
+  outputs = inputs@{self, darwin, home-manager, sops-nix, ...}:
   let 
     machines = {
       main = {
