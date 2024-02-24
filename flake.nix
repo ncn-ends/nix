@@ -41,8 +41,6 @@
             node = import ./dev-shells/node.nix devShellInputs;
             py = import ./dev-shells/py.nix devShellInputs;
             dotnet = import ./dev-shells/dotnet.nix  devShellInputs;
-            dotnet8 = import ./dev-shells/dotnet8.nix  devShellInputs;
-            dn-eap = import ./dev-shells/dn-eap.nix  devShellInputs;
             rust = import ./dev-shells/rust.nix  devShellInputs;
           };
         };

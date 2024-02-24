@@ -1,12 +1,13 @@
 {mkShell, stable, unstable} : 
 mkShell rec {
-  name = "ncn-dotnet7-env";
+  name = "ncn-dotnet8-env";
 
 
   stablePackages = with stable; [
     (with dotnetCorePackages; combinePackages [
       sdk_6_0
       sdk_7_0
+      sdk_8_0
     ])
   ];
 
