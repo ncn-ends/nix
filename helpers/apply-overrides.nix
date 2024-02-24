@@ -20,10 +20,18 @@ packages : (packages // {
   });
   jetbrains.datagrip = packages.jetbrains.datagrip.overrideAttrs (old: rec {
     version = "2023.2.3";
-    name = "rider-${version}";
+    name = "datagrip-${version}";
     src = packages.fetchurl {
       url = "https://download.jetbrains.com/datagrip/datagrip-${version}.tar.gz";
       sha256 = "sha256-hlrUex5ZP2ac0mJTPoDc3WWL1cAp+l7SIEFapAf8LjU=";
     };
   });
+  # jetbrains.webstorm = packages.jetbrains.webstorm.overrideAttrs (old: rec {
+  #   version = "2023.3.4";
+  #   name = "webstorm-${version}";
+  #   src = packages.fetchurl {
+  #     url = "https://download.jetbrains.com/webstorm/WebStorm-${version}.tar.gz";
+  #     sha256 = "sha256-I2IEqQ1H4N0lACB40/Ay5R4DzmvyFKeL69KGQL3TGQg=";
+  #   };
+  # });
 })

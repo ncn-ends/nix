@@ -12,6 +12,7 @@
       stable.azure-cli
       stable.peek
       stable.shotcut
+      stable.seafile-client
     ];
 
     programs.alacritty = {
