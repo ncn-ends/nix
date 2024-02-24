@@ -1,20 +1,5 @@
 ---
 services:
-  piwigo:
-    image: lscr.io/linuxserver/piwigo:latest
-    container_name: piwigo
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - /run/media/one/shape1/gallery/piwigo/config:/config
-      - /run/media/one/shape1/gallery/piwigo/gallery:/gallery
-    ports:
-      - 8143:80
-    restart: unless-stopped
----
-services:
   mariadb:
     image: lscr.io/linuxserver/mariadb:latest
     container_name: mariadb
@@ -30,4 +15,18 @@ services:
       - /run/media/one/shape1/gallery/piwigo/mariadb_config:/config
     ports:
       - 3306:3306
+    restart: unless-stopped
+
+  piwigo:
+    image: lscr.io/linuxserver/piwigo:latest
+    container_name: piwigo
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /run/media/one/shape1/gallery/piwigo/config:/config
+      - /run/media/one/shape1/gallery/piwigo/gallery:/gallery
+    ports:
+      - 8143:80
     restart: unless-stopped

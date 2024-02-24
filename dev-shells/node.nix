@@ -3,8 +3,8 @@ mkShell rec {
   name = "ncn-node-env";
 
   packages = let 
-    inherit (stable) nodejs nodePackages ngrok;
-    inherit (unstable) jetbrains;
+    inherit (stable) nodejs nodePackages ngrok jetbrains;
+    # inherit (stable) jetbrains;
   in [
     nodejs
     nodePackages.npm
@@ -13,6 +13,6 @@ mkShell rec {
     nodePackages.javascript-typescript-langserver
     nodePackages.typescript
     ngrok
-    jetbrains.webstorm
+    # stable.jetbrains.webstorm
   ];
 }
