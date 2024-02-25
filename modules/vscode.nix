@@ -2,7 +2,7 @@
 { stable, unstable, config, services, name, ... }:
 {
   home-manager.users.${name} = { ... }: {
-        programs.vscode = {
+    programs.vscode = {
       enable = true;
       mutableExtensionsDir = false; # home-manager stopped installing extensions at some point and this fixed it
       extensions = with stable.vscode-extensions; [
