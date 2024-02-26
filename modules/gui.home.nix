@@ -12,7 +12,7 @@
       stable.imagemagick
       stable.gimp
       stable.libsForQt5.kdeconnect-kde
-      stable.youtube-music
+      unstable.youtube-music
       stable.flameshot
       stable.qbittorrent
       unstable.vlc
