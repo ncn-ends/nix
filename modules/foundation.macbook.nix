@@ -133,7 +133,7 @@
       unstable.jetbrains.webstorm
       # unstable.jetbrains.rider
       stable.azure-cli
-      stable.insomnia
+      # stable.insomnia
     ];  
     programs.zsh = {
       enable = true;
