@@ -13,6 +13,6 @@ mkShell rec {
     nodePackages.javascript-typescript-langserver
     nodePackages.typescript
     ngrok
-    # stable.jetbrains.webstorm
+    stable.jetbrains.webstorm
   ];
 }

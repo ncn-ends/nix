@@ -26,12 +26,12 @@ packages : (packages // {
       sha256 = "sha256-hlrUex5ZP2ac0mJTPoDc3WWL1cAp+l7SIEFapAf8LjU=";
     };
   });
-  # jetbrains.webstorm = packages.jetbrains.webstorm.overrideAttrs (old: rec {
-  #   version = "2023.3.4";
-  #   name = "webstorm-${version}";
-  #   src = packages.fetchurl {
-  #     url = "https://download.jetbrains.com/webstorm/WebStorm-${version}.tar.gz";
-  #     sha256 = "sha256-I2IEqQ1H4N0lACB40/Ay5R4DzmvyFKeL69KGQL3TGQg=";
-  #   };
-  # });
+  jetbrains.webstorm = packages.jetbrains.webstorm.overrideAttrs (old: rec {
+    version = "2023.2.3";
+    name = "webstorm-${version}";
+    src = packages.fetchurl {
+      url = "https://download.jetbrains.com/webstorm/WebStorm-${version}.tar.gz";
+      sha256 = "sha256-tX9KcTYaIkrrDoDy8xH2MqsXVzVqLeNiet4+ndTuCJk=";
+    };
+  });
 })
