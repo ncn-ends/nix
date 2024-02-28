@@ -26,15 +26,11 @@ Personal repo for everything related to Nix and my dotfiles
 `configs/` dotfiles, personal shell scripts, etc.  
 `containers/` docker  
 `modules/` NixOS and Nix Darwin modules   
-`modules/foundation.main.nix` foundational configs for main computer which runs NixOS   
-`modules/foundation.mac.nix` foundational configs for macbook, which is mostly used for work   
+`modules/foundation.*.nix` foundational configs for each machine. see `machines` set in flake.nix  also  
 `modules/desktop.cinnamon.nix` DE and programs specific to the DE. currently using xserver and cinnamon   
 `modules/vscode.nix` vscode configs   
-`modules/vm.nix` VMs and related
+`modules/cli.nix` cli tools and related  
+`modules/vm.nix` VMs and related  
 `modules/play.nix` gaming  
 `modules/secrets.nix` configs for nix-sops  
-`modules/server.*.nix` server configs, where each service has its own file. see `containers/` also.   
-
-`modules/system.nix` base programs and related. applicable to both desktop and server NixOS. e.g. vim  
-`modules/gui.common.nix` DE/OS agnostic gui programs and related for all desktop computers  
-`modules/gui.home.nix` DE/OS agnostic gui programs and related for non-work computers  
+`modules/server.*.nix` server configs, where each service has its own file. see `containers/` also  
