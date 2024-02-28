@@ -13,5 +13,9 @@
   
   home-manager.users.${name} = { ... }: {
     home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg".source = ../configs/csgo/autoexec.cfg;
+
+    home.packages = [
+      stable.prismlauncher
+    ];
   };
 }

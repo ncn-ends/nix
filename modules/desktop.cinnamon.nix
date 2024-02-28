@@ -8,6 +8,7 @@
     desktopManager.cinnamon.enable = true;
     videoDrivers = [ "amdgpu" ];
   };
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -39,6 +40,7 @@
     home.packages = [ 
       stable.xbindkeys
       stable.screenkey
+      stable.xorg.xkill
     ];
 
     home.file.".config/autostart/.screenkey.desktop".source   = ../configs/startup/screenkey.desktop;

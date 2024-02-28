@@ -46,32 +46,37 @@
           };
         };
 
-        nixosConfigurations = {
-          ${machines.main.hostName} = lib.nixosSystem {
+        nixosConfigurations = let
+          machine = machines.main;
+          packages = import ./modules/package-dump.nix { inherit stable unstable; name = machine.user; };
+        in {
+          ${machine.hostName} = lib.nixosSystem {
             specialArgs = {
               inherit unstable sops-nix stable;
-              name = machines.main.user;
+              name = machine.user;
             };
             modules = [
-              ./modules/hardware-configuration.nix
               home-manager.nixosModules.home-manager
-              ./modules/secrets.nix
-              ./modules/foundation.common.nix
               ./modules/foundation.main.nix
-              ./modules/system.nix
-              ./modules/desktop.nix
-              ./modules/gui.common.nix
+              ./modules/secrets.nix
+              ./modules/cli.nix
+              ./modules/desktop.cinnamon.nix
               ./modules/vscode.nix
-              ./modules/gui.home.nix
               ./modules/vm.nix
-              ./modules/server.nix
+              ./modules/server.firewall.nix
+              ./modules/server.plex.nix
               ./modules/server.syncthing.nix
               ./modules/server.tailscale.nix
               ./modules/server.vaultwarden.nix
               ./modules/server.caddy.nix
-              # ./modules/server.seafile.nix
-              # ./modules/server.minecraft.nix
               ./modules/play.nix
+              {
+                users.users.${machine.user}.packages = 
+                  packages.all ++ 
+                  packages.work ++ 
+                  packages.personal ++ 
+                  packages.personalLinux;
+              }
             ];
           };
         };
@@ -85,9 +90,8 @@
             };
             modules = [ 
               home-manager.darwinModules.home-manager
-              ./modules/system.nix
-              ./modules/foundation.common.nix
               ./modules/foundation.mac.nix
+              ./modules/cli.nix
               ./modules/vscode.nix
             ];
           };

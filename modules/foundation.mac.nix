@@ -6,6 +6,10 @@ in {
   system.stateVersion = 4;
   nixpkgs.hostPlatform = "aarch64-darwin";
   nix.settings.experimental-features = "nix-command flakes";
+  home-manager.users.${name} = { ... }: {
+    home.stateVersion = "22.11";
+    nixpkgs.config.allowUnfree = true;
+  };
   system.configurationRevision = self.rev or self.dirtyRev or null;
   users.users.${username} = {
     name = username;
@@ -154,16 +158,5 @@ in {
     };	
       # export JAVA_HOME=${stable.zulu17}/lib/openjdk
       # export PATH=$JAVA_HOME:$PATH
-    # TODO: this is repeated from gui.common.nix, consolidate
-    programs.alacritty = {
-      enable = true;
-      settings.window = {
-        opacity = 0.95;
-        dimensions = {
-          lines = 40;
-          columns = 120;
-        };
-      };
-    };
   };
 }

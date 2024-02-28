@@ -3,6 +3,7 @@
   environment.systemPackages = [
     stable.wget
     stable.unzip
+    stable.python3
   ];
 
   users.users.${name}.packages = [
@@ -10,11 +11,22 @@
   ];
 
   home-manager.users.${name} = { ... }: {
+    programs.alacritty = {
+      enable = true;
+      settings.window = {
+        opacity = 0.95;
+        dimensions = {
+          lines = 40;
+          columns = 120;
+        };
+      };
+    };
+
     programs.vim = {
       enable = true;
       defaultEditor = true;
     };
-
+      
     home.sessionVariables = {
       # default editor set to vim
       EDITOR = "vim";
