@@ -74,10 +74,10 @@
               ./modules/play.nix
               {
                 users.users.${machine.user}.packages = 
-                  packages.all ++ 
-                  packages.work ++ 
-                  packages.personal ++ 
-                  packages.personalLinux;
+                  packages.all 
+                  ++ packages.work
+                  ++ packages.personal
+                  ++ packages.personalLinux;
               }
             ];
           };
