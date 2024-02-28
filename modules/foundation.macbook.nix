@@ -1,19 +1,16 @@
-{ stable, unstable, self, name, ... }:
-let 
-  username = "ncn";
-  homeDir = "/Users/${username}";
-in {
+{ stable, unstable, self, name, machine, ... }:
+{
   system.stateVersion = 4;
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs.hostPlatform = machine.system;
   nix.settings.experimental-features = "nix-command flakes";
   home-manager.users.${name} = { ... }: {
     home.stateVersion = "22.11";
     nixpkgs.config.allowUnfree = true;
   };
   system.configurationRevision = self.rev or self.dirtyRev or null;
-  users.users.${username} = {
-    name = username;
-    home = homeDir;
+  users.users.${machine.user} = {
+    name = machine.user;
+    home = "/Users/${machine.user}";
   };
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -101,7 +98,7 @@ in {
 
     # --- experimenting ---
     # these did not work
-    screencapture.location = "${homeDir}/captures";
+    screencapture.location = "/Users/${machines.user}/captures";
     screencapture.type = "jpg";
     # not sure
     dock.enable-spring-load-actions-on-all-items = true;
@@ -127,8 +124,8 @@ in {
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.${name} = { ... }: {
-    home.username = name;
+  home-manager.users.${machines.user} = { ... }: {
+    home.username = machines.user;
     programs.home-manager.enable = true;
     nixpkgs.config.allowUnfree = true;
     home.packages = [
@@ -144,7 +141,7 @@ in {
       # enableAutoSuggestions = true;
       syntaxHighlighting.enable = true;
       shellAliases = {
-        nix-sw = "darwin-rebuild switch --flake ~/nix2/flake.nix";
+        nix-sw = "darwin-rebuild switch --flake ${machines.nixRoot}/flake.nix";
         # nixup = "pushd ~/nix/darwin; nix flake update; nixsw; popd";
         # nixrn = "NIXPKGS_ALLOW_UNFREE=1 nix-shell ~/nix/shells/rn-shell.nix";
       };

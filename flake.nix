@@ -21,11 +21,13 @@
         hostName = "nixos";
         user = "one";
         nixConfigRoot = "/etc/nixos";
+        system = "x86_64-linux";
       };
       macbook = {
         hostName = "ncns-MacBook-Pro";
         user = "ncn";
         nixRoot = "/Users/ncn/nix2";
+        system = "aarch64-darwin";
       };
     };
     defineConfigBySystem = system: 
@@ -82,15 +84,15 @@
         };
 
         darwinConfigurations = {
-          ${machines.macbook.hostName} = darwin.lib.darwinSystem {
+          ${machine.hostName} = darwin.lib.darwinSystem {
             inherit system;
             specialArgs = {
-              inherit self unstable stable;
-              name = machines.macbook.user;
+              inherit self unstable stable machine;
+              name = machine.user;
             };
             modules = [ 
               home-manager.darwinModules.home-manager
-              ./modules/foundation.mac.nix
+              ./modules/foundation.macbook.nix
               ./modules/cli.nix
               ./modules/vscode.nix
             ];
