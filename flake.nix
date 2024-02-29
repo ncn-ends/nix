@@ -48,7 +48,8 @@
           };
         };
 
-        nixosConfigurations = let
+        nixosConfigurations = 
+        let
           machine = machines.main;
           packages = import ./modules/package-dump.nix { inherit stable unstable; name = machine.user; };
         in {
@@ -83,7 +84,11 @@
           };
         };
 
-        darwinConfigurations = {
+        darwinConfigurations = 
+        let
+          machine = machines.macbook;
+          packages = import ./modules/package-dump.nix { inherit stable unstable; name = machine.user; };
+        in {
           ${machine.hostName} = darwin.lib.darwinSystem {
             inherit system;
             specialArgs = {
