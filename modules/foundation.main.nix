@@ -43,11 +43,18 @@
   home-manager.users.${name} = { ... }: {
     home.stateVersion = "22.11";
     nixpkgs.config.allowUnfree = true;
+
+    programs.bash = {
+      enable = true;
+      bashrcExtra = ''
+        . /etc/nixos/configs/shell/.bashrc
+      '';
+    };
   };
 
   virtualisation.docker.enable = true;
 
-  # --- came from hardware-configuration.nix ---
+  # --- mostly came from hardware-configuration.nix ---
 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
@@ -55,15 +62,23 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/8f2b4ac7-ab2d-458d-b61a-2aa1545dfa5e"; # need to change this to /dev/disk/by-label if want to use on another machine
-      fsType = "ext4";
-    };
+  fileSystems."/" = { 
+    device = "/dev/disk/by-uuid/8f2b4ac7-ab2d-458d-b61a-2aa1545dfa5e";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6D00-DB7E";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = { 
+    device = "/dev/disk/by-uuid/6D00-DB7E";
+    fsType = "vfat";
+  };
+
+  fileSystems."/mnt/shape" = {
+    fsType = "ext4";
+    label = "shape";
+    device = "/dev/disk/by-label/shape";
+    depends = [ "/" "/boot" ];
+    options = [ "defaults" "nofail" ];
+  };
 
   swapDevices = [ ];
 
@@ -78,5 +93,4 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
 }
