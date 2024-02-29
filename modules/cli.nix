@@ -8,7 +8,6 @@
 
   users.users.${name}.packages = [
     unstable.ranger
-    stable.fzf
   ];
 
   home-manager.users.${name} = { ... }: {

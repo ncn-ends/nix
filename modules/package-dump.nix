@@ -40,7 +40,13 @@
     stable.seafile-client
   ];
 
+  # to try:
+  #     fzf
+  #     tldr
+  #     atuin
+  #     grub-reboot
+
   # to try again at some point maybe: 
-  #     stable.stacer
-  #     stable.floorp
+  #     stacer
+  #     floorp
 }
