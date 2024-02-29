@@ -98,7 +98,7 @@
 
     # --- experimenting ---
     # these did not work
-    screencapture.location = "/Users/${machines.user}/captures";
+    screencapture.location = "/Users/${machine.user}/captures";
     screencapture.type = "jpg";
     # not sure
     dock.enable-spring-load-actions-on-all-items = true;
@@ -124,8 +124,8 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.${machines.user} = { ... }: {
-    home.username = machines.user;
+  home-manager.users.${machine.user} = { ... }: {
+    home.username = machine.user;
     programs.home-manager.enable = true;
     nixpkgs.config.allowUnfree = true;
     home.packages = [
@@ -141,7 +141,7 @@
       # enableAutoSuggestions = true;
       syntaxHighlighting.enable = true;
       shellAliases = {
-        nix-sw = "darwin-rebuild switch --flake ${machines.nixRoot}/flake.nix";
+        nix-sw = "darwin-rebuild switch --flake ${machine.nixConfigRoot}/flake.nix";
         # nixup = "pushd ~/nix/darwin; nix flake update; nixsw; popd";
         # nixrn = "NIXPKGS_ALLOW_UNFREE=1 nix-shell ~/nix/shells/rn-shell.nix";
       };
