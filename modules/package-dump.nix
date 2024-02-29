@@ -38,6 +38,9 @@
     stable.peek
     stable.shotcut
     stable.seafile-client
+  ];
+
+  experimenting = [
     untested.warp-terminal
   ];
 

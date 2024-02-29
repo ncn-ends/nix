@@ -86,7 +86,8 @@
                   packages.all 
                   ++ packages.work
                   ++ packages.personal
-                  ++ packages.personalLinux;
+                  ++ packages.personalLinux
+                  ++ packages.experimenting;
               }
             ];
           };
