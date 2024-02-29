@@ -30,6 +30,11 @@
         system = "aarch64-darwin";
       };
     };
+    drives = {
+      shape = {
+        location = "/mnt/shape";
+      };
+    };
     defineConfigBySystem = system: 
       let 
         passPksImportInput = { inherit system; config.allowUnfree = true; };

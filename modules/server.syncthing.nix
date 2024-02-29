@@ -1,6 +1,7 @@
 { stable, config, ...}:
 {
   # https://wes.today/nixos-syncthing/
+  # TODO: use machine.shape.location to make the data directories consistent
   services.syncthing = {
     enable = true;
     dataDir = "/run/media/one/shape1/syncthing";
