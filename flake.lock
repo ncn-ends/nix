@@ -63,7 +63,8 @@
         "home-manager": "home-manager",
         "sops-nix": "sops-nix",
         "stable": "stable",
-        "unstable": "unstable"
+        "unstable": "unstable",
+        "untested": "untested"
       }
     },
     "sops-nix": {
@@ -115,6 +116,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "untested": {
+      "locked": {
+        "lastModified": 1709181342,
+        "narHash": "sha256-+aBoa3MV5Cp0g4HeqYvQmDuKiK2tRTrAr+8sFRjPuoc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e2376d8b73f5e1494e656a12cbaf9c21b8af1572",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
         "repo": "nixpkgs",
         "type": "github"
       }

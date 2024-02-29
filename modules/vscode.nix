@@ -26,7 +26,7 @@
         "workbench.tree.indent" = 20;
         "emmet.showExpandedAbbreviation" = "never"; # emmet gets in the way
 
-        # don't open modal on goto, just go to
+        # don't open modal on goto, just go t0
         "editor.gotoLocation.multipleTypeDefinitions" = "goto";
         "editor.gotoLocation.multipleImplementations" = "goto";
         "editor.gotoLocation.multipleDefinitions" = "goto";
@@ -39,6 +39,8 @@
         "editor.formatOnPaste" = true;
         "breadcrumbs.enabled" = false;
         "customizeUI.activityBar" = "top";
+        "files.autoSave"= "afterDelay"; 
+        "files.autoSaveDelay"= 1000;
 
         "vim.normalModeKeyBindings" = [
           {

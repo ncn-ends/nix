@@ -1,4 +1,4 @@
-{stable, unstable, name}: 
+{stable, unstable, name, untested}: 
 {
   # every machine
   all = [
@@ -38,6 +38,7 @@
     stable.peek
     stable.shotcut
     stable.seafile-client
+    untested.warp-terminal
   ];
 
   # to try:

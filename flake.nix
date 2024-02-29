@@ -4,6 +4,8 @@
 
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    untested.url = "github:NixOS/nixpkgs/master";
+
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "stable";
 
@@ -38,8 +40,9 @@
     defineConfigBySystem = system: 
       let 
         passPksImportInput = { inherit system; config.allowUnfree = true; };
-        unstable = import inputs.unstable passPksImportInput;
         stable = (import ./helpers/apply-overrides.nix (import inputs.stable passPksImportInput));
+        unstable = import inputs.unstable passPksImportInput;
+        untested = import inputs.untested passPksImportInput;
         lib = inputs.stable.lib;
         mkShell = stable.mkShell;
         devShellInputs = { inherit mkShell stable unstable; };
@@ -56,11 +59,11 @@
         nixosConfigurations = 
         let
           machine = machines.main;
-          packages = import ./modules/package-dump.nix { inherit stable unstable; name = machine.user; };
+          packages = import ./modules/package-dump.nix { inherit stable unstable untested; name = machine.user; };
         in {
           ${machine.hostName} = lib.nixosSystem {
             specialArgs = {
-              inherit unstable sops-nix stable;
+              inherit unstable sops-nix stable untested;
               name = machine.user;
             };
             modules = [
