@@ -26,7 +26,7 @@
       macbook = {
         hostName = "ncns-MacBook-Pro";
         user = "ncn";
-        nixRoot = "/Users/ncn/nix2";
+        nixConfigRoot = "/Users/ncn/nix2";
         system = "aarch64-darwin";
       };
     };
