@@ -28,7 +28,6 @@
   # every linux personal machine
   personalLinux = [
     stable.whatsapp-for-linux
-    stable.xfce.thunar
     stable.gimp
     stable.flameshot
     stable.libsForQt5.okular

@@ -93,4 +93,19 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # thunar stuff
+
+  programs.thunar = {
+    enable = true;
+    plugins = [
+      stable.xfce.thunar-archive-plugin
+    ];
+  };
+  # required to save preferences if not using xfce
+  programs.xfconf.enable = true;
+  # image thumbnails
+  # https://wiki.archlinux.org/title/File_manager_functionality#Thumbnail_previews
+  services.tumbler.enable = true;
+
 }
