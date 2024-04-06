@@ -14,7 +14,7 @@ alias nix-rust="nix develop /etc/nixos#rust";
 # convenience alias'
 alias nix-sw="sudo nixos-rebuild switch"
 alias nix-up="cd /etc/nix; nix flake update; nix-sw"
-alias nix-clean="sudo nix-collect-garbage --delete-older-than 60d"
+alias nix-clean="sudo nix-collect-garbage --delete-older-than 90d"
 
 # convenience scripts
 alias scd="source /etc/nixos/configs/scripts/scd.sh"
@@ -42,3 +42,4 @@ export GIT_SEQUENCE_EDITOR="vim";
 # set default terminal emulator
 export TERMINAL="alacritty"
 alias x-terminal-emulator='alacritty'
+

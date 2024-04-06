@@ -10,10 +10,10 @@
 
   # every work machine
   work = [
-    stable.jetbrains.datagrip
+    unstable.jetbrains.datagrip
     stable.insomnia
     stable.zoom-us
-    stable.azure-cli
+    unstable.azure-cli
   ];
 
   # every personal machine
@@ -40,7 +40,7 @@
   ];
 
   experimenting = [
-    untested.warp-terminal
+    # untested.warp-terminal
   ];
 
   # to try:
@@ -48,6 +48,7 @@
   #     tldr
   #     atuin
   #     grub-reboot
+  #     Pcmanfm
 
   # to try again at some point maybe: 
   #     stacer

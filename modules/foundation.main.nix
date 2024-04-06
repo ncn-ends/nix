@@ -30,6 +30,12 @@
     DefaultLimitNOFILE=1048576
   '';
 
+  # set maximum file watchers - required for node and jetbrains IDEs if you have too many things open
+  # https://intellij-support.jetbrains.com/hc/en-us/articles/15268113529362-Inotify-Watches-Limit-Linux
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches" = 1048576;
+  };
+
   fonts.packages = [
     stable.roboto-mono
   ];
