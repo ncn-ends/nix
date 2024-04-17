@@ -114,6 +114,7 @@
       stable.nodejs
       stable.nodePackages.npm
       stable.nodePackages.yarn
+      stable.azure-cli
   ];
 
   system.activationScripts.postUserActivation.text = ''
@@ -131,8 +132,8 @@
     home.packages = [
       # stable.obs-studio
       unstable.jetbrains.webstorm
+      unstable.jetbrains.datagrip
       # unstable.jetbrains.rider
-      stable.azure-cli
       # stable.insomnia
     ];  
     programs.zsh = {
