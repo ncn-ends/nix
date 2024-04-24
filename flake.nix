@@ -80,6 +80,7 @@
               ./modules/server.tailscale.nix
               ./modules/server.vaultwarden.nix
               ./modules/server.caddy.nix
+              ./modules/server.ssh.nix
               ./modules/play.nix
               {
                 users.users.${machine.user}.packages = 
