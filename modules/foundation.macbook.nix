@@ -3,15 +3,7 @@
   system.stateVersion = 4;
   nixpkgs.hostPlatform = machine.system;
   nix.settings.experimental-features = "nix-command flakes";
-  home-manager.users.${name} = { ... }: {
-    home.stateVersion = "22.11";
-    nixpkgs.config.allowUnfree = true;
-  };
   system.configurationRevision = self.rev or self.dirtyRev or null;
-  users.users.${machine.user} = {
-    name = machine.user;
-    home = "/Users/${machine.user}";
-  };
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -115,6 +107,7 @@
       stable.nodePackages.npm
       stable.nodePackages.yarn
       stable.azure-cli
+      stable.tmux
   ];
 
   system.activationScripts.postUserActivation.text = ''
@@ -126,16 +119,22 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.${machine.user} = { ... }: {
-    home.username = machine.user;
+    # home = "/Users/${machine.user}";
+    home = {
+      stateVersion = "22.11";
+      username = machine.user;
+      packages = [
+        # stable.obs-studio
+        unstable.jetbrains.webstorm
+        unstable.jetbrains.datagrip
+        stable.redis
+        # unstable.jetbrains.rider
+        # stable.insomnia
+      ];
+    };
+    # name = machine.user;
     programs.home-manager.enable = true;
     nixpkgs.config.allowUnfree = true;
-    home.packages = [
-      # stable.obs-studio
-      unstable.jetbrains.webstorm
-      unstable.jetbrains.datagrip
-      # unstable.jetbrains.rider
-      # stable.insomnia
-    ];  
     programs.zsh = {
       enable = true;
       enableCompletion = true;
