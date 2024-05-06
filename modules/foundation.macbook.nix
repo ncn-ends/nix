@@ -108,6 +108,7 @@
       stable.nodePackages.yarn
       stable.azure-cli
       stable.tmux
+      stable.redis
   ];
 
   system.activationScripts.postUserActivation.text = ''
@@ -128,7 +129,6 @@
         # stable.obs-studio
         unstable.jetbrains.webstorm
         unstable.jetbrains.datagrip
-        stable.redis
         # unstable.jetbrains.rider
         # stable.insomnia
       ];
