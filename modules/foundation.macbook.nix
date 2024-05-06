@@ -118,6 +118,7 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  users.users.${machine.user}.home = "/Users/${machine.user}";
   home-manager.users.${machine.user} = { ... }: {
     # home = "/Users/${machine.user}";
     home = {
