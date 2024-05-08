@@ -1,10 +1,11 @@
-{ stable, config, ...}:
-{
+{ stable, config, drives, ...}:
+let 
+  dataDir = "${drives.shape.location}/syncthing";
+in {
   # https://wes.today/nixos-syncthing/
-  # TODO: use machine.shape.location to make the data directories consistent
   services.syncthing = {
     enable = true;
-    dataDir = "/run/media/one/shape1/syncthing";
+    dataDir = dataDir;
     openDefaultPorts = true;
     configDir = "/home/one/.config/syncthing";
     user = "one";
@@ -15,13 +16,17 @@
     settings = {
       devices = {
         "s10" = { id = "RT5ULAR-676SHP6-WZ5UWS3-4VI3WBU-RNH5LJ7-PK3BOCZ-U6CAICR-L3SROAN"; };
-        "razr" = { id = "placeholder"; };
+        "razr" = { id = "FK4I66O-OY3OCGP-463GPGA-FAGYDOD-GE3FMOF-HFWBI3U-N5DCZDO-KS5W5QC"; };
         "one" = { id = "placeholder"; };
       };
       folders = {
-        "dump" = {
-          path = "/run/media/one/shape1/syncthing/dump";
-          devices = [ "s10" ];
+        # "dump" = {
+        #   path = "/run/media/one/shape1/syncthing/dump";
+        #   devices = [ "s10" ];
+        # };
+        "razr_sync" = {
+          path = "${dataDir}/razr";
+          devices = [ "razr" ];
         };
       };
     };

@@ -37,6 +37,7 @@
     stable.peek
     stable.shotcut
     stable.seafile-client
+    stable.remmina
   ];
 
   experimenting = [

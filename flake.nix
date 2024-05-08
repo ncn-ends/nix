@@ -63,7 +63,7 @@
         in {
           ${machine.hostName} = lib.nixosSystem {
             specialArgs = {
-              inherit unstable sops-nix stable untested;
+              inherit unstable sops-nix stable untested drives;
               name = machine.user;
             };
             modules = [
