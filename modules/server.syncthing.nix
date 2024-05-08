@@ -25,6 +25,8 @@ in {
         #   devices = [ "s10" ];
         # };
         "razr_sync" = {
+          id = "razr_sync";
+          label = "razr_sync";
           path = "${dataDir}/razr";
           devices = [ "razr" ];
         };
@@ -32,3 +34,12 @@ in {
     };
   };
 }
+
+# for any new device, add it to devices with the device id found somewhere in the client app's gui
+# for a new folder to sync:
+#   - config: 
+#     - the name can be anything
+#     - the path should be the path to store the files. extend from {dataDir}
+#     - add the devices that should sync with it
+#   - client side changes:
+#     - add the folder with the correct id
