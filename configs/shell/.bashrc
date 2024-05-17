@@ -10,6 +10,7 @@ ssh-add -l > /dev/null || ssh-add
 alias nix-dotnet="nix develop /etc/nixos#dotnet";
 alias nix-node="nix develop /etc/nixos#node";
 alias nix-rust="nix develop /etc/nixos#rust";
+alias nix-py="nix develop /etc/nixos#py";
 
 # convenience alias'
 alias nix-sw="sudo nixos-rebuild switch"

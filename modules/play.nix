@@ -8,7 +8,13 @@
     stable.lutris
   ];
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extraCompatPackages = [
+      stable.proton-ge-bin.steamcompattool
+    ];
+  };
+
   programs.gamemode.enable = true;
   
   home-manager.users.${name} = { ... }: {

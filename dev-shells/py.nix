@@ -27,7 +27,7 @@ mkShell rec {
     # python-multipart
     # requests
 
-    stable.jetbrains.pycharm-professional
+    # stable.jetbrains.pycharm-professional
   ];
   shellHook = ''
     VENV=.venv
