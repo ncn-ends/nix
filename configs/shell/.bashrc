@@ -6,13 +6,13 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l > /dev/null || ssh-add
 
-# alias' for nix shells
+# nix shells
 alias nix-dotnet="nix develop /etc/nixos#dotnet";
 alias nix-node="nix develop /etc/nixos#node";
 alias nix-rust="nix develop /etc/nixos#rust";
 alias nix-py="nix develop /etc/nixos#py";
 
-# convenience alias'
+# convenience
 alias nix-sw="sudo nixos-rebuild switch"
 alias nix-up="cd /etc/nix; nix flake update; nix-sw"
 alias nix-clean="sudo nix-collect-garbage --delete-older-than 90d"
