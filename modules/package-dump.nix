@@ -38,6 +38,7 @@
     stable.shotcut
     stable.seafile-client
     stable.remmina
+    unstable.morgen
   ];
 
   experimenting = [

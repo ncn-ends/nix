@@ -81,6 +81,7 @@
               ./modules/server.vaultwarden.nix
               ./modules/server.caddy.nix
               ./modules/server.ssh.nix
+              ./modules/server.calendar.nix
               ./modules/play.nix
               {
                 users.users.${machine.user}.packages = 
