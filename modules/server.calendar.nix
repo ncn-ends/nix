@@ -11,8 +11,6 @@ in {
     settings.server.hosts = [ 
       "0.0.0.0:5232" 
       "[::]:5232" 
-      "0.0.0.0:5233" 
-      "[::]:5233" 
     ];
     settings.storage.filesystem_folder = radicaleLocation;
   };
