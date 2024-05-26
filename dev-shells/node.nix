@@ -1,18 +1,22 @@
 {mkShell, stable, unstable, ...}: 
 mkShell rec { 
-  name = "ncn-node-env";
+  name = "ncn-node-env-4";
 
   packages = let 
-    inherit (stable) nodejs nodePackages ngrok jetbrains;
-    # inherit (stable) jetbrains;
+    inherit (stable) 
+    nodejs 
+    # nodePackages 
+    # ngrok 
+    # jetbrains 
+    yarn;
   in [
     nodejs
-    nodePackages.npm
-    nodePackages.yarn
-    nodePackages.pnpm
-    nodePackages.javascript-typescript-langserver
-    nodePackages.typescript
-    ngrok
+    yarn
+    # nodePackages.npm
+    # nodePackages.pnpm
+    # nodePackages.javascript-typescript-langserver
+    # nodePackages.typescript
+    # ngrok
     stable.jetbrains.webstorm
   ];
 }
