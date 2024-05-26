@@ -1,4 +1,4 @@
-{stable, unstable, name, untested}: 
+{ stable, unstable, name, untested, overrides }: 
 {
   # every machine
   all = [
@@ -18,7 +18,7 @@
 
   # every personal machine
   personal = [
-    stable.discord 
+    overrides.discord 
     unstable.youtube-music
     stable.qbittorrent
     stable.libsForQt5.kdeconnect-kde

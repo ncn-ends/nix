@@ -1,22 +1,15 @@
-{mkShell, stable, unstable, ...}: 
+{mkShell, stable, unstable, overrides, ...}: 
 mkShell rec { 
-  name = "ncn-node-env-4";
+  name = "ncn-node-env-5";
 
-  packages = let 
-    inherit (stable) 
-    nodejs 
-    # nodePackages 
-    # ngrok 
-    # jetbrains 
-    yarn;
-  in [
-    nodejs
-    yarn
+  packages = [
+    overrides.nodejs
+    stable.yarn
     # nodePackages.npm
     # nodePackages.pnpm
     # nodePackages.javascript-typescript-langserver
     # nodePackages.typescript
     # ngrok
-    stable.jetbrains.webstorm
+    overrides.jetbrains.webstorm
   ];
 }

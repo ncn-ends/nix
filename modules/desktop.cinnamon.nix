@@ -1,4 +1,4 @@
-{ stable, services, name, ... }:
+{ stable, services, name, overrides, ... }:
 {
   services.xserver = {
     enable = true;
@@ -34,7 +34,7 @@
       enable = true;
       script = "polybar bar &";
       config = ../configs/polybar/config.ini;
-      package = stable.polybar;
+      package = overrides.polybar;
     };
 
     home.packages = [ 

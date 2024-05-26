@@ -18,6 +18,9 @@ packages : (packages // {
       sha256 = "1091nv1lwqlcs890vcil8frx6j87n4mig1xdrfxi606cxkfirfbh";
     };
   });
+  nodejs = packages.nodejs.overrideAttrs (old: {
+    version = "18.14.1";
+  });
   # jetbrains.datagrip = packages.jetbrains.datagrip.overrideAttrs (old: rec {
   #   version = "2023.2.3";
   #   name = "datagrip-${version}";

@@ -40,12 +40,13 @@
     defineConfigBySystem = system: 
       let 
         passPksImportInput = { inherit system; config.allowUnfree = true; };
-        stable = (import ./helpers/apply-overrides.nix (import inputs.stable passPksImportInput));
+        stable = import inputs.stable passPksImportInput;
         unstable = import inputs.unstable passPksImportInput;
         untested = import inputs.untested passPksImportInput;
+        overrides = import ./helpers/apply-overrides.nix stable;
         lib = inputs.stable.lib;
         mkShell = stable.mkShell;
-        devShellInputs = { inherit mkShell stable unstable; };
+        devShellInputs = { inherit mkShell stable unstable overrides; };
       in {
         devShells = {
           ${system} = {
@@ -59,11 +60,11 @@
         nixosConfigurations = 
         let
           machine = machines.main;
-          packages = import ./modules/package-dump.nix { inherit stable unstable untested; name = machine.user; };
+          packages = import ./modules/package-dump.nix { inherit stable unstable untested overrides; name = machine.user; };
         in {
           ${machine.hostName} = lib.nixosSystem {
             specialArgs = {
-              inherit unstable sops-nix stable untested drives;
+              inherit unstable sops-nix stable untested overrides drives;
               name = machine.user;
             };
             modules = [
