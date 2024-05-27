@@ -14,6 +14,8 @@ in {
     ];
     settings.storage.filesystem_folder = radicaleLocation;
   };
+
+  networking.firewall.allowedTCPPorts = [ 5232 5233 ];
 }
 
 # defaults to localhost:5232

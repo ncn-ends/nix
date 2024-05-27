@@ -1,11 +1,11 @@
-{ config, stable, name, ...}:
+{ config, imports, machine, ...}:
 {
   # key based configuration storage system, back end to GSettings
   programs.dconf.enable = true;
 
-  users.users.${name}.extraGroups = ["libvirtd"];
+  users.users.${machine.user}.extraGroups = ["libvirtd"];
 
-  environment.systemPackages = with stable; [
+  environment.systemPackages = with imports.stable; [
     # GUI front end for VM management
     virt-manager
 
@@ -28,14 +28,14 @@
       qemu = {
         swtpm.enable = true;
         ovmf.enable = true;
-        ovmf.packages = [ stable.OVMFFull.fd ];
+        ovmf.packages = [ imports.stable.OVMFFull.fd ];
       };
     };
     spiceUSBRedirection.enable = true;
   };
   services.spice-vdagentd.enable = true;
 
-  home-manager.users.${name} = {...}: {
+  home-manager.users.${machine.user} = {...}: {
     # auto connect to qemu instead of having to set it up through the GUI initially
     dconf.settings = { 
       "org/virt-manager/virt-manager/connections" = {

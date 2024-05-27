@@ -1,27 +1,27 @@
-{ stable, unstable, config, services, name, ... }:
+{ imports, config, services, machine, ... }:
 {
   xdg.portal.enable = true; # required for flatpak
   services.flatpak.enable = true;
   #   - bottles
 
   environment.systemPackages = [
-    stable.lutris
+    imports.stable.lutris
   ];
 
   programs.steam = {
     enable = true;
     extraCompatPackages = [
-      stable.proton-ge-bin.steamcompattool
+      imports.stable.proton-ge-bin.steamcompattool
     ];
   };
 
   programs.gamemode.enable = true;
   
-  home-manager.users.${name} = { ... }: {
+  home-manager.users.${machine.user} = { ... }: {
     home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg".source = ../configs/csgo/autoexec.cfg;
 
     home.packages = [
-      stable.prismlauncher
+      imports.stable.prismlauncher
     ];
   };
 }

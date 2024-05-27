@@ -1,5 +1,7 @@
-{ stable, name, config, lib, modulesPath, ... }:
-{
+{ machine, config, lib, modulesPath, imports, ... }:
+let 
+  stable = imports.stable;
+in {
   system.stateVersion = "21.11";
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
@@ -40,13 +42,13 @@
     stable.roboto-mono
   ];
 
-  users.users.${name} = {
+  users.users.${machine.user} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "docker" "plex" ];
     initialPassword = "password";
   };
 
-  home-manager.users.${name} = { ... }: {
+  home-manager.users.${machine.user} = { ... }: {
     home.stateVersion = "22.11";
     nixpkgs.config.allowUnfree = true;
 

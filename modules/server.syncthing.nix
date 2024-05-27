@@ -1,4 +1,4 @@
-{ stable, config, drives, ...}:
+{ config, drives, ...}:
 let 
   dataDir = "${drives.shape.location}/syncthing";
 in {

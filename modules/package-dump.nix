@@ -1,5 +1,10 @@
-{ stable, unstable, name, untested, overrides }: 
-{
+{ imports, ... }: 
+let 
+  stable = imports.stable;
+  unstable = imports.unstable;
+  untested = imports.untested;
+  overrides = imports.overrides;
+in {
   # every machine
   all = [
     unstable.microsoft-edge

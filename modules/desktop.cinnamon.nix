@@ -1,5 +1,8 @@
-{ stable, services, name, overrides, ... }:
-{
+{ imports, services, machine, ... }:
+let 
+  stable = imports.stable;
+  overrides = imports.overrides;
+in {
   services.xserver = {
     enable = true;
     libinput.enable = true;
@@ -19,7 +22,7 @@
     ];
   };
 
-  home-manager.users.${name} = { ... }: {
+  home-manager.users.${machine.user} = { ... }: {
     programs.rofi = {
       enable = true;
       theme = ../configs/rofi/theme.rasi;

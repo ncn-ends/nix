@@ -1,4 +1,7 @@
-{ stable, config, ...}: {
+{ imports, config, ...}: 
+let 
+  stable = imports.stable;
+in {
 
   # things done manually:
   #   tailscale up --advertise-exit-node

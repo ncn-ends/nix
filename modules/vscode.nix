@@ -1,11 +1,11 @@
 
-{ stable, unstable, config, services, name, ... }:
+{ imports, config, services, machine, ... }:
 {
-  home-manager.users.${name} = { ... }: {
+  home-manager.users.${machine.user} = { ... }: {
     programs.vscode = {
       enable = true;
       mutableExtensionsDir = false; # home-manager stopped installing extensions at some point and this fixed it
-      extensions = with stable.vscode-extensions; [
+      extensions = with imports.stable.vscode-extensions; [
         vscodevim.vim
         bbenoist.nix
         jnoortheen.nix-ide

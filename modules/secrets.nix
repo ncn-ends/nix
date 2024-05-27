@@ -1,10 +1,10 @@
-{ stable, sops-nix, ...}:
+{ imports, sops-nix, ...}:
 {
   imports = [
     sops-nix.nixosModules.sops
   ];
 
-  environment.systemPackages = [ stable.sops ];
+  environment.systemPackages = [ imports.stable.sops ];
 
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";

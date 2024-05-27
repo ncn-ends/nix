@@ -1,5 +1,5 @@
-{ stable, config, ...}: {
-  environment.systemPackages = [stable.caddy];
+{ imports, config, ...}: {
+  environment.systemPackages = [ imports.stable.caddy ];
   services.caddy = {
     enable = true;
 

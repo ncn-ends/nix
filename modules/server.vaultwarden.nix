@@ -15,5 +15,5 @@ in {
   #   # "d ${vwDir}/backup 0755 vaultwarden vaultwarden - -"
   # ];
 
-  services.vaultwarden.enable = true;
+  # services.vaultwarden.enable = true;
 }

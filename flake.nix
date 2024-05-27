@@ -44,6 +44,7 @@
         unstable = import inputs.unstable passPksImportInput;
         untested = import inputs.untested passPksImportInput;
         overrides = import ./helpers/apply-overrides.nix stable;
+        imports = {inherit stable unstable untested overrides;};
         lib = inputs.stable.lib;
         mkShell = stable.mkShell;
         devShellInputs = { inherit mkShell stable unstable overrides; };
@@ -60,12 +61,11 @@
         nixosConfigurations = 
         let
           machine = machines.main;
-          packages = import ./modules/package-dump.nix { inherit stable unstable untested overrides; name = machine.user; };
+          packages = import ./modules/package-dump.nix { inherit imports machine; };
         in {
           ${machine.hostName} = lib.nixosSystem {
             specialArgs = {
-              inherit unstable sops-nix stable untested overrides drives;
-              name = machine.user;
+              inherit sops-nix imports drives machine;
             };
             modules = [
               home-manager.nixosModules.home-manager

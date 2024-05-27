@@ -1,4 +1,4 @@
-{ stable, config, ...}:
+{ config, ...}:
 {
   networking.firewall = { 
     enable = true;
@@ -13,12 +13,6 @@
       22 # ssh
       80 # http
       443 # https
-      5232 # radicale
     ];
   };
-
-  # services.jellyfin = {
-  #   enable = true;
-  #   openFirewall = true;
-  # };
 }

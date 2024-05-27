@@ -1,16 +1,19 @@
-{ stable, unstable, config, services, name, ... }:
-{
+{ config, services, imports, machine, ... }:
+let 
+  stable = imports.stable; 
+  unstable = imports.unstable;
+in {
   environment.systemPackages = [
     stable.wget
     stable.unzip
     stable.python3
   ];
 
-  users.users.${name}.packages = [
+  users.users.${machine.user}.packages = [
     unstable.ranger
   ];
 
-  home-manager.users.${name} = { ... }: {
+  home-manager.users.${machine.user} = { ... }: {
     programs.alacritty = {
       enable = true;
       settings.window = {
