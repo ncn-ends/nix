@@ -47,7 +47,7 @@
         imports = {inherit stable unstable untested overrides;};
         lib = inputs.stable.lib;
         mkShell = stable.mkShell;
-        devShellInputs = { inherit mkShell stable unstable overrides; };
+        devShellInputs = { inherit mkShell imports; };
       in {
         devShells = {
           ${system} = {

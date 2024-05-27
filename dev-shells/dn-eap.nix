@@ -1,5 +1,8 @@
-{mkShell, stable, unstable}: 
-mkShell rec {
+{mkShell, imports, ...}: 
+let 
+  stable = imports.stable;
+  unstable = imports.unstable;
+in mkShell rec {
   name = "ncn-dotnet-eap-env";
 
   stablePackages = with stable; [

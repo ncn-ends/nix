@@ -1,9 +1,9 @@
-{mkShell, stable, unstable} : 
+{mkShell, imports, ...} : 
 mkShell rec {
   name = "ncn-dotnet7-env";
 
 
-  stablePackages = with stable; [
+  stablePackages = with imports.stable; [
     (with dotnetCorePackages; combinePackages [
       sdk_6_0
       sdk_7_0
@@ -11,8 +11,8 @@ mkShell rec {
     ])
   ];
 
-  unstablePackages = with unstable; [
-    unstable.jetbrains.rider
+  unstablePackages = [
+    imports.unstable.jetbrains.rider
   ];
 
   packages = stablePackages ++ unstablePackages;

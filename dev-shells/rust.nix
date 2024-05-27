@@ -1,10 +1,10 @@
-{mkShell, stable, unstable, ...}: 
+{mkShell, imports, ...}: 
 mkShell rec { 
   name = "ncn-rust-env";
 
   packages = let 
-    inherit (stable) cargo rustc rustfmt openssl pkg-config;
-    inherit (unstable) jetbrains;
+    inherit (imports.stable) cargo rustc rustfmt openssl pkg-config;
+    inherit (imports.unstable) jetbrains;
   in [
     cargo
     rustc

@@ -1,9 +1,9 @@
-{mkShell, stable, unstable, ...}: 
+{mkShell, imports, ...}: 
 mkShell rec {
   name = "ncn-python-env";
-  python = stable.python310;
+  python = imports.stable.python310;
   patchShebangs = true;
-  packages = with stable.python310.pkgs; [
+  packages = with imports.stable.python310.pkgs; [
     ipython
     pip
     setuptools

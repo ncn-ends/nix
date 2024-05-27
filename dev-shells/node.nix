@@ -1,15 +1,15 @@
-{mkShell, stable, unstable, overrides, ...}: 
+{mkShell, imports, ...}: 
 mkShell rec { 
   name = "ncn-node-env-5";
 
   packages = [
-    overrides.nodejs
-    stable.yarn
+    imports.stable.nodejs
+    imports.stable.yarn
     # nodePackages.npm
     # nodePackages.pnpm
     # nodePackages.javascript-typescript-langserver
     # nodePackages.typescript
     # ngrok
-    overrides.jetbrains.webstorm
+    imports.overrides.jetbrains.webstorm
   ];
 }
