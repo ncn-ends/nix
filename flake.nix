@@ -69,6 +69,7 @@
             };
             modules = [
               home-manager.nixosModules.home-manager
+              ./modules/foundation.nix
               ./modules/foundation.main.nix
               ./modules/secrets.nix
               ./modules/cli.nix
