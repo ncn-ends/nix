@@ -18,13 +18,6 @@ packages : (packages // {
       sha256 = "1091nv1lwqlcs890vcil8frx6j87n4mig1xdrfxi606cxkfirfbh";
     };
   });
-  nodejs = packages.nodejs.overrideAttrs (old: rec {
-    version = "18.14.1";
-    src = builtins.fetchurl {
-      url = "https://nodejs.org/dist/${version}/node-${version}.tar.xz";
-      sha256 = "sha256-hlrUex5ZP2ac0mJTPoDc3WWL1cA3+l7SIEFapAf8LjU=";
-    };
-  });
   # jetbrains.datagrip = packages.jetbrains.datagrip.overrideAttrs (old: rec {
   #   version = "2023.2.3";
   #   name = "datagrip-${version}";

@@ -116,4 +116,8 @@ in {
   # https://wiki.archlinux.org/title/File_manager_functionality#Thumbnail_previews
   services.tumbler.enable = true;
 
+  environment.variables = {
+    # required to make yarn install work https://github.com/NixOS/nixpkgs/issues/314713
+    UV_USE_IO_URING = "0";
+  };
 }
