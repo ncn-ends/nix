@@ -19,6 +19,7 @@ in {
     stable.insomnia
     stable.zoom-us
     unstable.azure-cli
+    stable.gh
   ];
 
   # every personal machine

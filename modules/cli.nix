@@ -11,7 +11,7 @@ in {
 
   users.users.${machine.user}.packages = [
     unstable.ranger
-  ];
+      ];
 
   home-manager.users.${machine.user} = { ... }: {
     programs.alacritty = {
