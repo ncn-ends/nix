@@ -17,6 +17,8 @@
         # kamadorueda.alejandra
         # dlasagno.rasi
         tomoki1207.pdf
+
+        ms-python.python
         # yoavbls.pretty-ts-errors
       ];
       userSettings = {
