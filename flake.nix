@@ -84,6 +84,7 @@
               ./modules/server.caddy.nix
               ./modules/server.ssh.nix
               ./modules/server.calendar.nix
+              ./modules/server.rclone.nix
               ./modules/play.nix
               {
                 users.users.${machine.user}.packages = 

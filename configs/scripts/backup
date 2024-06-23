@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#!/usr/bin/env sh
+
+
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S").$(date +"%4N")
+
+echo "Backing up..." 
+echo "Time: $TIMESTAMP"
+echo "Location: $1"
+echo "Size: $(du -sh $1 | awk '{print $1}')"
+echo "---"
+
+read -sp "Enter passphrase: " PASSPHRASE
+echo
+read -sp "Confirm passphrase: " PASSPHRASE_CONFIRM
+echo
+
+if [ "$PASSPHRASE" != "$PASSPHRASE_CONFIRM" ]; then
+    echo "Passphrases don't match. Restart script."
+    exit 1
+fi
+
+TEMP_WORKING_DIR="/tmp/backing_up"
+UNENCRYPTED_TARBALL="$TEMP_WORKING_DIR/archive_$TIMESTAMP.tar" 
+
+echo "Packing tarball..."
+mkdir -p $TEMP_WORKING_DIR
+tar -cvf $UNENCRYPTED_TARBALL $1
+echo "---"
+
+echo "Encrypting..."
+gpg --cipher-algo AES128 --passphrase $PASSPHRASE -c $UNENCRYPTED_TARBALL
+echo "---"
+
+echo "Uploading..."
+echo "Size: $(du -sh "$UNENCRYPTED_TARBALL.gpg" | awk '{print $1}')"
+rclone copy $UNENCRYPTED_TARBALL.gpg azure-backup:backups -P
+echo "---"
+
+# echo "Cleaning up..."
+# rm -rf $TEMP_WORKING_DIR/*
+
+echo "Done."
