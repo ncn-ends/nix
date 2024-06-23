@@ -7,7 +7,7 @@ let
 in {
   # every machine
   all = [
-    unstable.microsoft-edge
+    stable.microsoft-edge
     stable.obs-studio
     stable.slack
     stable.firefox
@@ -45,6 +45,8 @@ in {
     stable.seafile-client
     stable.remmina
     unstable.morgen
+    stable.rclone
+    stable.rclone-browser
   ];
 
   experimenting = [
