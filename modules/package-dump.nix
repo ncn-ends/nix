@@ -28,7 +28,7 @@ in {
     unstable.youtube-music
     stable.qbittorrent
     stable.libsForQt5.kdeconnect-kde
-    unstable.vlc
+    stable.vlc
   ];
   
   # every linux personal machine
@@ -44,7 +44,6 @@ in {
     stable.shotcut
     stable.seafile-client
     stable.remmina
-    unstable.morgen
     stable.rclone
     stable.rclone-browser
   ];
