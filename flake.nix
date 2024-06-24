@@ -85,6 +85,7 @@
               ./modules/server.ssh.nix
               ./modules/server.calendar.nix
               ./modules/server.rclone.nix
+              ./modules/server.logging.nix
               ./modules/play.nix
               {
                 users.users.${machine.user}.packages = 

@@ -2,13 +2,12 @@
   environment.systemPackages = [ imports.stable.caddy ];
   services.caddy = {
     enable = true;
-
-    virtualHosts = {
-      "localhost:5233".extraConfig = ''
-        encode gzip
-        reverse_proxy localhost:5232
-      '';
-    };
+    # virtualHosts = {
+    #   "localhost:5233".extraConfig = ''
+    #     encode gzip
+    #     reverse_proxy localhost:5232
+    #   '';
+    # };
   };
 }
 
