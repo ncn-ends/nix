@@ -28,16 +28,28 @@ mkdir -p $TEMP_WORKING_DIR
 tar -cvf $UNENCRYPTED_TARBALL $1
 echo "---"
 
+if [ ! -e $UNENCRYPTED_TARBALL ]; then
+    echo "Failed to create tarball."
+    exit 1
+fi
+
 echo "Encrypting..."
-gpg --cipher-algo AES128 --passphrase $PASSPHRASE -c $UNENCRYPTED_TARBALL
+gpg --pinentry-mode=loopback --cipher-algo AES128 --passphrase $PASSPHRASE -c $UNENCRYPTED_TARBALL
 echo "---"
+
+ENCRYPTED_TARBALL="$UNENCRYPTED_TARBALL.gpg"
+
+if [ ! -e $UNENCRYPTED_TARBALL ]; then
+    echo "Failed to encrypt tarball."
+    exit 1
+fi
 
 echo "Uploading..."
-echo "Size: $(du -sh "$UNENCRYPTED_TARBALL.gpg" | awk '{print $1}')"
-rclone copy $UNENCRYPTED_TARBALL.gpg azure-backup:backups -P
+echo "Size: $(du -sh $ENCRYPTED_TARBALL | awk '{print $1}')"
+rclone copy $ENCRYPTED_TARBALL azure-backup:backups -P
 echo "---"
 
-# echo "Cleaning up..."
-# rm -rf $TEMP_WORKING_DIR/*
+echo "Cleaning up..."
+rm -rf $TEMP_WORKING_DIR/*
 
 echo "Done."
