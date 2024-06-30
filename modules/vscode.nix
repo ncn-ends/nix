@@ -20,6 +20,8 @@
 
         ms-python.python
         # yoavbls.pretty-ts-errors
+
+        timonwong.shellcheck
       ];
       userSettings = {
         # "vim.useSystemClipboard" = true;

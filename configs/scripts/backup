@@ -10,9 +10,9 @@ echo "Location: $1"
 echo "Size: $(du -sh $1 | awk '{print $1}')"
 echo "---"
 
-read -sp "Enter passphrase: " PASSPHRASE
+read -rsp "Enter passphrase: " PASSPHRASE
 echo
-read -sp "Confirm passphrase: " PASSPHRASE_CONFIRM
+read -rsp "Confirm passphrase: " PASSPHRASE_CONFIRM
 echo
 
 if [ "$PASSPHRASE" != "$PASSPHRASE_CONFIRM" ]; then
@@ -25,31 +25,31 @@ UNENCRYPTED_TARBALL="$TEMP_WORKING_DIR/archive_$TIMESTAMP.tar"
 
 echo "Packing tarball..."
 mkdir -p $TEMP_WORKING_DIR
-tar -cvf $UNENCRYPTED_TARBALL $1
+tar -cvf "$UNENCRYPTED_TARBALL" $1
 echo "---"
 
-if [ ! -e $UNENCRYPTED_TARBALL ]; then
+if [ ! -e "$UNENCRYPTED_TARBALL" ]; then
     echo "Failed to create tarball."
     exit 1
 fi
 
 echo "Encrypting..."
-gpg --pinentry-mode=loopback --cipher-algo AES128 --passphrase $PASSPHRASE -c $UNENCRYPTED_TARBALL
+gpg --pinentry-mode=loopback --cipher-algo AES128 --passphrase "$PASSPHRASE" -c "$UNENCRYPTED_TARBALL"
 echo "---"
 
 ENCRYPTED_TARBALL="$UNENCRYPTED_TARBALL.gpg"
 
-if [ ! -e $UNENCRYPTED_TARBALL ]; then
+if [ ! -e "$UNENCRYPTED_TARBALL" ]; then
     echo "Failed to encrypt tarball."
     exit 1
 fi
 
 echo "Uploading..."
-echo "Size: $(du -sh $ENCRYPTED_TARBALL | awk '{print $1}')"
-rclone copy $ENCRYPTED_TARBALL azure-backup:backups -P
+echo "Size: $(du -sh "$ENCRYPTED_TARBALL" | awk '{print $1}')"
+rclone copy "$ENCRYPTED_TARBALL" azure-backup:backups -P
 echo "---"
 
 echo "Cleaning up..."
-rm -rf $TEMP_WORKING_DIR/*
+rm -rf "${TEMP_WORKING_DIR:?}/"*
 
 echo "Done."

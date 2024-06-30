@@ -1,2 +1,44 @@
-#!/usr/bin/env sh
 #!/usr/bin/env bash
+#!/usr/bin/env sh
+
+echo "Restoring file from remote."
+
+read -rp "Remote file to be restored: " REMOTE_FILE
+read -rp "Where to place: " RESTORE_LOCATION
+read -rsp "Decryption passphrase: " PASSPHRASE
+
+# necessary to handle ~
+RESTORE_LOCATION=$(eval echo "$RESTORE_LOCATION")
+
+if [ ! -d "$RESTORE_LOCATION" ]; then
+    mkdir -p "$RESTORE_LOCATION"
+fi
+
+echo "Downloading to $RESTORE_LOCATION/$REMOTE_FILE..."
+rclone copy "azure-backup:backups/$REMOTE_FILE" "$RESTORE_LOCATION"
+
+ENCRYPTED_TARBALL="$RESTORE_LOCATION/$REMOTE_FILE"
+
+if [ ! -e "$ENCRYPTED_TARBALL" ]; then
+    echo "Failed to download remote file. Exiting."
+    exit 1
+fi
+
+DECRYPTED_TARBALL="${ENCRYPTED_TARBALL%.gpg}"
+
+echo "Decrypting $ENCRYPTED_TARBALL..."
+gpg --pinentry-mode=loopback --yes --cipher-algo AES128 --passphrase "$PASSPHRASE"  -o "$DECRYPTED_TARBALL" --decrypt "$ENCRYPTED_TARBALL"
+
+if [ ! -e "$DECRYPTED_TARBALL" ]; then
+    echo "Failed to decrypt file. Exiting."
+    exit 1
+fi
+
+if [ ! -d "$RESTORE_LOCATION/out" ]; then
+    mkdir -p "$RESTORE_LOCATION/out"
+fi
+
+echo "Extracting $DECRYPTED_TARBALL..."
+tar -xvf "$DECRYPTED_TARBALL" -C "$RESTORE_LOCATION/out"
+
+echo "Done."
