@@ -1,8 +1,7 @@
 { config, drives, ...}:
 let 
-  dataDir = "${drives.shape.location}/syncthing";
+  dataDir = "${drives.shape.location}/keep/syncthing/all_sync";
 in {
-  # https://wes.today/nixos-syncthing/
   services.syncthing = {
     enable = true;
     dataDir = dataDir;
@@ -24,17 +23,24 @@ in {
         #   path = "/run/media/one/shape1/syncthing/dump";
         #   devices = [ "s10" ];
         # };
-        "razr_sync" = {
-          id = "razr_sync";
-          label = "razr_sync";
-          path = "${dataDir}/razr";
-          devices = [ "razr" ];
+        # "razr_sync" = {
+        #   id = "razr_sync";
+        #   label = "razr_sync";
+        #   path = "${dataDir}/razr";
+        #   devices = [ "razr" ];
+        # };
+        "all_sync" = {
+          id = "all_sync";
+          label = "all_sync";
+          path = "${drives.shape.location}/keep/syncthing/all_sync";
+          devices = [ "razr" "s10" ];
         };
       };
     };
   };
 }
 
+# https://wes.today/nixos-syncthing/
 # for any new device, add it to devices with the device id found somewhere in the client app's gui
 # for a new folder to sync:
 #   - config: 
