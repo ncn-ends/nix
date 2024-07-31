@@ -71,7 +71,7 @@
               home-manager.nixosModules.home-manager
               ./modules/foundation.nix
               ./modules/foundation.main.nix
-              ./modules/secrets.nix
+              ./modules/sops.nix
               ./modules/cli.nix
               ./modules/desktop.cinnamon.nix
               ./modules/vscode.nix
