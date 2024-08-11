@@ -46,6 +46,7 @@ in {
     stable.remmina
     stable.rclone
     stable.rclone-browser
+    stable.qimgv
   ];
 
   experimenting = [
