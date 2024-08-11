@@ -30,7 +30,10 @@
         "workbench.tree.indent" = 20;
         "emmet.showExpandedAbbreviation" = "never"; # emmet gets in the way
 
-        # don't open modal on goto, just go t0
+        # when opening vs code won't open last closed window, opens blank window
+        "window.restoreWindows" = "none";
+
+        # don't open modal on goto, just go to
         "editor.gotoLocation.multipleTypeDefinitions" = "goto";
         "editor.gotoLocation.multipleImplementations" = "goto";
         "editor.gotoLocation.multipleDefinitions" = "goto";
