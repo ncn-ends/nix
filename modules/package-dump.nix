@@ -51,6 +51,7 @@ in {
 
   experimenting = [
     # untested.warp-terminal
+    stable.wireshark
   ];
 
   # to try:
