@@ -20,11 +20,11 @@ in mkShell rec {
 
     (jetbrains.plugins.addPlugins (jetbrains.rider.overrideAttrs (old: rec {
       # https://www.jetbrains.com/rider/download/other.html
-      version = "2023.2.5";
+      version = "2024.2";
       name = "rider-${version}";
       src = unstable.fetchurl {
         url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
-        sha256 = "sha256-5pY1aa/EfTUdaJisqNiRg0ibf90YBM+yRv0d5gc0LjY=";
+        sha256 = "sha256-tozH8Qk0fO25OBfMNabh8AibIF5q5a6M5AD7sv9hPAo=";
       };
       postPatch = old.postPatch + ''
         interp="$(cat $NIX_CC/nix-support/dynamic-linker)"
