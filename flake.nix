@@ -54,6 +54,7 @@
             node = import ./dev-shells/node.nix devShellInputs;
             py = import ./dev-shells/py.nix devShellInputs;
             dotnet = import ./dev-shells/dotnet.nix  devShellInputs;
+            dnrb = import ./dev-shells/dn-rb.nix  devShellInputs;
             rust = import ./dev-shells/rust.nix  devShellInputs;
           };
         };
