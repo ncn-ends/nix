@@ -18,7 +18,7 @@ in {
     unstable.jetbrains.datagrip
     stable.insomnia
     stable.zoom-us
-    unstable.azure-cli
+    stable.azure-cli
     stable.gh
   ];
 
