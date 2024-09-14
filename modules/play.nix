@@ -2,10 +2,10 @@
 {
   xdg.portal.enable = true; # required for flatpak
   services.flatpak.enable = true;
-  #   - bottles
+  #   - was using flatpak for bottles, but switched to system package. keep flatpak for now
 
   environment.systemPackages = [
-    imports.stable.lutris
+    imports.stable.bottles
   ];
 
   programs.steam = {
