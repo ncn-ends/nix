@@ -2,6 +2,7 @@
 let 
   dataDir = "${drives.shape.location}/keep/syncthing/all_sync";
 in {
+  # http://localhost:8384/
   services.syncthing = {
     enable = true;
     dataDir = dataDir;
@@ -19,21 +20,17 @@ in {
         "one" = { id = "placeholder"; };
       };
       folders = {
-        # "dump" = {
-        #   path = "/run/media/one/shape1/syncthing/dump";
-        #   devices = [ "s10" ];
-        # };
-        # "razr_sync" = {
-        #   id = "razr_sync";
-        #   label = "razr_sync";
-        #   path = "${dataDir}/razr";
-        #   devices = [ "razr" ];
-        # };
         "all_sync" = {
           id = "all_sync";
           label = "all_sync";
           path = "${drives.shape.location}/keep/syncthing/all_sync";
           devices = [ "razr" "s10" ];
+        };
+        "razr_sync" = {
+          id = "razr_sync";
+          label = "razr_sync";
+          path = "${drives.shape.location}/keep/syncthing/razr_sync";
+          devices = [ "razr" ];
         };
       };
     };
