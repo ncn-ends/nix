@@ -11,6 +11,7 @@ in {
     stable.obs-studio
     stable.slack
     stable.firefox
+    unstable.obsidian
   ];
 
   # every work machine
