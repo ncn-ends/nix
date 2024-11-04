@@ -3,13 +3,15 @@ let
   stable = imports.stable;
   overrides = imports.overrides;
 in {
-  services.xserver = {
-    enable = true;
+  services = {
     libinput.enable = true;
-    displayManager.lightdm.enable = true;
     displayManager.defaultSession = "cinnamon";
-    desktopManager.cinnamon.enable = true;
-    videoDrivers = [ "amdgpu" ];
+    xserver = {
+      enable = true;
+      displayManager.lightdm.enable = true;
+      desktopManager.cinnamon.enable = true;
+      videoDrivers = [ "amdgpu" ];
+    };
   };
 
   hardware.opengl = {
