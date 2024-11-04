@@ -18,6 +18,12 @@ packages : (packages // {
       sha256 = "1091nv1lwqlcs890vcil8frx6j87n4mig1xdrfxi606cxkfirfbh";
     };
   });
+  zoom = packages.zoom-us.overrideAttrs (old: {
+    src = builtins.fetchurl {
+      url = "https://zoom.us/client/latest/zoom_x86_64.tar.xz";
+      sha256 = "08vr1r8ayf1ffcclwcy8mcnxf538ildm5v2ya0azhi8a72xh4xc0";
+    };
+  });
   # jetbrains.datagrip = packages.jetbrains.datagrip.overrideAttrs (old: rec {
   #   version = "2023.2.3";
   #   name = "datagrip-${version}";
