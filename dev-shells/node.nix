@@ -11,5 +11,7 @@ mkShell rec {
     # nodePackages.typescript
     # ngrok
     imports.overrides.jetbrains.webstorm
+
+    imports.stable.libuuid1 # required for cypress testing
   ];
 }
