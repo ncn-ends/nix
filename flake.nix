@@ -43,9 +43,9 @@
         stable = import inputs.stable passPksImportInput;
         unstable = import inputs.unstable passPksImportInput;
         untested = import inputs.untested passPksImportInput;
-        overrides = import ./helpers/apply-overrides.nix stable;
-        imports = {inherit stable unstable untested overrides;};
         lib = inputs.stable.lib;
+        overrides = import ./helpers/apply-overrides.nix {packages = stable; lib = lib;};
+        imports = {inherit stable unstable untested overrides;};
         mkShell = stable.mkShell;
         devShellInputs = { inherit mkShell imports; };
       in {
@@ -62,7 +62,7 @@
         nixosConfigurations = 
         let
           machine = machines.main;
-          packages = import ./modules/package-dump.nix { inherit imports machine; };
+          packages = import ./modules/package-dump.nix { inherit imports machine lib; };
         in {
           ${machine.hostName} = lib.nixosSystem {
             specialArgs = {
@@ -103,7 +103,7 @@
         darwinConfigurations = 
         let
           machine = machines.macbook;
-          packages = import ./modules/package-dump.nix { inherit stable unstable; name = machine.user; };
+          packages = import ./modules/package-dump.nix { inherit stable unstable lib; name = machine.user;  };
         in {
           ${machine.hostName} = darwin.lib.darwinSystem {
             inherit system;

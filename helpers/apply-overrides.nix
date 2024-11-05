@@ -1,4 +1,4 @@
-packages : (packages // {
+{lib, packages, ...} : (packages // {
   # azure-cli = packages.azure-cli.override {
   #   python3 = packages.python310;
   # };
@@ -24,6 +24,15 @@ packages : (packages // {
       sha256 = "08vr1r8ayf1ffcclwcy8mcnxf538ildm5v2ya0azhi8a72xh4xc0";
     };
   });
+  # azure-functions-core-tools = packages.azure-functions-core-tools.overrideAttrs (old: rec {
+  #   version = "4.0.5858";
+  #   src = packages.fetchFromGitHub {
+  #     owner = "Azure";
+  #     repo = "azure-functions-core-tools";
+  #     rev = version;
+  #     sha256 = "sha256-JIqWYDQJCsezTrL3xDmFJdLX6uEF144AxHs5L9hs8pg=";
+  #   };
+  # });
   # jetbrains.datagrip = packages.jetbrains.datagrip.overrideAttrs (old: rec {
   #   version = "2023.2.3";
   #   name = "datagrip-${version}";
