@@ -49,7 +49,7 @@
   #     sha256 = "sha256-QXeILesDgPuptCbCWAuup9xCl73e/de/sJRDP/TLt7g=";
   #   };
   # });
-  jetbrains.webstorm = packages.jetbrains.webstorm.overrideAttrs (old: rec {
+  jetbrains.rider = packages.jetbrains.webstorm.overrideAttrs (old: rec {
     version = "2023.2.3";
     name = "webstorm-${version}";
     src = packages.fetchurl {
