@@ -51,12 +51,17 @@
       in {
         devShells = {
           ${system} = {
+            default = stable.mkShell { packages = [unstable.azure-functions-core-tools]; };
             node = import ./dev-shells/node.nix devShellInputs;
             py = import ./dev-shells/py.nix devShellInputs;
             dotnet = import ./dev-shells/dotnet.nix  devShellInputs;
             dnrb = import ./dev-shells/dn-rb.nix  devShellInputs;
             rust = import ./dev-shells/rust.nix  devShellInputs;
           };
+        };
+
+        packages = {
+          azure = unstable.azure-functions-core-tools;
         };
 
         nixosConfigurations = 
@@ -95,6 +100,8 @@
                   ++ packages.personal
                   ++ packages.personalLinux
                   ++ packages.experimenting;
+
+                # environment.systemPackages = [ unstable.azure-functions-core-tools ];
               }
             ];
           };
@@ -128,6 +135,7 @@
       devShells = linux64Config.devShells // macM1Config.devShells;
       nixosConfigurations = linux64Config.nixosConfigurations;
       darwinConfigurations = macM1Config.darwinConfigurations;
+      packages = linux64Config.packages;
     };
   in final;
 }

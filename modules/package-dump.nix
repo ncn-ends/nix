@@ -9,7 +9,6 @@ in {
   all = [
     stable.microsoft-edge
     stable.obs-studio
-    stable.slack
     stable.firefox
     unstable.obsidian
   ];
@@ -17,10 +16,11 @@ in {
   # every work machine
   work = [
     unstable.jetbrains.datagrip
+    stable.slack
     stable.insomnia
     stable.zoom-us
     stable.azure-cli
-    unstable.azure-functions-core-tools
+    # unstable.azure-functions-core-tools
     stable.gh
   ];
 
@@ -53,7 +53,7 @@ in {
 
   experimenting = [
     # untested.warp-terminal
-    stable.wireshark
+    # stable.wireshark
   ];
 
   # to try:
