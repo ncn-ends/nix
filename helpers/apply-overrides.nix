@@ -25,13 +25,7 @@
     };
   });
   # azure-functions-core-tools = packages.azure-functions-core-tools.overrideAttrs (old: rec {
-  #   version = "4.0.5858";
-  #   src = packages.fetchFromGitHub {
-  #     owner = "Azure";
-  #     repo = "azure-functions-core-tools";
-  #     rev = version;
-  #     sha256 = "sha256-JIqWYDQJCsezTrL3xDmFJdLX6uEF144AxHs5L9hs8pg=";
-  #   };
+  #   version = "4.0.6280";
   # });
   # jetbrains.datagrip = packages.jetbrains.datagrip.overrideAttrs (old: rec {
   #   version = "2023.2.3";
@@ -49,12 +43,13 @@
   #     sha256 = "sha256-QXeILesDgPuptCbCWAuup9xCl73e/de/sJRDP/TLt7g=";
   #   };
   # });
-  jetbrains.rider = packages.jetbrains.webstorm.overrideAttrs (old: rec {
-    version = "2023.2.3";
-    name = "webstorm-${version}";
+  # override until 2024.2 is fixed with 100% cpu. will need to adjust azure functions too
+  jetbrains.rider = packages.jetbrains.rider.overrideAttrs (old: rec {
+    version = "2024.1.6";
+    name = "rider-${version}";
     src = packages.fetchurl {
-      url = "https://download.jetbrains.com/webstorm/WebStorm-${version}.tar.gz";
-      sha256 = "sha256-tX9KcTYaIkrrDoDy8xH2MqsXVzVqLeNiet4+ndTuCJk=";
+      url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
+      sha256 = "sha256-4DOZbgbKCAIA96lrG2/Zf8ZflGf7xWTMxE7Kv+yfvl4=";
     };
   });
 })

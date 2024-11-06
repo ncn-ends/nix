@@ -1,5 +1,7 @@
 {
   inputs = {
+    oldstable.url = "github:NixOS/nixpkgs/nixos-23.11";
+
     stable.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -40,12 +42,13 @@
     defineConfigBySystem = system: 
       let 
         passPksImportInput = { inherit system; config.allowUnfree = true; };
+        oldstable = import inputs.oldstable passPksImportInput;
         stable = import inputs.stable passPksImportInput;
         unstable = import inputs.unstable passPksImportInput;
         untested = import inputs.untested passPksImportInput;
         lib = inputs.stable.lib;
         overrides = import ./helpers/apply-overrides.nix {packages = stable; lib = lib;};
-        imports = {inherit stable unstable untested overrides;};
+        imports = {inherit stable unstable untested overrides oldstable;};
         mkShell = stable.mkShell;
         devShellInputs = { inherit mkShell imports; };
       in {
@@ -100,8 +103,6 @@
                   ++ packages.personal
                   ++ packages.personalLinux
                   ++ packages.experimenting;
-
-                # environment.systemPackages = [ unstable.azure-functions-core-tools ];
               }
             ];
           };
