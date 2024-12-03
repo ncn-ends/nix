@@ -10,8 +10,8 @@ mkShell rec {
     # nodePackages.javascript-typescript-langserver
     # nodePackages.typescript
     # ngrok
-    imports.overrides.jetbrains.webstorm
+    imports.stable.jetbrains.webstorm
 
-    imports.stable.libuuid1 # required for cypress testing
+    imports.stable.libuuid # required for cypress testing
   ];
 }

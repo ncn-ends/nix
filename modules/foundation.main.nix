@@ -80,13 +80,13 @@ in {
     fsType = "vfat";
   };
 
-  fileSystems."/mnt/shape" = {
-    fsType = "ext4";
-    label = "shape";
-    device = "/dev/disk/by-label/shape";
-    depends = [ "/" "/boot" ];
-    options = [ "defaults" "nofail" ];
-  };
+  # fileSystems."/mnt/shape" = {
+  #   fsType = "ext4";
+  #   label = "shape";
+  #   device = "/dev/disk/by-label/shape";
+  #   depends = [ "/" "/boot" ];
+  #   options = [ "defaults" "nofail" ];
+  # };
 
   swapDevices = [ ];
 
