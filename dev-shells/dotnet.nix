@@ -11,8 +11,8 @@ in mkShell rec {
     stable.jetbrains.jdk
     oldstable.azure-functions-core-tools
     (with stable.dotnetCorePackages; combinePackages [
-      sdk_6_0
-      sdk_7_0
+      # sdk_6_0
+      # sdk_7_0
       sdk_8_0
     ])
     # rider, with dotCover fix and copilot plugin
@@ -29,7 +29,7 @@ in mkShell rec {
     #     patchelf --set-interpreter $interp plugins/dotCommon/DotFiles/linux-x64/JetBrains.Profiler.PdbServer
     #   '';
     # })
-    overrides.jetbrains.rider
+    stable.jetbrains.rider
   ];
 
   # if there is ever a bug with the jdk, set it here. Rider will pick up the correct version using these environment variables
