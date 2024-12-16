@@ -158,3 +158,14 @@
       # export PATH=$JAVA_HOME:$PATH
   };
 }
+
+# maintenance list:
+# - upgrade brew packages `brew upgrade`
+# - upgrade macos system
+# - upgrade flake, switch nix-darwin
+# - run android sim, fix if broken
+# - run ios sim, fix if broken
+
+# to do list:
+# - clean up foundation file for macbook
+# - move things that can be moved from brew to this file 

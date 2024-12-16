@@ -1,12 +1,17 @@
-{mkShell, stable, unstable} : 
-mkShell rec {
+{mkShell, imports} : 
+let 
+  oldstable = imports.oldstable;
+  stable = imports.stable;
+  unstable = imports.unstable;
+  overrides = imports.overrides;
+in mkShell rec {
   name = "ncn-dn-mac-fix-env";
 
 
   stablePackages = with stable; [
     (with dotnetCorePackages; combinePackages [
-      sdk_6_0
-      sdk_7_0
+      # sdk_6_0
+      # sdk_7_0
       sdk_8_0
     ])
   ];
