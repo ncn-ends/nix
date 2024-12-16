@@ -2,13 +2,13 @@
   inputs = {
     oldstable.url = "github:NixOS/nixpkgs/nixos-23.11";
 
-    stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    stable.url = "github:NixOS/nixpkgs/nixos-24.11";
 
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     untested.url = "github:NixOS/nixpkgs/master";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "stable";
 
     darwin.url = "github:LnL7/nix-darwin";
@@ -111,12 +111,12 @@
         darwinConfigurations = 
         let
           machine = machines.macbook;
-          packages = import ./modules/package-dump.nix { inherit stable unstable lib; name = machine.user;  };
+          packages = import ./modules/package-dump.nix { inherit imports machine lib;  };
         in {
           ${machine.hostName} = darwin.lib.darwinSystem {
             inherit system;
             specialArgs = {
-              inherit self unstable stable machine;
+              inherit self unstable stable machine imports;
               name = machine.user;
             };
             modules = [ 

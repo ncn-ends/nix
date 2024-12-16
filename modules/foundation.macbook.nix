@@ -10,7 +10,7 @@
 
   # not too sure what these are for or if they're necessary
   environment.shells = [ stable.zsh ];
-  environment.loginShell = stable.zsh;
+  # environment.loginShell = stable.zsh; # gave error, was apparently a tmux option and no longer relevant
 
   # may be needed when adding homebrew to nix config
   # environment.systemPath = [ "/opt/homebrew/bin" ];
