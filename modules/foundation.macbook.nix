@@ -169,3 +169,5 @@
 # to do list:
 # - clean up foundation file for macbook
 # - move things that can be moved from brew to this file 
+# - find way to allow intel apple programs to be chosen from nix arm version isn't availble. for example insomnia is available on intel, but not arm
+# - find way to override mac version of shell automatically
