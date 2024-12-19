@@ -98,6 +98,21 @@
     # universalaccess.mouseDriverCursorSize = 3.99;
     # font smoothing
     NSGlobalDomain.AppleFontSmoothing = 2;
+
+    # custom keybinds
+    CustomUserPreferences = {
+      "com.apple.symbolichotkeys" = {
+        AppleSymbolicHotKeys = {
+          "32" = {
+            enabled = true;
+            value = {
+              parameters = [262144 1048576 126];
+              type = "standard";
+            };
+          };
+        };
+      };
+    };
   };
 
   environment.systemPackages = [
@@ -106,7 +121,7 @@
       stable.nodejs
       stable.nodePackages.npm
       stable.nodePackages.yarn
-      stable.azure-cli
+      unstable.azure-cli
       stable.tmux
       stable.redis
   ];
@@ -131,6 +146,7 @@
         unstable.jetbrains.datagrip
         # unstable.jetbrains.rider
         # stable.insomnia
+        stable.zoom-us
       ];
     };
     # name = machine.user;
@@ -171,3 +187,25 @@
 # - move things that can be moved from brew to this file 
 # - find way to allow intel apple programs to be chosen from nix arm version isn't availble. for example insomnia is available on intel, but not arm
 # - find way to override mac version of shell automatically
+# - figure out how to open a new window of alacritty without having to focus on the window and pressing cmd+n 
+# - some mouse settings were changed related to scroll wheel. move those to this file
+# - this tool may be helpful for some nix darwin settings https://github.com/catilac/plistwatch
+# - set setting to not split workspaces by monitor, need to move that to this file
+
+# icu4c@76 is keg-only, which means it was not symlinked into /opt/homebrew,
+# because macOS provides libicucore.dylib (but nothing else).
+
+# If you need to have icu4c@76 first in your PATH, run:
+#   echo 'export PATH="/opt/homebrew/opt/icu4c@76/bin:$PATH"' >> /Users/ncn/.zshrc
+#   echo 'export PATH="/opt/homebrew/opt/icu4c@76/sbin:$PATH"' >> /Users/ncn/.zshrc
+
+# For compilers to find icu4c@76 you may need to set:
+#   export LDFLAGS="-L/opt/homebrew/opt/icu4c@76/lib"
+#   export CPPFLAGS="-I/opt/homebrew/opt/icu4c@76/include"
+
+# figure out why this happens: 
+# The following files have unrecognized content and would be overwritten:
+
+#   /etc/bashrc
+#   /etc/zshrc
+#   /etc/zshenv
