@@ -32,6 +32,12 @@
   # i think this is if you want to customize key remapping within nix
   # system.keyboard.enableKeyMapping = true; 
   system.defaults = {
+    # mmonitors share workspaces
+    spaces.spans-displays = true;
+    # disables smooth scrolling
+    NSGlobalDomain.NSScrollAnimationEnabled = false;
+    # turns on "natural" scrolling direction
+    NSGlobalDomain."com.apple.swipescrolldirection" = true;
     # dark mode
     NSGlobalDomain.AppleInterfaceStyle = "Dark";
     # always show file extensions in finder and in general
@@ -100,24 +106,22 @@
     NSGlobalDomain.AppleFontSmoothing = 2;
 
     # custom keybinds
-    CustomUserPreferences = {
-      "com.apple.symbolichotkeys" = {
-        AppleSymbolicHotKeys = {
-          "32" = {
-            enabled = true;
-            value = {
-              parameters = [262144 1048576 126];
-              type = "standard";
-            };
-          };
-        };
-      };
-    };
+    # CustomUserPreferences = {
+    #   "com.apple.symbolichotkeys" = {
+    #     AppleSymbolicHotKeys = {
+    #       "32" = {
+    #         enabled = true;
+    #         value = {
+    #           parameters = [262144 1048576 126];
+    #           type = "standard";
+    #         };
+    #       };
+    #     };
+    #   };
+    # };
   };
 
   environment.systemPackages = [
-      # stable.zulu17 # jdk for react native
-      # stable.jdk17
       stable.nodejs
       stable.nodePackages.npm
       stable.nodePackages.yarn
@@ -158,7 +162,7 @@
       # enableAutoSuggestions = true;
       syntaxHighlighting.enable = true;
       shellAliases = {
-        nix-sw = "darwin-rebuild switch --flake ${machine.nixConfigRoot}/flake.nix";
+        nix-sw = "sudo rm /etc/bashrc; sudo rm /etc/zshrc; sudo rm /etc/zshenv; darwin-rebuild switch --flake ${machine.nixConfigRoot}/flake.nix";
         # nixup = "pushd ~/nix/darwin; nix flake update; nixsw; popd";
         # nixrn = "NIXPKGS_ALLOW_UNFREE=1 nix-shell ~/nix/shells/rn-shell.nix";
       };
@@ -186,11 +190,8 @@
 # - clean up foundation file for macbook
 # - move things that can be moved from brew to this file 
 # - find way to allow intel apple programs to be chosen from nix arm version isn't availble. for example insomnia is available on intel, but not arm
-# - find way to override mac version of shell automatically
 # - figure out how to open a new window of alacritty without having to focus on the window and pressing cmd+n 
-# - some mouse settings were changed related to scroll wheel. move those to this file
-# - this tool may be helpful for some nix darwin settings https://github.com/catilac/plistwatch
-# - set setting to not split workspaces by monitor, need to move that to this file
+#   - couldn't figure this one out
 
 # icu4c@76 is keg-only, which means it was not symlinked into /opt/homebrew,
 # because macOS provides libicucore.dylib (but nothing else).
@@ -202,10 +203,3 @@
 # For compilers to find icu4c@76 you may need to set:
 #   export LDFLAGS="-L/opt/homebrew/opt/icu4c@76/lib"
 #   export CPPFLAGS="-I/opt/homebrew/opt/icu4c@76/include"
-
-# figure out why this happens: 
-# The following files have unrecognized content and would be overwritten:
-
-#   /etc/bashrc
-#   /etc/zshrc
-#   /etc/zshenv
