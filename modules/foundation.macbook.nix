@@ -205,6 +205,7 @@
 # - find way to allow intel apple programs to be chosen from nix arm version isn't availble. for example insomnia is available on intel, but not arm
 # - figure out how to open a new window of alacritty without having to focus on the window and pressing cmd+n 
 #   - couldn't figure this one out
+# - consolidate applicable settings, e.g. NIX_ROOT
 
 # icu4c@76 is keg-only, which means it was not symlinked into /opt/homebrew,
 # because macOS provides libicucore.dylib (but nothing else).
