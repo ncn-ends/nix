@@ -18,16 +18,28 @@
   # not sure what this is for
   # environment.pathsToLink = [ "/Applications" ];
 
-  # example homebrew config
-    #   homebrew = {
-    #   enable = true;
-    #   caskArgs.no_quarantine = true;
-    #   global.brewfile = true;
-    #   masApps = {
-    #     Xcode = 497799835;
-    #   };
-    #   casks = [];
-    # };
+  homebrew = {
+      # ==> Formulae
+      # boost                   fbthrift                icu4c@76                mpdecimal               ruby                    xz
+      # ca-certificates         fizz                    libevent                openssl@3               snappy                  zstd
+      # cocoapods               fmt                     libsodium               pcre2                   sqlite
+      # double-conversion       folly                   libyaml                 python@3.11             wangle
+      # edencommon              gflags                  lz4                     python@3.13             watchman
+      # fb303                   glog                    mas                     readline                xxhash
+
+      # ==> Casks
+      # android-studio  insomnia        microsoft-edge  raycast         slack           zulu17          zulu@17
+    enable = true;
+
+    # updates homebrew whenever on nix-darwin system activation
+    onActivation.autoUpdate = true;
+    # same thing for above, but specifically formulae and Mac App Store apps
+    onActivation.upgrade = true;
+
+    casks = [
+      "android-studio"
+    ];
+  };
 
   # i think this is if you want to customize key remapping within nix
   # system.keyboard.enableKeyMapping = true; 
@@ -189,6 +201,7 @@
 # to do list:
 # - clean up foundation file for macbook
 # - move things that can be moved from brew to this file 
+#   - wip
 # - find way to allow intel apple programs to be chosen from nix arm version isn't availble. for example insomnia is available on intel, but not arm
 # - figure out how to open a new window of alacritty without having to focus on the window and pressing cmd+n 
 #   - couldn't figure this one out
