@@ -28,7 +28,7 @@
       # fb303                   glog                    mas                     readline                xxhash
 
       # ==> Casks
-      # android-studio*  insomnia        microsoft-edge  raycast         slack           zulu17          zulu@17
+      # android-studio*  insomnia*        microsoft-edge  raycast         slack           zulu17          zulu@17
     enable = true;
 
     # updates homebrew whenever on nix-darwin system activation
@@ -39,6 +39,11 @@
     casks = [
       "android-studio"
       "insomnia"
+      "microsoft-edge"
+      "raycast"
+      "slack"
+      "zulu17"
+      "zulu@17"
     ];
   };
 
