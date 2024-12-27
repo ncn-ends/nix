@@ -49,23 +49,10 @@
           lib = inputs.stable.lib;
           overrides = import ./helpers/apply-overrides.nix { packages = stable; lib = lib; };
           imports = { inherit stable unstable untested overrides oldstable; };
-          mkShell = stable.mkShell;
-          devShellInputs = { inherit mkShell imports; };
         in
         {
           devShells = {
-            ${system} = {
-              default = stable.mkShell { packages = [ unstable.azure-functions-core-tools ]; };
-              node = import ./dev-shells/node.nix devShellInputs;
-              py = import ./dev-shells/py.nix devShellInputs;
-              dotnet = import ./dev-shells/dn-mac-fix.nix devShellInputs;
-              dnrb = import ./dev-shells/dn-rb.nix devShellInputs;
-              rust = import ./dev-shells/rust.nix devShellInputs;
-            };
-          };
-
-          packages = {
-            azure = unstable.azure-functions-core-tools;
+            ${system} = import ./shells.nix { mkShell = stable.mkShell; inherit imports; };
           };
 
           nixosConfigurations =
@@ -113,7 +100,7 @@
           darwinConfigurations =
             let
               machine = machines.macbook;
-              packages = import ./modules/package-dump.nix { inherit imports machine lib; };
+              # packages = import ./modules/package-dump.nix { inherit imports machine lib; };
             in
             {
               ${machine.hostName} = darwin.lib.darwinSystem {
@@ -139,7 +126,7 @@
         devShells = linux64Config.devShells // macM1Config.devShells;
         nixosConfigurations = linux64Config.nixosConfigurations;
         darwinConfigurations = macM1Config.darwinConfigurations;
-        packages = linux64Config.packages;
+        # packages = linux64Config.packages;
       };
     in
     final;
