@@ -70,6 +70,19 @@ in
         # improves folder structure visibility
         "explorer.compactFolders" = true;
 
+        # Make whitespace changes visible
+        "diffEditor.ignoreTrimWhitespace" = true;
+        # hide cursor position indicator in scrollbar
+        "editor.hideCursorInOverviewRuler" = true;
+        # only shows errors and git changes in scrollbar. TODO: may want to include find results too, but hard to fine control it.
+        "editor.overviewRulerLanes" = 0;
+        # sets color for modified lines to blue
+        "editor.gutter.modifiedBackground" = "#0070aa";
+        # sets line adds to green in scroll bar 
+        "editor.gutter.addedBackground" = "#2ea043";
+        # sets errors to red in scroll bar
+        "editorError.foreground" = "#ff0000";
+
         # vim
         "vim.normalModeKeyBindings" = [
           {
