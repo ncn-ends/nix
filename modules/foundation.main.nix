@@ -22,7 +22,15 @@ in {
      font = "Lat2-Terminus16";
      useXkbConfig = true;
   };
-  hardware.pulseaudio.enable = true;
+
+  hardware.pulseaudio.enable = false; # turned off due to conflicts with hardware.opengl.driSupport
+  security.rtkit.enable = true; # recommended for pipewire
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   systemd.extraConfig = ''
     DefaultLimitNOFILE=1048576

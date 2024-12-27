@@ -28,7 +28,7 @@ in {
   personal = [
     overrides.discord 
     unstable.youtube-music
-    unstable.qbittorrent
+    stable.qbittorrent
     stable.libsForQt5.kdeconnect-kde
     stable.vlc
   ];

@@ -16,7 +16,6 @@ in {
 
   hardware.opengl = {
     enable = true;
-    driSupport = true;
     extraPackages = [
       stable.amdvlk
       stable.vaapiVdpau
