@@ -1,7 +1,7 @@
 { system, inputs, ...} : 
 let 
   passPksImportInput = {inherit system; config.allowUnfree = true;};
-in {
+in rec {
   oldstable = import inputs.oldstable passPksImportInput;
   stable = import inputs.stable passPksImportInput;
   unstable = import inputs.unstable passPksImportInput;
