@@ -4,6 +4,7 @@ let
   unstable = imports.unstable;
   untested = imports.untested;
   overrides = imports.overrides;
+  lib = imports.stable.lib;
 in {
   # every machine
   all = [

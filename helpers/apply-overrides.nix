@@ -1,4 +1,4 @@
-{lib, packages, ...} : (packages // {
+{packages, ...} : (packages // {
   # azure-cli = packages.azure-cli.override {
   #   python3 = packages.python310;
   # };

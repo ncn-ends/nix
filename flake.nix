@@ -41,24 +41,18 @@
       };
       defineConfigBySystem = system:
         let
-          passPksImportInput = { inherit system; config.allowUnfree = true; };
-          oldstable = import inputs.oldstable passPksImportInput;
-          stable = import inputs.stable passPksImportInput;
-          unstable = import inputs.unstable passPksImportInput;
-          untested = import inputs.untested passPksImportInput;
+          imports = import ./helpers/import-packages.nix { inherit system inputs; };
           lib = inputs.stable.lib;
-          overrides = import ./helpers/apply-overrides.nix { packages = stable; lib = lib; };
-          imports = { inherit stable unstable untested overrides oldstable; };
         in
         {
           devShells = {
-            ${system} = import ./shells.nix { mkShell = stable.mkShell; inherit imports; };
+            ${system} = import ./shells.nix { inherit imports; };
           };
 
           nixosConfigurations =
             let
               machine = machines.main;
-              packages = import ./modules/package-dump.nix { inherit imports machine lib; };
+              packages = import ./modules/package-dump.nix { inherit imports machine; };
             in
             {
               ${machine.hostName} = lib.nixosSystem {
@@ -106,8 +100,10 @@
               ${machine.hostName} = darwin.lib.darwinSystem {
                 inherit system;
                 specialArgs = {
-                  inherit self unstable stable machine imports;
+                  inherit self machine imports;
                   name = machine.user;
+                  unstable = imports.unstable;
+                  stable = imports.stable;
                 };
                 modules = [
                   home-manager.darwinModules.home-manager
