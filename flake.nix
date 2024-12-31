@@ -43,14 +43,16 @@
         let
           imports = import ./helpers/import-packages.nix { inherit system inputs; };
           lib = inputs.stable.lib;
-          callPackage = imports.stable.callPackage;
+          callPackage = (imports.stable.extend (final: prev: {
+            inherit machines lib sops-nix imports drives home-manager;
+          })).callPackage;
         in
         {
           devShells = {
-            ${system} = import ./shells.nix { inherit imports; };
+            ${system} = callPackage ./shells.nix { };
           };
 
-          nixosConfigurations = callPackage ./machine.main.nix { inherit machines lib sops-nix imports drives home-manager; };
+          nixosConfigurations = callPackage ./machine.main.nix { };
 
           darwinConfigurations =
             let
