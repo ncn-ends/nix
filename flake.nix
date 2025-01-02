@@ -44,13 +44,9 @@
       supportedSystems = lib.lists.unique (builtins.map (machine: machine.system) (builtins.attrValues machines));
 
     in {
-      devShells = builtins.listToAttrs (map (system: let 
-        imports = import ./helpers/import-packages.nix {inherit system inputs;};
-      in {
-        name = system;
-        value = import ./shells.nix {inherit imports system;};
-      }) supportedSystems);
+      devShells = import ./shells.nix {inherit inputs supportedSystems;};
 
+      # TODO: these can be cleaned up a a bit more like the devShells one
       nixosConfigurations = builtins.listToAttrs (map (machine: let 
         system = machine.system;
         imports = import ./helpers/import-packages.nix { inherit system inputs;};

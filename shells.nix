@@ -1,10 +1,16 @@
-{ system, imports, ...}: 
+{ inputs, supportedSystems, ...}: 
 let 
-  stable = imports.stable.${system};
-  oldstable = imports.oldstable.${system};
-  unstable = imports.unstable.${system};
-  mkShell = stable.mkShell;
-in {
+  mkShellsForEachSystem = defineShell: builtins.listToAttrs (map (system: let 
+    imports = import ./helpers/import-packages.nix {inherit system inputs;};
+    stable = imports.stable;
+    oldstable = imports.oldstable;
+    unstable = imports.unstable;
+    mkShell = stable.mkShell;
+  in {
+    name = system;
+    value = defineShell {inherit stable oldstable unstable mkShell; };
+  }) supportedSystems);
+in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
   # default = stable.mkShell { packages = [ unstable.azure-functions-core-tools ]; };
 
   #  _   _           _      
@@ -17,16 +23,16 @@ in {
     name = "ncn-node-env";
 
     packages = [
-      imports.stable.nodejs
-      imports.stable.yarn
+      stable.nodejs
+      stable.yarn
       # nodePackages.npm
       # nodePackages.pnpm
       # nodePackages.javascript-typescript-langserver
       # nodePackages.typescript
       # ngrok
-      imports.stable.jetbrains.webstorm
+      stable.jetbrains.webstorm
 
-      imports.stable.libuuid # required for cypress testing
+      stable.libuuid # required for cypress testing
     ];
   };
 
@@ -134,4 +140,4 @@ in {
       unstable.jetbrains.rust-rover
     ];
   };
-}
+})
