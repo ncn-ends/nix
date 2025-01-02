@@ -39,54 +39,62 @@
           location = "/mnt/shape";
         };
       };
-      defineConfigBySystem = system:
-        let
-          imports = import ./helpers/import-packages.nix { inherit system inputs; };
-          lib = inputs.stable.lib;
-          callPackage = (imports.stable.extend (final: prev: {
-            inherit machines lib sops-nix imports drives home-manager;
-          })).callPackage;
-        in
-        {
-          devShells = {
-            ${system} = callPackage ./shells.nix { };
-          };
+      # defineConfigBySystem = system:
+      #   let
+      #     imports = import ./helpers/import-packages.nix { inherit system inputs; };
+      #     lib = inputs.stable.lib;
+      #     callPackage = (imports.stable.extend (final: prev: {
+      #       inherit machines lib sops-nix imports drives home-manager;
+      #     })).callPackage;
+      #   in
+      #   {
+      #     devShells = {
+      #       ${system} = callPackage ./shells.nix { };
+      #     };
 
-          nixosConfigurations = callPackage ./machine.main.nix { };
+      #     nixosConfigurations = callPackage ./machine.main.nix { };
 
-          darwinConfigurations =
-            let
-              machine = machines.macbook;
-              # packages = import ./modules/package-dump.nix { inherit imports machine lib; };
-            in
-            {
-              ${machine.hostName} = darwin.lib.darwinSystem {
-                inherit system;
-                specialArgs = {
-                  inherit self machine imports;
-                  name = machine.user;
-                  unstable = imports.unstable;
-                  stable = imports.stable;
-                };
-                modules = [
-                  home-manager.darwinModules.home-manager
-                  ./modules/foundation.macbook.nix
-                  ./modules/cli.nix
-                  ./modules/vscode.nix
-                ];
-              };
-            };
-        };
+      #     darwinConfigurations =
+      #       let
+      #         machine = machines.macbook;
+      #         # packages = import ./modules/package-dump.nix { inherit imports machine lib; };
+      #       in
+      #       {
+      #         ${machine.hostName} = darwin.lib.darwinSystem {
+      #           inherit system;
+      #           specialArgs = {
+      #             inherit self machine imports;
+      #             name = machine.user;
+      #             unstable = imports.unstable;
+      #             stable = imports.stable;
+      #           };
+      #           modules = [
+      #             home-manager.darwinModules.home-manager
+      #             ./modules/foundation.macbook.nix
+      #             ./modules/cli.nix
+      #             ./modules/vscode.nix
+      #           ];
+      #         };
+      #       };
+      #   };
 
-      linux64Config = defineConfigBySystem "x86_64-linux";
-      macM1Config = defineConfigBySystem "aarch64-darwin";
-      final = {
-        eval = 2 + 2;
-        devShells = linux64Config.devShells // macM1Config.devShells;
-        nixosConfigurations = linux64Config.nixosConfigurations;
-        darwinConfigurations = macM1Config.darwinConfigurations;
-        # packages = linux64Config.packages;
-      };
-    in
-    final;
+      # linux64Config = defineConfigBySystem "x86_64-linux";
+      # macM1Config = defineConfigBySystem "aarch64-darwin";
+    in {
+      eval = 2 + 2;
+      devShells = builtins.listToAttrs (map (system: let 
+        imports = import ./helpers/import-packages.nix {inherit system inputs;};
+      in {
+        name = system;
+        value = import ./shells.nix {inherit imports system;};
+      }) ["x86_64-linux" "aarch64-darwin"]);
+      # nixosConfigurations = builtins.listToAttrs (map (system: let 
+      #   inherit system;
+      #   imports
+      # ))
+      
+      # linux64Config.nixosConfigurations;
+      # darwinConfigurations = macM1Config.darwinConfigurations;
+      # packages = linux64Config.packages;
+    };
 }

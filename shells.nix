@@ -1,9 +1,9 @@
-{ imports, ...}: 
+{ system, imports, ...}: 
 let 
-  stable = imports.stable;
-  oldstable = imports.oldstable;
-  unstable = imports.unstable;
-  mkShell = imports.stable.mkShell;
+  stable = imports.stable.${system};
+  oldstable = imports.oldstable.${system};
+  unstable = imports.unstable.${system};
+  mkShell = stable.mkShell;
 in {
   # default = stable.mkShell { packages = [ unstable.azure-functions-core-tools ]; };
 
