@@ -43,49 +43,7 @@
       # takes all the unique systems from machines list
       supportedSystems = lib.lists.unique (builtins.map (machine: machine.system) (builtins.attrValues machines));
 
-      # defineConfigBySystem = system:
-      #   let
-      #     imports = import ./helpers/import-packages.nix { inherit system inputs; };
-      #     lib = inputs.stable.lib;
-      #     callPackage = (imports.stable.extend (final: prev: {
-      #       inherit machines lib sops-nix imports drives home-manager;
-      #     })).callPackage;
-      #   in
-      #   {
-      #     devShells = {
-      #       ${system} = callPackage ./shells.nix { };
-      #     };
-
-      #     nixosConfigurations = callPackage ./machine.main.nix { };
-
-      #     darwinConfigurations =
-      #       let
-      #         machine = machines.macbook;
-      #         # packages = import ./modules/package-dump.nix { inherit imports machine lib; };
-      #       in
-      #       {
-      #         ${machine.hostName} = darwin.lib.darwinSystem {
-      #           inherit system;
-      #           specialArgs = {
-      #             inherit self machine imports;
-      #             name = machine.user;
-      #             unstable = imports.unstable;
-      #             stable = imports.stable;
-      #           };
-      #           modules = [
-      #             home-manager.darwinModules.home-manager
-      #             ./modules/foundation.macbook.nix
-      #             ./modules/cli.nix
-      #             ./modules/vscode.nix
-      #           ];
-      #         };
-      #       };
-      #   };
-
-      # linux64Config = defineConfigBySystem "x86_64-linux";
-      # macM1Config = defineConfigBySystem "aarch64-darwin";
     in {
-      # eval = 2 + 2;
       devShells = builtins.listToAttrs (map (system: let 
         imports = import ./helpers/import-packages.nix {inherit system inputs;};
       in {
@@ -101,9 +59,15 @@
         # each nixos system should be combined, similar to the empty attr set here
         value = import ./machine.main.nix {  inherit machines lib sops-nix imports drives home-manager; };
       }) [machines.main]);
-      
-      # darwinConfigurations = macM1Config.darwinConfigurations;
-      # packages = linux64Config.packages;
+
+      darwinConfigurations = builtins.listToAttrs (map (machine: let
+        system = machine.system;
+        imports = import ./helpers/import-packages.nix {inherit system inputs;};
+      in {
+        name = machine.hostName;
+        value = import ./machine.macbook.nix { inherit system self darwin machine lib sops-nix imports drives home-manager; };
+      }
+      ) [machines.macbook]);
 
       # for testing. to see result do `nix eval .#eval
       eval = {
