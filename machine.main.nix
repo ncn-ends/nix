@@ -3,8 +3,7 @@ let
   machine = machines.main;
   packages = import ./modules/package-dump.nix { inherit imports machine; };
 in
-{
-  ${machine.hostName} = lib.nixosSystem {
+  lib.nixosSystem {
     specialArgs = {
       inherit sops-nix imports drives machine;
     };
@@ -37,5 +36,4 @@ in
           ++ packages.experimenting;
       }
     ];
-  };
-}
+  }

@@ -20,6 +20,7 @@
 
   outputs = inputs@{ self, darwin, home-manager, sops-nix, ... }:
     let
+      lib = inputs.stable.lib;
       machines = {
         main = {
           hostName = "nixos";
@@ -39,6 +40,9 @@
           location = "/mnt/shape";
         };
       };
+      # takes all the unique systems from machines list
+      supportedSystems = lib.lists.unique (builtins.map (machine: machine.system) (builtins.attrValues machines));
+
       # defineConfigBySystem = system:
       #   let
       #     imports = import ./helpers/import-packages.nix { inherit system inputs; };
@@ -81,20 +85,29 @@
       # linux64Config = defineConfigBySystem "x86_64-linux";
       # macM1Config = defineConfigBySystem "aarch64-darwin";
     in {
-      eval = 2 + 2;
+      # eval = 2 + 2;
       devShells = builtins.listToAttrs (map (system: let 
         imports = import ./helpers/import-packages.nix {inherit system inputs;};
       in {
         name = system;
         value = import ./shells.nix {inherit imports system;};
-      }) ["x86_64-linux" "aarch64-darwin"]);
-      # nixosConfigurations = builtins.listToAttrs (map (system: let 
-      #   inherit system;
-      #   imports
-      # ))
+      }) supportedSystems);
+
+      nixosConfigurations = builtins.listToAttrs (map (machine: let 
+        system = machine.system;
+        imports = import ./helpers/import-packages.nix { inherit system inputs;};
+      in {
+        name = machine.hostName;
+        # each nixos system should be combined, similar to the empty attr set here
+        value = import ./machine.main.nix {  inherit machines lib sops-nix imports drives home-manager; };
+      }) [machines.main]);
       
-      # linux64Config.nixosConfigurations;
       # darwinConfigurations = macM1Config.darwinConfigurations;
       # packages = linux64Config.packages;
+
+      # for testing. to see result do `nix eval .#eval
+      eval = {
+        "x86_64-linux" = lib.lists.unique (builtins.map (machine: machine.system) (builtins.attrValues machines));
+      };
     };
 }

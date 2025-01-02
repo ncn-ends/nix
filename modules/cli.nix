@@ -10,7 +10,7 @@ in {
   ];
 
   users.users.${machine.user}.packages = [
-    unstable.ranger
+    # unstable.ranger
   ];
 
   home-manager.users.${machine.user} = { ... }: {
