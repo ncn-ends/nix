@@ -27,12 +27,14 @@
           user = "one";
           nixConfigRoot = "/etc/nixos";
           system = "x86_64-linux";
+          buildFilePath = ./machine.main.nix;
         };
         macbook = {
           hostName = "ncns-MacBook-Pro";
           user = "ncn";
           nixConfigRoot = "/Users/ncn/nix2";
           system = "aarch64-darwin";
+          buildFilePath = ./machine.macbook.nix;
         };
       };
       drives = {
@@ -52,7 +54,7 @@
       in {
         name = machine.hostName;
         # each nixos system should be combined, similar to the empty attr set here
-        value = import ./machine.main.nix {  inherit machines lib sops-nix imports drives home-manager; };
+        value = import machine.buildFilePath {  inherit machines lib sops-nix imports drives home-manager; };
       }) [machines.main]);
 
       darwinConfigurations = builtins.listToAttrs (map (machine: let
@@ -60,7 +62,7 @@
         imports = import ./helpers/import-packages.nix {inherit system inputs;};
       in {
         name = machine.hostName;
-        value = import ./machine.macbook.nix { inherit system self darwin machine lib sops-nix imports drives home-manager; };
+        value = import machine.buildFilePath { inherit system self darwin machine lib sops-nix imports drives home-manager; };
       }
       ) [machines.macbook]);
 
