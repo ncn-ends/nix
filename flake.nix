@@ -40,7 +40,6 @@
           location = "/mnt/shape";
         };
       };
-      # takes all the unique systems from machines list
       supportedSystems = lib.lists.unique (builtins.map (machine: machine.system) (builtins.attrValues machines));
 
     in {
