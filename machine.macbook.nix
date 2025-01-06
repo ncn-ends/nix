@@ -9,6 +9,7 @@ darwin.lib.darwinSystem {
   };
   modules = [
     home-manager.darwinModules.home-manager
+    ./modules/foundation.nix
     ./modules/foundation.macbook.nix
     ./modules/cli.nix
     ./modules/vscode.nix
