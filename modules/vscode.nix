@@ -31,6 +31,22 @@ in
         # yoavbls.pretty-ts-errors
 
         timonwong.shellcheck
+
+        # adds support for dotenv files
+        mikestead.dotenv
+
+        # auto completes npm packages in import modules
+        christian-kohler.npm-intellisense
+      ];
+      keybindings = [
+        {
+          key = "alt+left";
+          command = "workbench.action.navigateBack";
+        }
+        {
+          key = "alt+right";
+          command = "workbench.action.navigateForward";
+        }
       ];
       userSettings = {
         # "vim.useSystemClipboard" = true;
