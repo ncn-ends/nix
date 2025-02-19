@@ -23,6 +23,12 @@ in {
      useXkbConfig = true;
   };
 
+  environment.systemPackages = [
+    stable.openssl
+    stable.libsecret
+    # stable.openssl_3_3
+  ];
+
   hardware.pulseaudio.enable = false; # turned off due to conflicts with hardware.opengl.driSupport
   security.rtkit.enable = true; # recommended for pipewire
   services.pipewire = {
@@ -52,7 +58,7 @@ in {
 
   users.users.${machine.user} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "docker" "plex" ];
+    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "docker" "plex" "nordvpn" ];
     initialPassword = "password";
   };
 

@@ -69,12 +69,33 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
       #   '';
       # })
       stable.jetbrains.rider
+
+      # not necessary unless you're running powershell scripts
+      stable.powershell
+      # stable.openssl
+      # stable.update-ca-certificates
+
+      stable.nodejs
+      stable.yarn
+      stable.nodePackages.npm
+      # nodePackages.pnpm
+      # nodePackages.javascript-typescript-langserver
+      # nodePackages.typescript
+      # ngrok
+
+      stable.libuuid # required for cypress testing
     ];
 
     # if there is ever a bug with the jdk, set it here. Rider will pick up the correct version using these environment variables
     # JDK_HOME = stable.jetbrains.jdk;
     # IDEA_JDK = "${stable.jetbrains.jdk}/lib/openjdk";
     # RIDER_JDK = "${stable.jetbrains.jdk}/lib/openjdk";
+
+    # shellHook = ''
+    #   export LD_LIBRARY_PATH=${stable.openssl}/lib:$LD_LIBRARY_PATH
+    #   export AZURE_CREDENTIALS_PATH="$HOME/.local/share/JetBrains/Rider${stable.jetbrains.rider.version}/azure"
+    #   export LOCALAPPDATA="$HOME/.local/share"
+    # '';
   };
 
   #  _____        _   _              
@@ -128,7 +149,7 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
   # | |_) | | | \___ \ | |
   # |  _ <| |_| |___) || |
   # |_| \_\\___/|____/ |_|
-  rust = {
+  rust = mkShell {
     name = "ncn-rust-env";
 
     packages = [
@@ -138,6 +159,39 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
       stable.openssl
       stable.pkg-config
       unstable.jetbrains.rust-rover
+    ];
+  };
+
+  #   _____
+  #  / ____|
+  # | |     
+  # | |     
+  # | |____ 
+  #  \_____|
+  c = mkShell {
+    # make install CFLAGS="-Wno-unused-result"
+    # solid, blink, cycle, wave, lightning, and pulse.
+    # Default solid color (#f20000, red) for the whole micro:
+    # quadcastrgb solid 
+    # # Random blinking colors:
+    # quadcastrgb blink
+    # # Default cycle (rainbow) mode for the whole micro:
+    # quadcastrgb -a cycle 
+    # # Purple color for the upper part and yellow for the lower:
+    # quadcastrgb -u solid 4c0099 -l solid ff6000 
+    # # Default cycle mode for the upper diode with 50% brightness and yellow lightning for the lower:
+    # quadcastrgb -u -b 50 cycle -l lightning ff6000 
+
+    # white on bottom, blue on top
+    # sudo killall quadcastrgb; sudo ./quadcastrgb -u pulse 0057a9 -b 50 -l solid ffea77 -b 100
+
+    # blue on top, green on bottom
+    # sudo killall quadcastrgb; sudo ./quadcastrgb -u pulse 0057a9 -b 50 -l solid 002700 -b 100
+    name = "ncn-c-env";
+
+    packages = [
+      stable.gnumake
+      stable.libusb1
     ];
   };
 })

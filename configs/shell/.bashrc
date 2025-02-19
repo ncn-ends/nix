@@ -24,7 +24,7 @@ alias sls="source /etc/nixos/configs/scripts/sls.sh"
 alias addcdlog="source /etc/nixos/configs/scripts/addcdlog.sh"
 
 # programs
-alias bottles="flatpak run com.usebottles.bottles"
+# alias bottles="flatpak run com.usebottles.bottles"
 
 # ssh
 alias ssh:cap="ssh -i ~/.ssh/cap_key.pem cap@20.253.238.231"

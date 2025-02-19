@@ -5,7 +5,8 @@
   #   - was using flatpak for bottles, but switched to system package. keep flatpak for now
 
   environment.systemPackages = [
-    imports.stable.bottles
+    # imports.stable.bottles
+    # imports.stable.wowup-cf
   ];
 
   programs.steam = {

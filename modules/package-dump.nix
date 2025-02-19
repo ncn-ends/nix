@@ -20,7 +20,7 @@ in {
     stable.slack
     stable.insomnia
     stable.zoom-us
-    stable.azure-cli
+    unstable.azure-cli
     # unstable.azure-functions-core-tools
     stable.gh
   ];

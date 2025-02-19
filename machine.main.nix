@@ -27,6 +27,7 @@ in
       ./modules/server.rclone.nix
       ./modules/server.logging.nix
       ./modules/play.nix
+      ./modules/nordvpn.nix
       {
         users.users.${machine.user}.packages =
           packages.all

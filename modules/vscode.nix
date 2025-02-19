@@ -28,7 +28,7 @@ in
         tomoki1207.pdf
 
         ms-python.python
-        # yoavbls.pretty-ts-errors
+        yoavbls.pretty-ts-errors
 
         timonwong.shellcheck
 
