@@ -48,7 +48,7 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
 
     packages = [
       stable.jetbrains.jdk
-      oldstable.azure-functions-core-tools
+      unstable.azure-functions-core-tools
       (with stable.dotnetCorePackages; combinePackages [
         # sdk_6_0
         # sdk_7_0
@@ -68,7 +68,7 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
       #     patchelf --set-interpreter $interp plugins/dotCommon/DotFiles/linux-x64/JetBrains.Profiler.PdbServer
       #   '';
       # })
-      stable.jetbrains.rider
+      unstable.jetbrains.rider
 
       # not necessary unless you're running powershell scripts
       stable.powershell

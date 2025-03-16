@@ -19,7 +19,7 @@
     win-virtio win-spice
 
     # for non-gnome DEs, may see errors if you don't have this
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
   ];
 
   virtualisation = {

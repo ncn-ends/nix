@@ -14,7 +14,7 @@ in {
     };
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = [
       stable.amdvlk
@@ -46,6 +46,7 @@ in {
       stable.xbindkeys
       stable.screenkey
       stable.xorg.xkill
+      stable.xclip # pipe text to system clipboard easily 
     ];
 
     home.file.".config/autostart/.screenkey.desktop".source   = ../configs/startup/screenkey.desktop;
