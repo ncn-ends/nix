@@ -62,6 +62,13 @@ in {
     initialPassword = "password";
   };
 
+  # networking.networkmanager.enable = true;
+  # networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
+
+  programs.openvpn3 = {
+    enable = true;
+  };
+
   home-manager.users.${machine.user} = { ... }: {
     home.stateVersion = "22.11";
     nixpkgs.config.allowUnfree = true;
