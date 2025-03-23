@@ -44,3 +44,5 @@ export GIT_SEQUENCE_EDITOR="vim";
 export TERMINAL="alacritty"
 alias x-terminal-emulator='alacritty'
 
+# manually add dotnet-ef tools to PATH
+export PATH="$PATH:/home/one/.dotnet/tools"
