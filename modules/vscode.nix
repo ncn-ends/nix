@@ -37,6 +37,9 @@ in
 
         # auto completes npm packages in import modules
         christian-kohler.npm-intellisense
+
+
+        # mxsdev.typescript-explorer
       ];
       keybindings = [
         {

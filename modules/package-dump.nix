@@ -8,7 +8,7 @@ let
 in {
   # every machine
   all = [
-    unstable.microsoft-edge
+    stable.microsoft-edge
     stable.obs-studio
     stable.firefox
     unstable.obsidian
