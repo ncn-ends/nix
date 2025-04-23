@@ -6,6 +6,9 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l > /dev/null || ssh-add
 
+# sets the rgb color for the micprohone
+cd ~/local-packages/QuadcastRGB || return; sudo killall quadcastrgb; sudo ./quadcastrgb -u pulse 0057a9 -b 50 -l solid 002700 -b 100;
+
 # nix shells
 alias nix-dotnet="nix develop /etc/nixos#dotnet";
 alias nix-node="nix develop /etc/nixos#node";
