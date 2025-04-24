@@ -32,8 +32,12 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
       # ngrok
       stable.jetbrains.webstorm
 
-      stable.libuuid # required for cypress testing
+      stable.libuuid # required for cypress and jest testing
     ];
+
+    shellHook = ''
+      export LD_LIBRARY_PATH = ${stable.lib.makeLibraryPath [stable.libuuid]};
+    '';
   };
 
 
