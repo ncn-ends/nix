@@ -28,7 +28,7 @@ in {
   # every personal machine
   personal = [
     overrides.discord 
-    unstable.youtube-music
+    stable.youtube-music
     stable.qbittorrent
     stable.libsForQt5.kdeconnect-kde
     stable.vlc
