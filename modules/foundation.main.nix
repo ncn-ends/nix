@@ -123,8 +123,7 @@ in {
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  # thunar stuff
-
+  # thunar stuff. file explorer
   programs.thunar = {
     enable = true;
     plugins = [
@@ -140,5 +139,19 @@ in {
   environment.variables = {
     # required to make yarn install work https://github.com/NixOS/nixpkgs/issues/314713
     UV_USE_IO_URING = "0";
+  };
+
+  # sudo killall quadcastrgb; sudo ~/local-packages/QuadcastRGB/quadcastrgb -u pulse 0057a9 -b 50 -l solid 002700 -b 100;
+  systemd.services.setup-quadcastrgb = {
+    description = "Sets up colors for microphone using Quadcastrgb";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = stable.writeShellScript "setup-quadcastrgb" ''
+        killall quadcastrgb;
+        /home/one/local-packages/QuadcastRGB/quadcastrgb -u pulse 0057a9 -b 50 -l solid 002700 -b 100;
+      '';
+      RemainAfterExit = true;
+    };
   };
 }
