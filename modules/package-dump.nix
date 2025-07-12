@@ -8,7 +8,7 @@ let
 in {
   # every machine
   all = [
-    unstable.microsoft-edge
+    stable.microsoft-edge
     stable.obs-studio
     stable.firefox
     unstable.obsidian
@@ -32,6 +32,7 @@ in {
     stable.qbittorrent
     stable.libsForQt5.kdeconnect-kde
     stable.vlc
+    stable.floorp
   ];
   
   # every linux personal machine
@@ -50,11 +51,14 @@ in {
     stable.rclone
     stable.rclone-browser
     stable.qimgv
+    stable.element-desktop
   ];
 
   experimenting = [
     # untested.warp-terminal
     # stable.wireshark
+    stable.wezterm
+    stable.azuredatastudio
   ];
 
   # to try:
