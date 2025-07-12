@@ -27,8 +27,11 @@ in {
     stable.openssl
     stable.libsecret
     # stable.openssl_3_3
+    stable.plexamp
+    stable.soulseekqt
   ];
 
+  # sound
   hardware.pulseaudio.enable = false; # turned off due to conflicts with hardware.opengl.driSupport
   security.rtkit.enable = true; # recommended for pipewire
   services.pipewire = {
@@ -37,6 +40,7 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  # hardware.alsa.enablePersistence = true;
 
   systemd.extraConfig = ''
     DefaultLimitNOFILE=1048576
@@ -145,6 +149,7 @@ in {
   systemd.services.setup-quadcastrgb = {
     description = "Sets up colors for microphone using Quadcastrgb";
     wantedBy = [ "multi-user.target" ];
+    path = [ stable.psmisc ]; # used for killall
     serviceConfig = {
       Type = "oneshot";
       ExecStart = stable.writeShellScript "setup-quadcastrgb" ''
