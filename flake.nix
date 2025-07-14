@@ -1,14 +1,14 @@
 {
   inputs = {
-    oldstable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    oldstable.url = "github:NixOS/nixpkgs/nixos-24.11";
 
-    stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    stable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     untested.url = "github:NixOS/nixpkgs/master";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "stable";
 
     darwin.url = "github:LnL7/nix-darwin";

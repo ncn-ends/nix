@@ -12,6 +12,7 @@ in {
       "0.0.0.0:5232" 
       "[::]:5232" 
     ];
+    settings.auth.type = "none";
     settings.storage.filesystem_folder = radicaleLocation;
   };
 
