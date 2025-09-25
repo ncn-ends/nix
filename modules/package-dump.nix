@@ -8,7 +8,7 @@ let
 in {
   # every machine
   all = [
-    stable.microsoft-edge
+    unstable.microsoft-edge
     stable.obs-studio
     stable.firefox
     unstable.obsidian
@@ -52,13 +52,14 @@ in {
     stable.rclone-browser
     stable.qimgv
     stable.element-desktop
+    stable.blender-hip                        # blender-hip seems to be better for AMD
   ];
 
   experimenting = [
     # untested.warp-terminal
     # stable.wireshark
     stable.wezterm
-    stable.azuredatastudio
+    unstable.azuredatastudio
   ];
 
   # to try:

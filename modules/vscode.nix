@@ -1,6 +1,7 @@
 { imports, config, services, machine, ... }:
 let
   stable = imports.stable;
+  unstable = imports.unstable;
 in
 {
   environment.systemPackages = [
@@ -14,6 +15,7 @@ in
     programs.vscode = {
       enable = true;
       mutableExtensionsDir = false; # home-manager stopped installing extensions at some point and this fixed it
+      package = unstable.vscode;
       extensions = with stable.vscode-extensions; [
         vscodevim.vim
         bbenoist.nix
@@ -38,8 +40,14 @@ in
         # auto completes npm packages in import modules
         christian-kohler.npm-intellisense
 
-
         # mxsdev.typescript-explorer
+
+        (stable.vscode-utils.extensionFromVscodeMarketplace {
+          publisher = "ms-mssql";
+          name = "mssql";
+          version = "latest";
+          sha256 = "sha256-WnC0W5SShQuGsQBmC8eEy++NhpKaoCx6lzKjJ+koz08=";
+        })
       ];
       keybindings = [
         {
@@ -84,6 +92,7 @@ in
         "editor.formatOnPaste" = true;
         "breadcrumbs.enabled" = false;
         "customizeUI.activityBar" = "top";
+        "editor.formatOnSave" = true;
         "files.autoSave" = "afterDelay";
         "files.autoSaveDelay" = 1000;
         # improves folder structure visibility

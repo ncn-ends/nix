@@ -30,7 +30,7 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
       # nodePackages.javascript-typescript-langserver
       # nodePackages.typescript
       # ngrok
-      stable.jetbrains.webstorm
+      # stable.jetbrains.webstorm
 
       stable.libuuid # required for cypress and jest testing
     ];
