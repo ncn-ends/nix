@@ -73,6 +73,8 @@ in {
     enable = true;
   };
 
+  home-manager.backupFileExtension = "backup";
+
   home-manager.users.${machine.user} = { ... }: {
     home.stateVersion = "22.11";
     nixpkgs.config.allowUnfree = true;

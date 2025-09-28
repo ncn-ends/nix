@@ -60,6 +60,7 @@ in {
     # stable.wireshark
     stable.wezterm
     unstable.azuredatastudio
+    stable.bruno
   ];
 
   # to try:
