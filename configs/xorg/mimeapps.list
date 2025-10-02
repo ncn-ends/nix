@@ -1,11 +1,11 @@
 # https://www.iana.org/assignments/media-types/media-types.xhtml#image
 
 [Default Applications]
-text/html=microsoft-edge.desktop
+text/html=floorp.desktop
 text/plain=code.desktop
-application/xhtml+xml=microsoft-edge.desktop
-x-scheme-handler/http=microsoft-edge.desktop
-x-scheme-handler/https=microsoft-edge.desktop
+application/xhtml+xml=floorp.desktop
+x-scheme-handler/http=floorp.desktop
+x-scheme-handler/https=floorp.desktop
 inode/directory=thunar.desktop
 image/jpeg=qimgv.desktop
 image/png=qimgv.desktop
@@ -22,7 +22,7 @@ video/x-matroska=vlc.desktop
 video/webm=vlc.desktop
 
 [Added Associations]
-x-scheme-handler/http=microsoft-edge.desktop
+x-scheme-handler/http=floorp.desktop
 inode/directory=thunar.desktop
 video/mp4=vlc.desktop;
 video/mpeg=vlc.desktop;
