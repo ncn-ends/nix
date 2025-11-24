@@ -42,12 +42,12 @@ in
 
         # mxsdev.typescript-explorer
 
-        (stable.vscode-utils.extensionFromVscodeMarketplace {
-          publisher = "ms-mssql";
-          name = "mssql";
-          version = "latest";
-          sha256 = "sha256-WnC0W5SShQuGsQBmC8eEy++NhpKaoCx6lzKjJ+koz08=";
-        })
+        # (stable.vscode-utils.extensionFromVscodeMarketplace {
+        #   publisher = "ms-mssql";
+        #   name = "mssql";
+        #   version = "latest";
+        #   sha256 = "sha256-WnC0W5SShQuGsQBmC8eEy++NhpKaoCx6lzKjJ+koz08=";
+        # })
       ];
       keybindings = [
         {

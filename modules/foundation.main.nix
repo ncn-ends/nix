@@ -148,17 +148,17 @@ in {
   };
 
   # sudo killall quadcastrgb; sudo ~/local-packages/QuadcastRGB/quadcastrgb -u pulse 0057a9 -b 50 -l solid 002700 -b 100;
-  systemd.services.setup-quadcastrgb = {
-    description = "Sets up colors for microphone using Quadcastrgb";
-    wantedBy = [ "multi-user.target" ];
-    path = [ stable.psmisc ]; # used for killall
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = stable.writeShellScript "setup-quadcastrgb" ''
-        killall quadcastrgb;
-        /home/one/local-packages/QuadcastRGB/quadcastrgb -u pulse 0057a9 -b 50 -l solid 002700 -b 100;
-      '';
-      RemainAfterExit = true;
-    };
-  };
+  # systemd.services.setup-quadcastrgb = {
+  #   description = "Sets up colors for microphone using Quadcastrgb";
+  #   wantedBy = [ "multi-user.target" ];
+  #   path = [ stable.psmisc ]; # used for killall
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     ExecStart = stable.writeShellScript "setup-quadcastrgb" ''
+  #       killall quadcastrgb;
+  #       /home/one/local-packages/QuadcastRGB/quadcastrgb -u pulse 0057a9 -b 50 -l solid 002700 -b 100;
+  #     '';
+  #     RemainAfterExit = true;
+  #   };
+  # };
 }
