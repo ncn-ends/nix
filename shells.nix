@@ -101,6 +101,76 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
     #   export LOCALAPPDATA="$HOME/.local/share"
     # '';
   };
+  aspire =
+    let
+      fhsEnv = stable.buildFHSUserEnv {
+        name = "aspire-fhs";
+        targetPkgs = pkgs: (with pkgs; [
+          jetbrains.jdk
+          azure-functions-core-tools
+          dotnetCorePackages.sdk_8_0
+          jetbrains.rider
+          powershell
+          nodejs
+          yarn
+          nodePackages.npm
+          # Core libraries for .NET and Aspire
+          icu
+          openssl
+          zlib
+          libuuid
+          krb5
+          lttng-ust_2_12
+          stdenv.cc.cc.lib
+          # Additional runtime dependencies
+          curl
+          libunwind
+          git
+          which
+        ]);
+        extraBwrapArgs = [
+          "--ro-bind /etc/subuid /etc/subuid"
+          "--ro-bind /etc/subgid /etc/subgid"
+          "--ro-bind /run/wrappers /run/wrappers"
+          "--bind /run/user /run/user"
+          "--share-net"
+        ];
+        profile = ''
+          # Mutable dotnet location for workload installs
+          export DOTNET_INSTALL_DIR="$HOME/.dotnet-aspire"
+          
+          # Copy SDK if not already there
+          if [ ! -d "$DOTNET_INSTALL_DIR/sdk" ]; then
+            echo "Setting up mutable .NET SDK (one-time)..."
+            mkdir -p "$DOTNET_INSTALL_DIR"
+            cp -r ${stable.dotnetCorePackages.sdk_8_0}/share/dotnet/* "$DOTNET_INSTALL_DIR/"
+            chmod -R u+w "$DOTNET_INSTALL_DIR"
+          fi
+          
+          export DOTNET_ROOT="$DOTNET_INSTALL_DIR"
+          export PATH="$DOTNET_INSTALL_DIR:$PATH"
+          export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
+          export CONTAINER_HOST="unix:///run/user/1000/podman/podman.sock"
+          export DOTNET_SYSTEM_NET_DISABLEIPV6=1
+        '';
+        runScript = "bash";
+      };
+  in stable.mkShell {
+    name = "aspire-launcher";
+    buildInputs = [ fhsEnv ];
+    shellHook = ''
+      echo "================================================"
+      echo "Aspire Development Environment"
+      echo "================================================"
+      echo "1. Run 'aspire-fhs' to enter the FHS environment"
+      echo "2. If not run before, run 'dotnet workload install aspire'"
+      echo "3. Run 'dotnet restore' in Aspire directory"
+      echo "4. Run 'dotnet run' in Aspire directory"
+      echo ""
+      echo "Tip: You may need to run 'dotnet clean' targeting the solution. If so, make sure to run 'dotnet dev-certs https' as well."
+      echo "================================================"
+    '';
+  };
 
   #  _____        _   _              
   # |  __ \ _   _| |_| |__   ___  _ __  

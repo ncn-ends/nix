@@ -53,6 +53,7 @@ in {
     stable.qimgv
     stable.element-desktop
     stable.blender-hip                        # blender-hip seems to be better for AMD
+    unstable.claude-code
   ];
 
   experimenting = [
@@ -72,5 +73,4 @@ in {
 
   # to try again at some point maybe: 
   #     stacer
-  #     floorp
 }

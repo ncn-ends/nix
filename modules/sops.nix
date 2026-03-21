@@ -6,6 +6,8 @@
 
   environment.systemPackages = [ imports.stable.sops ];
 
+  # https://login.tailscale.com/admin/settings/keys
+
   # where secrets are stored. when you want to edit it, do `sops ../secrets/secrets.yaml`
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";

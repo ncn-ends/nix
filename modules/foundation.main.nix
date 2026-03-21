@@ -64,6 +64,10 @@ in {
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "docker" "plex" "nordvpn" ];
     initialPassword = "password";
+
+    # # for podman/aspire
+    # subUidRanges = [{ startUid = 100000; count = 65536; }];
+    # subGidRanges = [{ startGid = 100000; count = 65536; }];
   };
 
   # networking.networkmanager.enable = true;
@@ -75,6 +79,9 @@ in {
 
   home-manager.backupFileExtension = "backup";
 
+  # initially added for claude code vs code extensions
+  programs.nix-ld.enable = true;
+
   home-manager.users.${machine.user} = { ... }: {
     home.stateVersion = "22.11";
     nixpkgs.config.allowUnfree = true;
@@ -85,9 +92,22 @@ in {
         . /etc/nixos/configs/shell/.bashrc
       '';
     };
+
+  #   home.file.".config/containers/policy.json".text = 
+  #   ''
+  #     {
+  #       "default": [
+  #         {
+  #           "type": "insecureAcceptAnything"
+  #         }
+  #       ]
+  #     }
+  #   '';
   };
 
   virtualisation.docker.enable = true;
+  # virtualisation.podman.enable = true;
+  # for podman
 
   # --- mostly came from hardware-configuration.nix ---
 
@@ -125,6 +145,25 @@ in {
   # networking.interfaces.enp7s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
+  networking.extraHosts = ''
+    127.0.0.1 redroverk12.local
+    127.0.0.1 api.redroverk12.local
+    127.0.0.1 app.redroverk12.local
+    127.0.0.1 notification.redroverk12.local
+    127.0.0.1 auth.redroverk12.local
+    127.0.0.1 ads-mod0.redroverk12.local
+    127.0.0.1 ads-mod1.redroverk12.local
+    127.0.0.1 redis
+    127.0.0.1 cosmos
+    127.0.0.1 mssql
+    127.0.0.1 azurite
+  '';
+
+  # path from flake
+  # security.pki.certificateFiles = [
+  #   /etc/nixos/secrets/redroverk12.local.crt
+  # ];
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -161,4 +200,5 @@ in {
   #     RemainAfterExit = true;
   #   };
   # };
+  
 }
