@@ -62,6 +62,7 @@ in {
     stable.wezterm
     unstable.azuredatastudio
     stable.bruno
+    stable.unityhub
   ];
 
   # to try:
