@@ -12,6 +12,15 @@ alias nix-node="nix develop /etc/nixos#node";
 alias nix-rust="nix develop /etc/nixos#rust";
 alias nix-py="nix develop /etc/nixos#py";
 
+# "nix dev <shell>" → "nix develop /etc/nixos#<shell>"
+nix() {
+  if [ "$1" = "dev" ] && [ -n "$2" ]; then
+    command nix develop /etc/nixos#"$2" "${@:3}"
+  else
+    command nix "$@"
+  fi
+}
+
 # convenience
 alias nix-sw="sudo nixos-rebuild switch"
 alias nix-up="cd /etc/nix; nix flake update; nix-sw"
