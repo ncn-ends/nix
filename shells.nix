@@ -13,12 +13,11 @@ let
 in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
   # default = stable.mkShell { packages = [ unstable.azure-functions-core-tools ]; };
 
-  #  _   _           _      
-  # | \ | |         | |     
-  # |  \| | ___   __| | ___ 
-  # | . ` |/ _ \ / _` |/ _ \
-  # | |\  | (_) | (_| |  __/
-  # |_| \_|\___/ \__,_|\___|
+  #    _   __          __
+  #   / | / /___  ____/ /__
+  #  /  |/ / __ \/ __  / _ \
+  # / /|  / /_/ / /_/ /  __/
+  #/_/ |_/\____/\__,_/\___/
   node = mkShell {
     name = "ncn-node-env";
 
@@ -36,17 +35,16 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
     ];
 
     shellHook = ''
-      export LD_LIBRARY_PATH = ${stable.lib.makeLibraryPath [stable.libuuid]};
+      export LD_LIBRARY_PATH=${stable.lib.makeLibraryPath [stable.libuuid]};
     '';
   };
 
 
-  #  _____        _              _   
-  # |  __ \      | |            | |  
-  # | |  | | ___ | |_ _ __   ___| |_ 
-  # | |  | |/ _ \| __| '_ \ / __| __|
-  # | |__| | (_) | |_| | | |  __| |_ 
-  # |_____/ \___/ \__|_| |_|\___|\__|
+  #   ____        __             __
+  #  / __ \____  / /_____  ___  / /_
+  # / / / / __ \/ __/ __ \/ _ \/ __/
+  #/ /_/ / /_/ / /_/ / / /  __/ /_
+  #\____/\____/\__/_/ /_/\___/\__/
   dotnet = mkShell {
     name = "ncn-dotnet-env";
 
@@ -101,9 +99,16 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
     #   export LOCALAPPDATA="$HOME/.local/share"
     # '';
   };
+
+  #    ___               _
+  #   /   |  _________  (_)_______
+  #  / /| | / ___/ __ \/ / ___/ _ \
+  # / ___ |(__  ) /_/ / / /  /  __/
+  #/_/  |_/____/ .___/_/_/   \___/
+  #            /_/
   aspire =
     let
-      fhsEnv = stable.buildFHSUserEnv {
+      fhsEnv = stable.buildFHSEnv {
         name = "aspire-fhs";
         targetPkgs = pkgs: (with pkgs; [
           jetbrains.jdk
@@ -174,12 +179,98 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
     '';
   };
 
-  #  _____        _   _              
-  # |  __ \ _   _| |_| |__   ___  _ __  
-  # | |__) | | | | __| '_ \ / _ \| '_ \ 
-  # |  ___/| |_| | |_| | | | (_) | | | |
-  # |_|     \__, |\__|_| |_|\___/|_| |_|
-  #         |___/
+  #  ______             ______
+  # |___  /            |___  /
+  #    / / _   _  __ _    / / _   _  __ _
+  #   / / | | | |/ _` |  / / | | | |/ _` |
+  #  / /__| |_| | (_| | / /__| |_| | (_| |
+  # /_____|\__,_|\__, |/_____|\__,_|\__, |
+  #               __/ |              __/ |
+  #              |___/              |___/
+  # work work
+  zugzug =
+    let
+      fhsEnv = stable.buildFHSEnv {
+        name = "zugzug-fhs";
+        targetPkgs = pkgs: (with pkgs; [
+          # JVM / IDE
+          jetbrains.jdk
+          jetbrains.rider
+          # .NET
+          (dotnetCorePackages.combinePackages [ dotnetCorePackages.sdk_8_0 ])
+          powershell
+          # Node
+          nodejs
+          yarn
+          nodePackages.npm
+          # Core libraries (.NET / Aspire / Node)
+          icu
+          openssl
+          zlib
+          libuuid
+          krb5
+          lttng-ust_2_12
+          stdenv.cc.cc.lib
+          # Runtime dependencies
+          curl
+          libunwind
+          git
+          which
+          docker
+        ]) ++ [ unstable.azure-functions-core-tools ];
+        extraBwrapArgs = [
+          "--ro-bind /etc/subuid /etc/subuid"
+          "--ro-bind /etc/subgid /etc/subgid"
+          "--ro-bind /run/wrappers /run/wrappers"
+          "--bind /run/user /run/user"
+          "--share-net"
+        ];
+        profile = ''
+          # libuuid for cypress/jest
+          export LD_LIBRARY_PATH=${stable.lib.makeLibraryPath [stable.libuuid]}:$LD_LIBRARY_PATH
+
+          # Mutable dotnet location for workload installs (required for Aspire)
+          export DOTNET_INSTALL_DIR="$HOME/.dotnet-aspire"
+          if [ ! -d "$DOTNET_INSTALL_DIR/sdk" ]; then
+            echo "Setting up mutable .NET SDK (one-time)..."
+            mkdir -p "$DOTNET_INSTALL_DIR"
+            cp -r ${stable.dotnetCorePackages.sdk_8_0}/share/dotnet/* "$DOTNET_INSTALL_DIR/"
+            chmod -R u+w "$DOTNET_INSTALL_DIR"
+          fi
+
+          export DOTNET_ROOT="$DOTNET_INSTALL_DIR"
+          export PATH="$DOTNET_INSTALL_DIR:$PATH"
+          export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
+          export CONTAINER_HOST="unix:///var/run/docker.sock"
+          export DOCKER_HOST="unix:///var/run/docker.sock"
+          export ASPIRE_CONTAINER_RUNTIME="docker"
+        '';
+        runScript = "bash";
+      };
+    in stable.mkShell {
+      name = "zugzug";
+      buildInputs = [ fhsEnv ];
+      shellHook = ''
+        echo "================================================"
+        echo " ZugZug — Node / .NET / Aspire"
+        echo "================================================"
+        echo "Aspire first-time setup:"
+        echo "  1. dotnet workload install aspire"
+        echo "  2. dotnet restore  (in your Aspire project)"
+        echo "  3. dotnet run"
+        echo ""
+        echo "Tip: after 'dotnet clean', run 'dotnet dev-certs https'"
+        echo "================================================"
+        exec zugzug-fhs
+      '';
+    };
+
+  #    ____        __  __
+  #   / __ \__  __/ /_/ /_  ____  ____
+  #  / /_/ / / / / __/ __ \/ __ \/ __ \
+  # / ____/ /_/ / /_/ / / / /_/ / / / /
+  #/_/    \__, /\__/_/ /_/\____/_/ /_/
+  #      /____/
   py = mkShell rec {
     name = "ncn-python-env";
     python = stable.python310;
@@ -220,11 +311,11 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
     '';
   };
 
-  #  ____  _   _ ____ _____
-  # |  _ \| | | / ___|_   _|
-  # | |_) | | | \___ \ | |
-  # |  _ <| |_| |___) || |
-  # |_| \_\\___/|____/ |_|
+  #    ____              __
+  #   / __ \__  _______/ /_
+  #  / /_/ / / / / ___/ __/
+  # / _, _/ /_/ (__  ) /_
+  #/_/ |_|\__,_/____/\__/
   rust = mkShell {
     name = "ncn-rust-env";
 
@@ -238,12 +329,11 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
     ];
   };
 
-  #   _____
-  #  / ____|
-  # | |     
-  # | |     
-  # | |____ 
-  #  \_____|
+  #    ______
+  #   / ____/
+  #  / /
+  # / /_____
+  # \______/
   c = mkShell {
     # make install CFLAGS="-Wno-unused-result"
     # solid, blink, cycle, wave, lightning, and pulse.
