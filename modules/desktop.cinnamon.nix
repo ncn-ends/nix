@@ -88,6 +88,7 @@ in {
     home.file.".config/autostart/.xbindkeys.desktop".source   = ../configs/startup/xbindkeys.desktop;
     home.file.".config/autostart/.polybar.desktop".source     = ../configs/startup/polybar.desktop;
     home.file.".config/mimeapps.list".source                  = ../configs/xorg/mimeapps.list;
+    home.file.".local/share/applications/xkill.desktop".source = ../configs/startup/xkill.desktop;
     home.file.".xbindkeysrc".source                           = ../configs/xorg/.xbindkeysrc;
   };
 }

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=xkill
+Comment=Kill a window by clicking on it
+Exec=xkill
+Icon=utilities-system-monitor
+Type=Application
+Categories=Utility;
