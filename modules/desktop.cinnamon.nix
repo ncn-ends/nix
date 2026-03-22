@@ -42,7 +42,41 @@ in {
     };
 
 
-    home.packages = [ 
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Adwaita-dark";
+        package = stable.gnome-themes-extra;
+      };
+      gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+      gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
+    };
+
+    qt = {
+      enable = true;
+      style.name = "adwaita-dark";
+    };
+
+    dconf.settings = {
+      "org/cinnamon/desktop/interface" = {
+        gtk-theme = "Adwaita-dark";
+        color-scheme = "prefer-dark";
+      };
+      "org/gnome/desktop/interface" = {
+        gtk-theme = "Adwaita-dark";
+        color-scheme = "prefer-dark";
+      };
+    };
+
+    home.sessionVariables = {
+      GTK_THEME = "Adwaita:dark";
+    };
+
+    programs.bash.shellAliases = {
+      logout = "cinnamon-session-quit --logout --no-prompt";
+    };
+
+    home.packages = [
       stable.xbindkeys
       stable.screenkey
       stable.xorg.xkill
