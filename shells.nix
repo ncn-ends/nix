@@ -127,6 +127,7 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
           libunwind
           git
           which
+          docker
         ]);
         extraBwrapArgs = [
           "--ro-bind /etc/subuid /etc/subuid"
@@ -150,8 +151,9 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
           export DOTNET_ROOT="$DOTNET_INSTALL_DIR"
           export PATH="$DOTNET_INSTALL_DIR:$PATH"
           export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
-          export CONTAINER_HOST="unix:///run/user/1000/podman/podman.sock"
-          export DOTNET_SYSTEM_NET_DISABLEIPV6=1
+          export CONTAINER_HOST="unix:///var/run/docker.sock"
+          export DOCKER_HOST="unix:///var/run/docker.sock"
+          export ASPIRE_CONTAINER_RUNTIME="docker"
         '';
         runScript = "bash";
       };
@@ -162,13 +164,13 @@ in mkShellsForEachSystem ({mkShell, stable, oldstable, unstable, ...}: {
       echo "================================================"
       echo "Aspire Development Environment"
       echo "================================================"
-      echo "1. Run 'aspire-fhs' to enter the FHS environment"
-      echo "2. If not run before, run 'dotnet workload install aspire'"
-      echo "3. Run 'dotnet restore' in Aspire directory"
-      echo "4. Run 'dotnet run' in Aspire directory"
+      echo "1. If not run before, run 'dotnet workload install aspire'"
+      echo "2. Run 'dotnet restore' in Aspire directory"
+      echo "3. Run 'dotnet run' in Aspire directory"
       echo ""
       echo "Tip: You may need to run 'dotnet clean' targeting the solution. If so, make sure to run 'dotnet dev-certs https' as well."
       echo "================================================"
+      exec aspire-fhs
     '';
   };
 
