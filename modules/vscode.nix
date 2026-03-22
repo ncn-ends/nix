@@ -16,9 +16,8 @@ in
       enable = true;
       mutableExtensionsDir = false; # home-manager stopped installing extensions at some point and this fixed it
       package = unstable.vscode;
-      extensions = with stable.vscode-extensions; [
+      profiles.default.extensions = with stable.vscode-extensions; [
         vscodevim.vim
-        bbenoist.nix
         jnoortheen.nix-ide
         formulahendry.auto-rename-tag
         formulahendry.auto-close-tag
@@ -48,8 +47,17 @@ in
         #   version = "latest";
         #   sha256 = "sha256-WnC0W5SShQuGsQBmC8eEy++NhpKaoCx6lzKjJ+koz08=";
         # })
+
+        # Inline error/warning display — pairs well with your ESLint setup
+        usernamehw.errorlens
+
+        # Much better Python language server (type checking, IntelliSense)
+        ms-python.vscode-pylance
+
+        # nice for tailwind
+        bradlc.vscode-tailwindcss
       ];
-      keybindings = [
+      profiles.default.keybindings = [
         {
           key = "alt+left";
           command = "workbench.action.navigateBack";
@@ -59,7 +67,7 @@ in
           command = "workbench.action.navigateForward";
         }
       ];
-      userSettings = {
+      profiles.default.userSettings = {
         # "vim.useSystemClipboard" = true;
         "workbench.editor.wrapTabs" = true; # have tabs become multiline instead of scroll
         # "workbench.editor.showTabs" = false;
@@ -85,20 +93,40 @@ in
         "editor.gotoLocation.multipleDefinitions" = "goto";
         "editor.gotoLocation.multipleDeclarations" = "goto";
         "editor.wordWrap" = "on";
-        "editor.wrappingColumn" = 0;
+        "editor.wordWrapColumn" = 0;
         "editor.cursorBlinking" = "smooth";
         "editor.unicodeHighlight.invisibleCharacters" = true;
         "editor.menuBarVisibility" = "hidden";
         "editor.formatOnPaste" = true;
         "breadcrumbs.enabled" = false;
-        "customizeUI.activityBar" = "top";
         "editor.formatOnSave" = true;
         "files.autoSave" = "afterDelay";
         "files.autoSaveDelay" = 1000;
+        # auto-renames matching HTML/JSX tags as you type
+        "editor.linkedEditing" = true;
         # improves folder structure visibility
         "explorer.compactFolders" = true;
 
-        # Make whitespace changes visible
+        # terminal improvements
+        "terminal.integrated.gpuAcceleration" = "on";
+        "terminal.integrated.persistentSessionReviveProcess" = "never";
+        "terminal.integrated.cursorBlinking" = true;
+        "terminal.integrated.cursorStyle" = "line";
+
+        # disable minimap
+        "editor.minimap.enabled" = false;
+
+        # highlight modified editor tabs
+        "workbench.editor.highlightModifiedTabs" = true;
+
+        # keeps the current function/class signature pinned at the top as you scroll
+        "editor.stickyScroll.enabled" = true;
+        "editor.stickyScroll.maxLineCount" = 3;
+        
+        # make hover appear faster
+        "editor.hover.delay" = 300;
+
+        # Hides whitespace changes
         "diffEditor.ignoreTrimWhitespace" = true;
         # hide cursor position indicator in scrollbar
         "editor.hideCursorInOverviewRuler" = true;
