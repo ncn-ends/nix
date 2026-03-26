@@ -28,7 +28,7 @@ in {
     stable.libsecret
     # stable.openssl_3_3
     stable.plexamp
-    stable.soulseekqt
+    # stable.soulseekqt # removed due to lack of maintenance in nixpkgs
   ];
 
   # sound
@@ -42,9 +42,9 @@ in {
   };
   # hardware.alsa.enablePersistence = true;
 
-  systemd.extraConfig = ''
-    DefaultLimitNOFILE=1048576
-  '';
+  systemd.settings.Manager = {
+    DefaultLimitNOFILE = 1048576;
+  };
 
   systemd.user.extraConfig = ''
     DefaultLimitNOFILE=1048576

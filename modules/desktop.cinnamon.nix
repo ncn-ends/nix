@@ -17,8 +17,7 @@ in {
   hardware.graphics = {
     enable = true;
     extraPackages = [
-      stable.amdvlk
-      stable.vaapiVdpau
+stable.libva-vdpau-driver
       stable.libvdpau-va-gl
     ];
   };

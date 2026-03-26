@@ -35,6 +35,7 @@ in
           ++ packages.personal
           ++ packages.personalLinux
           ++ packages.experimenting;
+        programs.kdeconnect.enable = true;
       }
     ];
   }

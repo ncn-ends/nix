@@ -16,7 +16,7 @@
     spice spice-gtk spice-protocol
 
     # drivers for windows VMs
-    win-virtio win-spice
+    virtio-win win-spice
 
     # for non-gnome DEs, may see errors if you don't have this
     adwaita-icon-theme
@@ -27,8 +27,6 @@
       enable = true;
       qemu = {
         swtpm.enable = true;
-        ovmf.enable = true;
-        ovmf.packages = [ imports.stable.OVMFFull.fd ];
       };
     };
     spiceUSBRedirection.enable = true;

@@ -30,20 +30,20 @@ in {
     overrides.discord 
     stable.youtube-music
     stable.qbittorrent
-    stable.libsForQt5.kdeconnect-kde
+    # stable.libsForQt5.kdeconnect-kde
     stable.vlc
-    stable.floorp
+    stable.floorp-bin
   ];
   
   # every linux personal machine
   personalLinux = [
-    stable.whatsapp-for-linux
+    stable.wasistlos
     stable.gimp
     stable.flameshot
-    stable.libsForQt5.okular
+    stable.kdePackages.okular
     stable.imagemagick
     stable.libreoffice
-    stable.libsForQt5.filelight
+    stable.kdePackages.filelight
     stable.peek
     stable.shotcut
     stable.seafile-client
