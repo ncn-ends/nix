@@ -1,26 +1,34 @@
-{ machine, config, lib, modulesPath, imports, ... }:
-let 
+{
+  machine,
+  config,
+  lib,
+  modulesPath,
+  imports,
+  ...
+}:
+let
   stable = imports.stable;
-in {
+in
+{
   system.stateVersion = "21.11";
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
-  
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.useOSProber = true; 
-  boot.kernelPackages = stable.linuxPackages_latest; 
-  boot.initrd.kernelModules = ["amdgpu"]; 
+  boot.loader.grub.useOSProber = true;
+  boot.kernelPackages = stable.linuxPackages_latest;
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader.grub.device = "/dev/sda";
 
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-     font = "Lat2-Terminus16";
-     useXkbConfig = true;
+    font = "Lat2-Terminus16";
+    useXkbConfig = true;
   };
 
   environment.systemPackages = [
@@ -62,7 +70,18 @@ in {
 
   users.users.${machine.user} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "docker" "plex" "nordvpn" ];
+    extraGroups = [
+      "wheel"
+      "video"
+      "audio"
+      "networkmanager"
+      "lp"
+      "scanner"
+      "docker"
+      "plex"
+      "nordvpn"
+      "nordlayer"
+    ];
     initialPassword = "password";
 
     # # for podman/aspire
@@ -82,28 +101,30 @@ in {
   # initially added for claude code vs code extensions
   programs.nix-ld.enable = true;
 
-  home-manager.users.${machine.user} = { ... }: {
-    home.stateVersion = "22.11";
-    nixpkgs.config.allowUnfree = true;
+  home-manager.users.${machine.user} =
+    { ... }:
+    {
+      home.stateVersion = "22.11";
+      nixpkgs.config.allowUnfree = true;
 
-    programs.bash = {
-      enable = true;
-      bashrcExtra = ''
-        . /etc/nixos/configs/shell/.bashrc
-      '';
+      programs.bash = {
+        enable = true;
+        bashrcExtra = ''
+          . /etc/nixos/configs/shell/.bashrc
+        '';
+      };
+
+      #   home.file.".config/containers/policy.json".text =
+      #   ''
+      #     {
+      #       "default": [
+      #         {
+      #           "type": "insecureAcceptAnything"
+      #         }
+      #       ]
+      #     }
+      #   '';
     };
-
-  #   home.file.".config/containers/policy.json".text = 
-  #   ''
-  #     {
-  #       "default": [
-  #         {
-  #           "type": "insecureAcceptAnything"
-  #         }
-  #       ]
-  #     }
-  #   '';
-  };
 
   virtualisation.docker.enable = true;
   # virtualisation.podman.enable = true;
@@ -113,16 +134,23 @@ in {
 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = { 
+  fileSystems."/" = {
     device = "/dev/disk/by-uuid/8f2b4ac7-ab2d-458d-b61a-2aa1545dfa5e";
     fsType = "ext4";
   };
 
-  fileSystems."/boot" = { 
+  fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/6D00-DB7E";
     fsType = "vfat";
   };
@@ -131,8 +159,14 @@ in {
     fsType = "ext4";
     label = "shape";
     device = "/dev/disk/by-label/shape";
-    depends = [ "/" "/boot" ];
-    options = [ "defaults" "nofail" ];
+    depends = [
+      "/"
+      "/boot"
+    ];
+    options = [
+      "defaults"
+      "nofail"
+    ];
   };
 
   swapDevices = [ ];
@@ -144,25 +178,6 @@ in {
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp7s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
-
-  networking.extraHosts = ''
-    127.0.0.1 redroverk12.local
-    127.0.0.1 api.redroverk12.local
-    127.0.0.1 app.redroverk12.local
-    127.0.0.1 notification.redroverk12.local
-    127.0.0.1 auth.redroverk12.local
-    127.0.0.1 ads-mod0.redroverk12.local
-    127.0.0.1 ads-mod1.redroverk12.local
-    127.0.0.1 redis
-    127.0.0.1 cosmos
-    127.0.0.1 mssql
-    127.0.0.1 azurite
-  '';
-
-  # path from flake
-  # security.pki.certificateFiles = [
-  #   /etc/nixos/secrets/redroverk12.local.crt
-  # ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
@@ -200,5 +215,5 @@ in {
   #     RemainAfterExit = true;
   #   };
   # };
-  
+
 }

@@ -12,12 +12,12 @@
       fetchSubmodules = true;
     };
   });
-  discord = packages.discord.overrideAttrs (old: {
-    src = builtins.fetchTarball {
-      url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-      sha256 = "1091nv1lwqlcs890vcil8frx6j87n4mig1xdrfxi606cxkfirfbh";
-    };
-  });
+  # discord = packages.discord.overrideAttrs (old: {
+  #   src = builtins.fetchTarball {
+  #     url = "https://discord.com/api/download?platform=linux&format=tar.gz";
+  #     sha256 = "1091nv1lwqlcs890vcil8frx6j87n4mig1xdrfxi606cxkfirfbh";
+  #   };
+  # });
   zoom = packages.zoom-us.overrideAttrs (old: {
     src = builtins.fetchurl {
       url = "https://zoom.us/client/latest/zoom_x86_64.tar.xz";

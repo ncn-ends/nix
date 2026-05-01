@@ -1,11 +1,12 @@
-{ imports, ... }: 
-let 
+{ imports, ... }:
+let
   stable = imports.stable;
   unstable = imports.unstable;
   untested = imports.untested;
   overrides = imports.overrides;
   lib = imports.stable.lib;
-in {
+in
+{
   # every machine
   all = [
     unstable.microsoft-edge
@@ -27,14 +28,14 @@ in {
 
   # every personal machine
   personal = [
-    overrides.discord 
+    stable.discord
     stable.youtube-music
     stable.qbittorrent
     # stable.libsForQt5.kdeconnect-kde
     stable.vlc
     stable.floorp-bin
   ];
-  
+
   # every linux personal machine
   personalLinux = [
     stable.wasistlos
@@ -52,7 +53,7 @@ in {
     stable.rclone-browser
     stable.qimgv
     stable.element-desktop
-    stable.blender-hip                        # blender-hip seems to be better for AMD
+    stable.blender-hip # blender-hip seems to be better for AMD
     unstable.claude-code
   ];
 
@@ -72,6 +73,6 @@ in {
   #     grub-reboot
   #     Pcmanfm
 
-  # to try again at some point maybe: 
+  # to try again at some point maybe:
   #     stacer
 }

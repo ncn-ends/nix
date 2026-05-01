@@ -28,7 +28,9 @@ in
       ./modules/server.logging.nix
       ./modules/play.nix
       ./modules/nordvpn.nix
+      ./modules/nordlayer.nix
       {
+        myypo.services.custom.nordlayer.enable = true;
         users.users.${machine.user}.packages =
           packages.all
           ++ packages.work
