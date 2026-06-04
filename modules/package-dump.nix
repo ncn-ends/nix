@@ -55,6 +55,7 @@ in
     stable.element-desktop
     stable.blender-hip # blender-hip seems to be better for AMD
     unstable.claude-code
+    stable.xdotool
   ];
 
   experimenting = [

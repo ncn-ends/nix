@@ -35,8 +35,11 @@ in
     stable.openssl
     stable.libsecret
     # stable.openssl_3_3
-    stable.plexamp
     # stable.soulseekqt # removed due to lack of maintenance in nixpkgs
+
+    # for razer m
+    # stable.openrazer-daemon
+    # stable.polychromatic
   ];
 
   # sound
@@ -53,6 +56,10 @@ in
   systemd.settings.Manager = {
     DefaultLimitNOFILE = 1048576;
   };
+
+  # switch-to-configuration restarts nsncd multiple times when store paths change,
+  # hitting the default StartLimitBurst=5 within one second
+  systemd.services.nscd.serviceConfig.StartLimitIntervalSec = lib.mkForce 0;
 
   systemd.user.extraConfig = ''
     DefaultLimitNOFILE=1048576
@@ -81,6 +88,7 @@ in
       "plex"
       "nordvpn"
       "nordlayer"
+      "openrazer"
     ];
     initialPassword = "password";
 
@@ -95,6 +103,8 @@ in
   programs.openvpn3 = {
     enable = true;
   };
+
+  # hardware.openrazer.enable = true; # disabled: openrazer 3.10.3 incompatible with kernel 7.x (hid_report_raw_event signature change)
 
   home-manager.backupFileExtension = "backup";
 
