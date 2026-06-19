@@ -1,0 +1,25 @@
+services:
+  invokeai:
+    build:
+      context: ~/invokeai-src
+      dockerfile: docker/Dockerfile
+      args:
+        GPU_DRIVER: rocm
+    ports:
+      - "9090:9090"
+    environment:
+      - INVOKEAI_ROOT=/invokeai
+      - GPU_DRIVER=rocm
+      - AMD_VISIBLE_DEVICES=all
+      - HSA_OVERRIDE_GFX_VERSION=10.3.0
+      - RENDER_GROUP_ID=303
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
+    volumes:
+      - ~/invokeai:/invokeai
+    group_add:
+      - "303"
+      - "26"
+    restart: unless-stopped
