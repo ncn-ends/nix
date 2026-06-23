@@ -1,0 +1,1393 @@
+{
+  "__inputs": [],
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.4.2"
+    },
+    {
+      "type": "datasource",
+      "id": "grafana-azure-monitor-datasource",
+      "name": "Azure Monitor",
+      "version": "0.3.0"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": 22279,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1615221134185,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$DataSource",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {},
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          },
+          "unit": "Computation"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 20,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 51,
+      "interval": "10m",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 0.5,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "v",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "appInsights": {
+            "dimension": [
+              "none"
+            ],
+            "metricName": "select",
+            "rawQuery": false,
+            "rawQueryString": "",
+            "timeColumn": "timestamp",
+            "timeGrain": "auto",
+            "valueColumn": ""
+          },
+          "azureLogAnalytics": {
+            "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+            "resultFormat": "time_series",
+            "workspace": ""
+          },
+          "azureMonitor": {
+            "aggOptions": [
+              "None",
+              "Average",
+              "Minimum",
+              "Maximum",
+              "Total",
+              "Count"
+            ],
+            "aggregation": "Total",
+            "alias": "{{name}}",
+            "allowedTimeGrainsMs": [
+              60000,
+              300000,
+              900000,
+              1800000,
+              3600000,
+              21600000,
+              43200000,
+              86400000
+            ],
+            "dimension": "None",
+            "dimensionFilter": "*",
+            "dimensionFilters": [
+              {
+                "dimension": "Name",
+                "filter": "",
+                "operator": "eq"
+              }
+            ],
+            "dimensions": [
+              {
+                "$$hashKey": "object:58",
+                "text": "Failure Type",
+                "value": "FailureType"
+              },
+              {
+                "$$hashKey": "object:59",
+                "text": "Pipeline",
+                "value": "Name"
+              }
+            ],
+            "metricDefinition": "Microsoft.DataFactory/factories",
+            "metricName": "PipelineSucceededRuns",
+            "metricNamespace": "Microsoft.DataFactory/factories",
+            "resourceGroup": "$ResourceGroupADF",
+            "resourceName": "$ADF",
+            "timeGrain": "auto",
+            "timeGrains": [
+              {
+                "$$hashKey": "object:49",
+                "text": "auto",
+                "value": "auto"
+              },
+              {
+                "$$hashKey": "object:50",
+                "text": "1 minute",
+                "value": "PT1M"
+              },
+              {
+                "$$hashKey": "object:51",
+                "text": "5 minutes",
+                "value": "PT5M"
+              },
+              {
+                "$$hashKey": "object:52",
+                "text": "15 minutes",
+                "value": "PT15M"
+              },
+              {
+                "$$hashKey": "object:53",
+                "text": "30 minutes",
+                "value": "PT30M"
+              },
+              {
+                "$$hashKey": "object:54",
+                "text": "1 hour",
+                "value": "PT1H"
+              },
+              {
+                "$$hashKey": "object:55",
+                "text": "6 hours",
+                "value": "PT6H"
+              },
+              {
+                "$$hashKey": "object:56",
+                "text": "12 hours",
+                "value": "PT12H"
+              },
+              {
+                "$$hashKey": "object:57",
+                "text": "1 day",
+                "value": "P1D"
+              }
+            ],
+            "top": "10"
+          },
+          "insightsAnalytics": {
+            "query": "",
+            "resultFormat": "time_series"
+          },
+          "queryType": "Azure Monitor",
+          "refId": "A",
+          "subscription": "$Subscription"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Number of pipelines runs in success",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:91",
+          "decimals": 0,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:92",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "$DataSource",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "Computation"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      },
+      "id": 50,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.4.2",
+      "repeat": "ADF",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "appInsights": {
+            "dimension": [
+              "none"
+            ],
+            "metricName": "select",
+            "rawQuery": false,
+            "rawQueryString": "",
+            "timeColumn": "timestamp",
+            "timeGrain": "auto",
+            "valueColumn": ""
+          },
+          "azureLogAnalytics": {
+            "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+            "resultFormat": "time_series",
+            "workspace": ""
+          },
+          "azureMonitor": {
+            "aggOptions": [
+              "None",
+              "Average",
+              "Minimum",
+              "Maximum",
+              "Total",
+              "Count"
+            ],
+            "aggregation": "Average",
+            "alias": "",
+            "allowedTimeGrainsMs": [
+              60000,
+              300000,
+              900000,
+              1800000,
+              3600000,
+              21600000,
+              43200000,
+              86400000
+            ],
+            "dimension": "None",
+            "dimensionFilter": "*",
+            "dimensionFilters": [],
+            "dimensions": [
+              {
+                "$$hashKey": "object:58",
+                "text": "Failure Type",
+                "value": "FailureType"
+              },
+              {
+                "$$hashKey": "object:59",
+                "text": "Pipeline",
+                "value": "Name"
+              }
+            ],
+            "metricDefinition": "Microsoft.DataFactory/factories",
+            "metricName": "PipelineSucceededRuns",
+            "metricNamespace": "Microsoft.DataFactory/factories",
+            "resourceGroup": "$ResourceGroupADF",
+            "resourceName": "$ADF",
+            "timeGrain": "auto",
+            "timeGrains": [
+              {
+                "$$hashKey": "object:49",
+                "text": "auto",
+                "value": "auto"
+              },
+              {
+                "$$hashKey": "object:50",
+                "text": "1 minute",
+                "value": "PT1M"
+              },
+              {
+                "$$hashKey": "object:51",
+                "text": "5 minutes",
+                "value": "PT5M"
+              },
+              {
+                "$$hashKey": "object:52",
+                "text": "15 minutes",
+                "value": "PT15M"
+              },
+              {
+                "$$hashKey": "object:53",
+                "text": "30 minutes",
+                "value": "PT30M"
+              },
+              {
+                "$$hashKey": "object:54",
+                "text": "1 hour",
+                "value": "PT1H"
+              },
+              {
+                "$$hashKey": "object:55",
+                "text": "6 hours",
+                "value": "PT6H"
+              },
+              {
+                "$$hashKey": "object:56",
+                "text": "12 hours",
+                "value": "PT12H"
+              },
+              {
+                "$$hashKey": "object:57",
+                "text": "1 day",
+                "value": "P1D"
+              }
+            ],
+            "top": "10"
+          },
+          "insightsAnalytics": {
+            "query": "",
+            "resultFormat": "time_series"
+          },
+          "queryType": "Azure Monitor",
+          "refId": "A",
+          "subscription": "$Subscription"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Pipeline Successes",
+      "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$DataSource",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {},
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 20,
+        "x": 0,
+        "y": 5
+      },
+      "hiddenSeries": false,
+      "id": 47,
+      "interval": "10m",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxDataPoints": null,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "appInsights": {
+            "dimension": [
+              "none"
+            ],
+            "metricName": "select",
+            "rawQuery": false,
+            "rawQueryString": "",
+            "timeColumn": "timestamp",
+            "timeGrain": "auto",
+            "valueColumn": ""
+          },
+          "azureLogAnalytics": {
+            "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+            "resultFormat": "time_series",
+            "workspace": ""
+          },
+          "azureMonitor": {
+            "aggOptions": [
+              "None",
+              "Average",
+              "Minimum",
+              "Maximum",
+              "Total",
+              "Count"
+            ],
+            "aggregation": "Maximum",
+            "alias": "{{name}}",
+            "allowedTimeGrainsMs": [
+              60000,
+              300000,
+              900000,
+              1800000,
+              3600000,
+              21600000,
+              43200000,
+              86400000
+            ],
+            "dimension": "None",
+            "dimensionFilter": "*",
+            "dimensionFilters": [
+              {
+                "dimension": "Name",
+                "filter": "",
+                "operator": "eq"
+              }
+            ],
+            "dimensions": [
+              {
+                "$$hashKey": "object:1152",
+                "text": "Failure Type",
+                "value": "FailureType"
+              },
+              {
+                "$$hashKey": "object:1153",
+                "text": "Pipeline",
+                "value": "Name"
+              }
+            ],
+            "metricDefinition": "Microsoft.DataFactory/factories",
+            "metricName": "PipelineFailedRuns",
+            "metricNamespace": "Microsoft.DataFactory/factories",
+            "resourceGroup": "$ResourceGroupADF",
+            "resourceName": "$ADF",
+            "timeGrain": "auto",
+            "timeGrains": [
+              {
+                "$$hashKey": "object:1143",
+                "text": "auto",
+                "value": "auto"
+              },
+              {
+                "$$hashKey": "object:1144",
+                "text": "1 minute",
+                "value": "PT1M"
+              },
+              {
+                "$$hashKey": "object:1145",
+                "text": "5 minutes",
+                "value": "PT5M"
+              },
+              {
+                "$$hashKey": "object:1146",
+                "text": "15 minutes",
+                "value": "PT15M"
+              },
+              {
+                "$$hashKey": "object:1147",
+                "text": "30 minutes",
+                "value": "PT30M"
+              },
+              {
+                "$$hashKey": "object:1148",
+                "text": "1 hour",
+                "value": "PT1H"
+              },
+              {
+                "$$hashKey": "object:1149",
+                "text": "6 hours",
+                "value": "PT6H"
+              },
+              {
+                "$$hashKey": "object:1150",
+                "text": "12 hours",
+                "value": "PT12H"
+              },
+              {
+                "$$hashKey": "object:1151",
+                "text": "1 day",
+                "value": "P1D"
+              }
+            ],
+            "top": ""
+          },
+          "insightsAnalytics": {
+            "query": "",
+            "resultFormat": "time_series"
+          },
+          "queryType": "Azure Monitor",
+          "refId": "A",
+          "subscription": "$Subscription"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Number of pipelines runs in failure",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1229",
+          "decimals": 0,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1230",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "$DataSource",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "Computation"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 20,
+        "y": 5
+      },
+      "id": 42,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.4.2",
+      "targets": [
+        {
+          "appInsights": {
+            "dimension": [
+              "none"
+            ],
+            "metricName": "select",
+            "rawQuery": false,
+            "rawQueryString": "",
+            "timeColumn": "timestamp",
+            "timeGrain": "auto",
+            "valueColumn": ""
+          },
+          "azureLogAnalytics": {
+            "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+            "resultFormat": "time_series",
+            "workspace": ""
+          },
+          "azureMonitor": {
+            "aggOptions": [
+              "None",
+              "Average",
+              "Minimum",
+              "Maximum",
+              "Total",
+              "Count"
+            ],
+            "aggregation": "Average",
+            "alias": "{{name}}",
+            "allowedTimeGrainsMs": [
+              60000,
+              300000,
+              900000,
+              1800000,
+              3600000,
+              21600000,
+              43200000,
+              86400000
+            ],
+            "dimension": "None",
+            "dimensionFilter": "*",
+            "dimensionFilters": [],
+            "dimensions": [
+              {
+                "$$hashKey": "object:1152",
+                "text": "Failure Type",
+                "value": "FailureType"
+              },
+              {
+                "$$hashKey": "object:1153",
+                "text": "Pipeline",
+                "value": "Name"
+              }
+            ],
+            "metricDefinition": "Microsoft.DataFactory/factories",
+            "metricName": "PipelineFailedRuns",
+            "metricNamespace": "Microsoft.DataFactory/factories",
+            "resourceGroup": "$ResourceGroupADF",
+            "resourceName": "$ADF",
+            "timeGrain": "auto",
+            "timeGrains": [
+              {
+                "$$hashKey": "object:1143",
+                "text": "auto",
+                "value": "auto"
+              },
+              {
+                "$$hashKey": "object:1144",
+                "text": "1 minute",
+                "value": "PT1M"
+              },
+              {
+                "$$hashKey": "object:1145",
+                "text": "5 minutes",
+                "value": "PT5M"
+              },
+              {
+                "$$hashKey": "object:1146",
+                "text": "15 minutes",
+                "value": "PT15M"
+              },
+              {
+                "$$hashKey": "object:1147",
+                "text": "30 minutes",
+                "value": "PT30M"
+              },
+              {
+                "$$hashKey": "object:1148",
+                "text": "1 hour",
+                "value": "PT1H"
+              },
+              {
+                "$$hashKey": "object:1149",
+                "text": "6 hours",
+                "value": "PT6H"
+              },
+              {
+                "$$hashKey": "object:1150",
+                "text": "12 hours",
+                "value": "PT12H"
+              },
+              {
+                "$$hashKey": "object:1151",
+                "text": "1 day",
+                "value": "P1D"
+              }
+            ],
+            "top": "10"
+          },
+          "insightsAnalytics": {
+            "query": "",
+            "resultFormat": "time_series"
+          },
+          "queryType": "Azure Monitor",
+          "refId": "A",
+          "subscription": "$Subscription"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Pipeline Failures",
+      "type": "stat"
+    },
+    {
+      "datasource": "$DataSource",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 48,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "7.4.2",
+      "targets": [
+        {
+          "appInsights": {
+            "dimension": [
+              "none"
+            ],
+            "metricName": "select",
+            "rawQuery": false,
+            "rawQueryString": "",
+            "timeColumn": "timestamp",
+            "timeGrain": "auto",
+            "valueColumn": ""
+          },
+          "azureLogAnalytics": {
+            "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+            "resultFormat": "time_series",
+            "workspace": ""
+          },
+          "azureMonitor": {
+            "aggOptions": [
+              "None",
+              "Average",
+              "Minimum",
+              "Maximum",
+              "Total",
+              "Count"
+            ],
+            "aggregation": "Total",
+            "alias": "{{pipelinename}}",
+            "allowedTimeGrainsMs": [
+              60000,
+              300000,
+              900000,
+              1800000,
+              3600000,
+              21600000,
+              43200000,
+              86400000
+            ],
+            "dimension": "None",
+            "dimensionFilter": "*",
+            "dimensionFilters": [
+              {
+                "dimension": "Name",
+                "filter": "",
+                "operator": "eq"
+              },
+              {
+                "dimension": "PipelineName",
+                "filter": "",
+                "operator": "eq"
+              }
+            ],
+            "dimensions": [
+              {
+                "$$hashKey": "object:402",
+                "text": "Activity Type",
+                "value": "ActivityType"
+              },
+              {
+                "$$hashKey": "object:403",
+                "text": "Pipeline",
+                "value": "PipelineName"
+              },
+              {
+                "$$hashKey": "object:404",
+                "text": "Failure Type",
+                "value": "FailureType"
+              },
+              {
+                "$$hashKey": "object:405",
+                "text": "Activity",
+                "value": "Name"
+              }
+            ],
+            "metricDefinition": "Microsoft.DataFactory/factories",
+            "metricName": "ActivityFailedRuns",
+            "metricNamespace": "Microsoft.DataFactory/factories",
+            "resourceGroup": "$ResourceGroupADF",
+            "resourceName": "$ADF",
+            "timeGrain": "auto",
+            "timeGrains": [
+              {
+                "$$hashKey": "object:393",
+                "text": "auto",
+                "value": "auto"
+              },
+              {
+                "$$hashKey": "object:394",
+                "text": "1 minute",
+                "value": "PT1M"
+              },
+              {
+                "$$hashKey": "object:395",
+                "text": "5 minutes",
+                "value": "PT5M"
+              },
+              {
+                "$$hashKey": "object:396",
+                "text": "15 minutes",
+                "value": "PT15M"
+              },
+              {
+                "$$hashKey": "object:397",
+                "text": "30 minutes",
+                "value": "PT30M"
+              },
+              {
+                "$$hashKey": "object:398",
+                "text": "1 hour",
+                "value": "PT1H"
+              },
+              {
+                "$$hashKey": "object:399",
+                "text": "6 hours",
+                "value": "PT6H"
+              },
+              {
+                "$$hashKey": "object:400",
+                "text": "12 hours",
+                "value": "PT12H"
+              },
+              {
+                "$$hashKey": "object:401",
+                "text": "1 day",
+                "value": "P1D"
+              }
+            ],
+            "top": ""
+          },
+          "insightsAnalytics": {
+            "query": "",
+            "resultFormat": "time_series"
+          },
+          "queryType": "Azure Monitor",
+          "refId": "A",
+          "subscription": "$Subscription"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Number of activity runs in failure",
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$DataSource",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {},
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          },
+          "unit": "Computation"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 52,
+      "interval": "10m",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "appInsights": {
+            "dimension": [
+              "none"
+            ],
+            "metricName": "select",
+            "rawQuery": false,
+            "rawQueryString": "",
+            "timeColumn": "timestamp",
+            "timeGrain": "auto",
+            "valueColumn": ""
+          },
+          "azureLogAnalytics": {
+            "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+            "resultFormat": "time_series",
+            "workspace": ""
+          },
+          "azureMonitor": {
+            "aggOptions": [
+              "None",
+              "Average",
+              "Minimum",
+              "Maximum",
+              "Total",
+              "Count"
+            ],
+            "aggregation": "Total",
+            "alias": "{{pipelinename}} : {{name}}",
+            "allowedTimeGrainsMs": [
+              60000,
+              300000,
+              900000,
+              1800000,
+              3600000,
+              21600000,
+              43200000,
+              86400000
+            ],
+            "dimension": "None",
+            "dimensionFilter": "*",
+            "dimensionFilters": [
+              {
+                "dimension": "Name",
+                "filter": "",
+                "operator": "eq"
+              },
+              {
+                "dimension": "PipelineName",
+                "filter": "",
+                "operator": "eq"
+              }
+            ],
+            "dimensions": [
+              {
+                "$$hashKey": "object:402",
+                "text": "Activity Type",
+                "value": "ActivityType"
+              },
+              {
+                "$$hashKey": "object:403",
+                "text": "Pipeline",
+                "value": "PipelineName"
+              },
+              {
+                "$$hashKey": "object:404",
+                "text": "Failure Type",
+                "value": "FailureType"
+              },
+              {
+                "$$hashKey": "object:405",
+                "text": "Activity",
+                "value": "Name"
+              }
+            ],
+            "metricDefinition": "Microsoft.DataFactory/factories",
+            "metricName": "ActivityFailedRuns",
+            "metricNamespace": "Microsoft.DataFactory/factories",
+            "resourceGroup": "$ResourceGroupADF",
+            "resourceName": "$ADF",
+            "timeGrain": "auto",
+            "timeGrains": [
+              {
+                "$$hashKey": "object:393",
+                "text": "auto",
+                "value": "auto"
+              },
+              {
+                "$$hashKey": "object:394",
+                "text": "1 minute",
+                "value": "PT1M"
+              },
+              {
+                "$$hashKey": "object:395",
+                "text": "5 minutes",
+                "value": "PT5M"
+              },
+              {
+                "$$hashKey": "object:396",
+                "text": "15 minutes",
+                "value": "PT15M"
+              },
+              {
+                "$$hashKey": "object:397",
+                "text": "30 minutes",
+                "value": "PT30M"
+              },
+              {
+                "$$hashKey": "object:398",
+                "text": "1 hour",
+                "value": "PT1H"
+              },
+              {
+                "$$hashKey": "object:399",
+                "text": "6 hours",
+                "value": "PT6H"
+              },
+              {
+                "$$hashKey": "object:400",
+                "text": "12 hours",
+                "value": "PT12H"
+              },
+              {
+                "$$hashKey": "object:401",
+                "text": "1 day",
+                "value": "P1D"
+              }
+            ],
+            "top": ""
+          },
+          "insightsAnalytics": {
+            "query": "",
+            "resultFormat": "time_series"
+          },
+          "queryType": "Azure Monitor",
+          "refId": "A",
+          "subscription": "$Subscription"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Number of activity runs in failure",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:588",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:589",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "Azure Monitor",
+          "value": "Azure Monitor"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Data Source",
+        "multi": false,
+        "name": "DataSource",
+        "options": [],
+        "query": "grafana-azure-monitor-datasource",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "$DataSource",
+        "definition": "Subscriptions()",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Subscription",
+        "multi": false,
+        "name": "Subscription",
+        "options": [],
+        "query": "Subscriptions()",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "$DataSource",
+        "definition": "ResourceGroups($Subscription)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Res. Group",
+        "multi": false,
+        "name": "ResourceGroupADF",
+        "options": [],
+        "query": "ResourceGroups($Subscription)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "$DataSource",
+        "definition": "ResourceNames($Subscription,$ResourceGroupADF, Microsoft.DataFactory/factories)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "ADF",
+        "multi": true,
+        "name": "ADF",
+        "options": [],
+        "query": "ResourceNames($Subscription,$ResourceGroupADF, Microsoft.DataFactory/factories)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h"
+    ]
+  },
+  "timezone": "",
+  "title": "Azure Data Factory",
+  "uid": "jZNnvMUMz",
+  "version": 5,
+  "description": "Monitor Your ADF pipelines and activities. And Find out easily if any failures occur."
+}
