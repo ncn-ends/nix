@@ -55,3 +55,20 @@ alias x-terminal-emulator='alacritty'
 
 # manually add dotnet-ef tools to PATH
 export PATH="$PATH:/home/one/.dotnet/tools"
+
+# docker helpers
+DOCKER_DIR="/etc/nixos/docker"
+docker:up() {
+  if [ -z "$1" ]; then
+    echo "Usage: docker:up <service>"
+    echo "Available: $(ls "$DOCKER_DIR" | grep -v README | tr '\n' ' ')"
+    return 1
+  fi
+  local dir="$DOCKER_DIR/$1"
+  if [ ! -f "$dir/docker-compose.yml" ]; then
+    echo "No docker-compose.yml found for '$1'."
+    echo "Available: $(ls "$DOCKER_DIR" | grep -v README | tr '\n' ' ')"
+    return 1
+  fi
+  docker compose -f "$dir/docker-compose.yml" up -d
+}

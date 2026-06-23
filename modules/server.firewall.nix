@@ -13,6 +13,8 @@
       22 # ssh
       80 # http
       443 # https
+      2283 # immich
+      3100 # grafana
     ];
   };
 }

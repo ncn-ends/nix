@@ -56,6 +56,9 @@ in
 
         # nice for tailwind
         bradlc.vscode-tailwindcss
+
+        # Claude Code
+        anthropic.claude-code
       ];
       profiles.default.keybindings = [
         {

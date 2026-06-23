@@ -1,51 +1,24 @@
 { imports, config, ...}: {
   environment.systemPackages = [ imports.stable.caddy ];
+
+  networking.hosts."127.0.0.1" = [
+    "invokeai.local"
+    "immich.local"
+    "grafana.local"
+  ];
+
   services.caddy = {
     enable = true;
-    # virtualHosts = {
-    #   "localhost:5233".extraConfig = ''
-    #     encode gzip
-    #     reverse_proxy localhost:5232
-    #   '';
-    # };
+    virtualHosts = {
+      "http://invokeai.local".extraConfig = ''
+        reverse_proxy localhost:9090
+      '';
+      "http://immich.local".extraConfig = ''
+        reverse_proxy localhost:2283
+      '';
+      "http://grafana.local".extraConfig = ''
+        reverse_proxy localhost:3100
+      '';
+    };
   };
 }
-
-
-    # virtualHosts = {
-    #   "nixos.tail7d98c.ts.net".extraConfig = ''
-    #     encode gzip
-
-    #     handle_path /vw/* {
-    #       reverse_proxy localhost:8222
-    #     }
-
-    #     handle_path /sync* {
-    #       reverse_proxy localhost:9080
-    #     }
-
-    #     handle_path /cal/* {
-    #       encode gzip
-
-    #       reverse_proxy localhost:5232
-    #     }
-
-    #     handle_path /ping {
-    #       respond "pong"
-    #     }
-    #   '';
-    # };
-
-    # virtualHosts.    # virtualHosts."hub.ncn.dev".extraConfig = ''
-    #   handle / {
-    #     respond "hello"
-    #   }
-
-    #   handle_path /vw/* {
-    #     reverse_proxy localhost:8222
-    #   }
-    # '';
-
-      # log {
-      #   output file /var/log/caddy/access.log
-      # }
