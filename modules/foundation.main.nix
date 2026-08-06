@@ -40,6 +40,9 @@ in
     # for razer m
     # stable.openrazer-daemon
     # stable.polychromatic
+
+    stable.nvtopPackages.amd # htop for GPUs
+    stable.rocmPackages.rocm-smi # gives list of PIDs + VRAM
   ];
 
   # sound
@@ -86,8 +89,6 @@ in
       "scanner"
       "docker"
       "plex"
-      "nordvpn"
-      "nordlayer"
       "openrazer"
     ];
     initialPassword = "password";
@@ -137,6 +138,13 @@ in
     };
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.package = stable.docker_29;
+
+  # nscd's upstream unit puts StartLimitIntervalSec in [Service] where systemd
+  # ignores it, so rapid restarts (e.g. Tailscale updating resolv.conf at boot)
+  # trip the default rate limit and leave the DNS cache dead — which slows
+  # every fresh browser lookup. Set the limit in [Unit] where it belongs.
+  systemd.services.nscd.unitConfig.StartLimitIntervalSec = 0;
   # virtualisation.podman.enable = true;
   # for podman
 
