@@ -14,6 +14,7 @@ in
       ./modules/sops.nix
       ./modules/cli.nix
       ./modules/desktop.cinnamon.nix
+      ./modules/ancs4linux.nix
       ./modules/vscode.nix
       ./modules/vm.nix
       ./modules/server.firewall.nix

@@ -1,0 +1,17 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ancs4linux-history"
+version = "0.1.0"
+description = "Log and browse iPhone notifications captured via ancs4linux"
+requires-python = ">=3.10"
+dependencies = ["dasbus>=1.7,<2.0", "PyGObject>=3.50,<4.0"]
+
+[project.scripts]
+ancs4linux-history = "ancs4linux_history:main"
+ancs4linux-history-gui = "ancs4linux_history_gui:main"
+
+[tool.hatch.build.targets.wheel]
+include = ["ancs4linux_history.py", "ancs4linux_history_gui.py"]
