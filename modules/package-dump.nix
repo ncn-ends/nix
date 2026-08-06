@@ -33,7 +33,7 @@ in
     stable.qbittorrent
     # stable.libsForQt5.kdeconnect-kde
     stable.vlc
-    stable.floorp-bin
+    unstable.floorp-bin
   ];
 
   # every linux personal machine

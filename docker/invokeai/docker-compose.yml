@@ -13,6 +13,8 @@ services:
       - AMD_VISIBLE_DEVICES=all
       - HSA_OVERRIDE_GFX_VERSION=10.3.0
       - RENDER_GROUP_ID=303
+      # Reduce VRAM fragmentation (recommended by the OOM error itself)
+      - PYTORCH_HIP_ALLOC_CONF=expandable_segments:True
     devices:
       - /dev/kfd:/dev/kfd
       - /dev/dri/renderD128:/dev/dri/renderD128
